@@ -1,5 +1,20 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { routes } from "./router";
+
 function App() {
-  return <h1 className="text-2xl text-bold">Hello tailwind</h1>;
+  return (
+    <Routes>
+      {routes.map((props, i) => (
+        <Route {...props} key={i} />
+      ))}
+    </Routes>
+  );
 }
 
-export default App;
+export default () => {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+};
