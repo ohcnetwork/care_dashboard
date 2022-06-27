@@ -1,4 +1,4 @@
-import { Error404 } from '../pages/Error404'
+import Error404 from '../pages/Error404'
 import { Routes } from './types'
 
 export const errorRouter: Routes[] = [
