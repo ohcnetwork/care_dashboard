@@ -139,6 +139,7 @@ export interface AvailabilityData {
 }
 
 export interface Capacity {
+  room_type: number
   total_capacity: number | string
   current_capacity: number | string
 }
