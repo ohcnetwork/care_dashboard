@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import {
   FacilitySummaryQuery,
   useFacilitySummary,
@@ -28,18 +27,23 @@ import {
 } from '../../utils/facility/capacity'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
+import { useQueryParams } from 'raviger'
+import { UrlQuery } from '../../types/urlQuery'
 
-export default function Capacity() {
-  const { district_name: districtName, date } = useParams()
+interface Props {
+  districtName?: string
+}
+
+export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
+  const [{ date }, setQuery] = useQueryParams<UrlQuery>()
 
   const queryDate = getDateFromQuery(date)
-
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
     end_date: toDateString(getNDateAfter(queryDate, 1)),
-    limit: 2000,
+    limit: 1000,
   }
 
   const { data, isLoading } = useFacilitySummary(query)

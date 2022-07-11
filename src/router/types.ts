@@ -1,3 +1,3 @@
-import { RouteProps } from 'react-router-dom'
+import { Routes as RavigerRoutes } from 'raviger'
 
-export type Routes = RouteProps
+export type Routes = RavigerRoutes<string>

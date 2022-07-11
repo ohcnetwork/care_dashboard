@@ -1,27 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { routes } from './router'
+import { useRoutes } from 'raviger'
 
 const queryClient = new QueryClient()
 
 function App() {
-  return (
-    <Routes>
-      {routes.map((props, i) => (
-        <Route {...props} key={i} />
-      ))}
-    </Routes>
-  )
+  const appRoutes = useRoutes(routes, { matchTrailingSlash: false })
+  return <main>{appRoutes}</main>
 }
 
 // eslint-disable-next-line react/display-name
 export default () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <App />
     </QueryClientProvider>
   )
 }

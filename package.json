@@ -16,12 +16,12 @@
     "dayjs": "^1.11.3",
     "fuse.js": "^6.6.2",
     "lodash-es": "^4.17.21",
+    "raviger": "^4.1.0",
     "react": "^18.0.0",
     "react-csv": "^2.2.2",
     "react-dom": "^18.0.0",
     "react-feather": "^2.0.10",
-    "react-query": "^3.39.1",
-    "react-router-dom": "^6.3.0"
+    "react-query": "^3.39.1"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
