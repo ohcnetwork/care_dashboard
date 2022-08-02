@@ -41,7 +41,7 @@ export default function Capacity({ districtName }: Props) {
   const queryDate = getDateFromQuery(date)
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
-    start_date: toDateString(getNDateBefore(queryDate, 1)),
+    start_date: toDateString(getNDateBefore(queryDate, 10)),
     end_date: toDateString(getNDateAfter(queryDate, 1)),
     limit: 1000,
   }

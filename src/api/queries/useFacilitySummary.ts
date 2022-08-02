@@ -30,6 +30,8 @@ interface Facility {
   facility_type: string
   address: string
   location: Location
+  latitude?: number
+  longitude?: number
   pincode: number
   oxygen_capacity: number
   phone_number: string
@@ -47,7 +49,7 @@ interface Facility {
   expected_type_b_cylinders: number
   expected_type_c_cylinders: number
   expected_type_d_cylinders: number
-  cover_image_url?: null
+  cover_image_url?: string
 }
 
 export interface Location {
@@ -90,6 +92,8 @@ export interface Data {
   pincode: number
   district: number
   location: Location
+  latitude?: number
+  longitude?: number
   local_body: number
   ward_object: WardObject
   availability?: AvailabilityData[] | null
@@ -139,6 +143,7 @@ export interface AvailabilityData {
 }
 
 export interface Capacity {
+  room_type: number
   total_capacity: number | string
   current_capacity: number | string
 }

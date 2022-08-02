@@ -10,11 +10,14 @@
     "format": "prettier --write src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.12.0",
     "@react-spring/web": "^9.4.5",
+    "@types/google-map-react": "^2.1.7",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "dayjs": "^1.11.3",
     "fuse.js": "^6.6.2",
+    "google-map-react": "^2.2.0",
     "lodash-es": "^4.17.21",
     "raviger": "^4.1.0",
     "react": "^18.0.0",

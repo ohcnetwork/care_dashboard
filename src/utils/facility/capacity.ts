@@ -44,10 +44,13 @@ export const InventoryTimeToEmpty = (inventoryItem?: Inventory) =>
     ? Number((inventoryItem?.stock / inventoryItem?.burn_rate).toFixed(2))
     : -1
 
-const additionalData = (data: FacilitySummaryResponse['data']) => {
-  if (!data.availability) return data
+const additionalData = ({
+  availability,
+  ...data
+}: FacilitySummaryResponse['data']) => {
+  if (!availability) return { availability, ...data }
 
-  const capacity = keyBy(data.availability, (d) => d.room_type)
+  const capacity = keyBy(availability, (d) => d.room_type)
 
   const omitKeys = [
     'modified_date',
@@ -63,7 +66,6 @@ const additionalData = (data: FacilitySummaryResponse['data']) => {
   return omit(
     {
       ...data,
-      capacity,
       oxygen_capacity: data.oxygen_capacity ?? null,
       type_b_cylinders: data.type_b_cylinders ?? null,
       type_c_cylinders: data.type_c_cylinders ?? null,
@@ -86,6 +88,7 @@ const additionalData = (data: FacilitySummaryResponse['data']) => {
       tte_b_cylinders: InventoryTimeToEmpty(
         data?.inventory?.[OXYGEN_INVENTORY.liquid]
       ),
+      capacity,
     },
     omitKeys
   )
