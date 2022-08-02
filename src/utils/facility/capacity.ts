@@ -50,7 +50,7 @@ const additionalData = ({
 }: FacilitySummaryResponse['data']) => {
   if (!availability) return { availability, ...data }
 
-  const availabilityMap = keyBy(availability, (d) => d.room_type)
+  const capacity = keyBy(availability, (d) => d.room_type)
 
   const omitKeys = [
     'modified_date',
@@ -88,7 +88,7 @@ const additionalData = ({
       tte_b_cylinders: InventoryTimeToEmpty(
         data?.inventory?.[OXYGEN_INVENTORY.liquid]
       ),
-      availability: availabilityMap,
+      capacity,
     },
     omitKeys
   )

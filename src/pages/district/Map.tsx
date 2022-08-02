@@ -28,9 +28,9 @@ export default function Map({ districtName }: Props) {
 
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
-    start_date: toDateString(getNDateBefore(queryDate, 20)),
+    start_date: toDateString(getNDateBefore(queryDate, 1)),
     end_date: toDateString(getNDateAfter(queryDate, 1)),
-    limit: 100,
+    limit: 1000,
   }
 
   const { data, isLoading } = useFacilitySummary(query)
