@@ -1,4 +1,4 @@
+import { Routes } from 'raviger'
 import { Home } from '../pages/Home'
-import { Routes } from './types'
 
-export const homeRouter: Routes = { '/': Home }
+export const homeRouter: Routes<string> = { '/': () => <Home /> }
