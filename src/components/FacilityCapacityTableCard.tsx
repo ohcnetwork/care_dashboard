@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { Link } from 'raviger'
 import React from 'react'
 import { CapacityCardDataForCapacity } from '../utils/facility/capacity'
 
@@ -8,6 +9,7 @@ interface Props {
 
 export const FacilityCapacityTableCard = (props: Props) => {
   const {
+    facility_id,
     facility_name,
     facility_type,
     last_updated,
@@ -21,7 +23,12 @@ export const FacilityCapacityTableCard = (props: Props) => {
     <div className="p-4 dark:bg-black mb-2 rounded-2xl dark:text-white overflow-x-auto">
       <div className="flex gap-2 items-center justify-between flex-wrap">
         <div className="flex gap-2 flex-wrap items-center">
-          <h1 className="text-lg font-medium">{facility_name}</h1>
+          <Link
+            href={`/facility/${facility_id || ''}`}
+            className="text-lg font-medium"
+          >
+            {facility_name}
+          </Link>
           <span className="bg-primary-300 text-primary-900 font-bold text-sm px-2 rounded">
             {facility_type}
           </span>

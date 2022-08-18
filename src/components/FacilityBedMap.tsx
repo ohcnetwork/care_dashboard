@@ -203,8 +203,8 @@ export const FacilityBedMap = (props: Props) => {
     assets: [],
     showAddressSuggestion: false,
     center: {
-      lat: district?.lat || 10,
-      lng: district?.lng || 20,
+      lat: district?.lat || 10.148_547_6,
+      lng: district?.lng || 76.500_752_4,
     },
     zoom: district?.zoom || 5,
   })
