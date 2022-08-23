@@ -11,6 +11,7 @@ export interface FacilitySummaryQuery {
   start_date?: string
   end_date?: string
   limit?: number
+  facility?: string
 }
 
 export interface FacilitySummaryResponse {
@@ -104,8 +105,8 @@ export interface Data {
   modified_date: string
   cover_image_url?: null
   district_object: DistrictObject
-  inventory?: [Inventory, Inventory, Inventory, Inventory]
-  capacity?: { [key: string]: Capacity }
+  inventory?: Record<string, Inventory>
+  capacity?: Record<string, Capacity>
   kasp_empanelled: boolean
   oxygen_capacity: number
   type_b_cylinders: number
@@ -148,7 +149,10 @@ export interface Capacity {
   current_capacity: number | string
 }
 
-export const useFacilitySummary = (query: FacilitySummaryQuery) =>
+export const useFacilitySummary = (
+  query: FacilitySummaryQuery,
+  enabled = true
+) =>
   useQuery(
     createQueryKey(FACILITY_SUMMARY_KEY, query),
     () =>
@@ -161,6 +165,6 @@ export const useFacilitySummary = (query: FacilitySummaryQuery) =>
         )
         .then((d) => d.data),
     {
-      enabled: query.district !== undefined,
+      enabled,
     }
   )
