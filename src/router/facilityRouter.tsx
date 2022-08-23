@@ -1,7 +1,6 @@
 import FacilityDetails from '../pages/Facility/FacilityDetails'
-import { Routes } from './types'
 
-export const facilityRouter: Routes = {
+export const facilityRouter = {
   '/facility/:id': (props: Record<'id', string>) => (
     <FacilityDetails id={props.id} />
   ),
