@@ -32,7 +32,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({
   return (
     <div
       className={clsx(
-        'bg-white dark:bg-black',
+        'bg-white dark:bg-slate-800',
         'rounded-xl',
         small ? 'p-0' : 'md:p-3'
       )}
