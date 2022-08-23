@@ -362,3 +362,5 @@ export const processFacilityCapacityTableData = (
     [] as CapacityCardDataForCapacity[]
   )
 }
+
+export type ProcessFacilityDataReturn = ReturnType<typeof processFacilityData>
