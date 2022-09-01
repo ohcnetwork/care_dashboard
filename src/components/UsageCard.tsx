@@ -29,16 +29,20 @@ interface UsageCardProps {
   data: ValueCardProps[]
 }
 
-export const UsageCard: React.FC<UsageCardProps> = ({ data }) => {
-  return (
-    <div className="my-2 p-2">
-      <div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
-          {data.map((props, index) => (
-            <ValueCard {...props} key={index} />
-          ))}
-        </div>
+export const UsageCard: React.FC<UsageCardProps> = ({ data }) => (
+  <div className="my-2 p-2">
+    <div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 ">
+        {data.map((props, index) => (
+          <ValueCard
+            icon={props.icon}
+            label={props.label}
+            unit={props.unit}
+            value={props.value}
+            key={index}
+          />
+        ))}
       </div>
     </div>
-  )
-}
+  </div>
+)

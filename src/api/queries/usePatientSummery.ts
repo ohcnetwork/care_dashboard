@@ -21,7 +21,7 @@ export const usePatientSummary = (query: PatientSummaryQuery, enabled = true) =>
     () =>
       axios
         .get<PaginatedResponse<FacilitySummaryResponse[]>>(
-          '/api/v1/patient_summary/',
+          'https://careapi.coronasafe.in/api/v1/patient_summary/',
           {
             params: query,
           }
