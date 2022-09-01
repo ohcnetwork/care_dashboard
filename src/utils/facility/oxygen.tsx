@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import clsx from 'clsx'
 import { ColumnType, DefaultRecordType } from 'rc-table/lib/interface'
 import relativeTime from 'dayjs/plugin//relativeTime'
 import dayjs from 'dayjs'
 import { Database, Activity, Clock, AlertTriangle } from 'react-feather'
 import {
-  chain,
   clone,
   mapValues,
   entries,
@@ -13,6 +13,8 @@ import {
   reduce,
   sumBy,
   values,
+  map,
+  flatMap,
 } from 'lodash-es'
 import { Inventory } from '../../api/queries/useFacilitySummary'
 import { Nullable } from '../../types'
@@ -24,8 +26,6 @@ import {
 } from '../constants'
 import { toDateString } from '../date'
 import { ProcessFacilityDataReturn } from './capacity'
-import _ from 'lodash'
-import clsx from 'clsx'
 
 dayjs.extend(relativeTime)
 
@@ -163,20 +163,18 @@ export const getOxygenFlatData = (
   data?: ProcessFacilityDataReturn,
   filterDate?: string
 ): Inventory[] => {
-  return chain(data)
-    .filter((c) => {
-      return !!(
-        c.date === (filterDate || toDateString(new Date())) &&
-        c.inventory &&
-        Object.keys(c.inventory).length !== 0 &&
-        Object.keys(c.inventory).some((key) =>
-          Object.values(OXYGEN_INVENTORY_ENUM).includes(Number(key))
-        )
+  const p1 = filter(data, (c) => {
+    return !!(
+      c.date === (filterDate || toDateString(new Date())) &&
+      c.inventory &&
+      Object.keys(c.inventory).length !== 0 &&
+      Object.keys(c.inventory).some((key) =>
+        Object.values(OXYGEN_INVENTORY_ENUM).includes(Number(key))
       )
-    })
-    .map((c) => values(c.inventory))
-    .flatMap()
-    .value()
+    )
+  })
+  const p2 = map(p1, (c) => values(c.inventory))
+  return flatMap(p2)
 }
 export const getOxygenSummeryConfig = (data: Inventory[]) => {
   return Object.values(OXYGEN_INVENTORY_NAME).map((name) => {
@@ -225,20 +223,30 @@ type OxygenMapKeys = keyof OxygenType<string>
 export const getOxygenTableRows = (data: OxygenCardData) => {
   return [
     {
-      name: <h1 className="dark:text-white text-base">Last Updated</h1>,
-      ...mapValues(data.last_updated, (val) => {
-        return <span className="text-slate-300 text-base">{val || '---'}</span>
+      name: (
+        <h1 className="dark:text-white text-base" key="last-updated">
+          Last Updated
+        </h1>
+      ),
+      ...mapValues(data.last_updated, (val, key) => {
+        // console.log('Something', key)
+        return (
+          <span key={`last-${key}`} className="text-slate-300 text-base">
+            {val || '---'}
+          </span>
+        )
       }),
     },
     {
       name: (
-        <div className="flex">
+        <div className="flex" key="quantity">
           <Database className="text-blue-500 mr-4" />
           <h1 className="dark:text-white text-base">Quantity</h1>
         </div>
       ),
 
       ...mapValues(data.quantity, (val, key: OxygenMapKeys) => {
+        // console.log('Something2', key)
         const isLow = data.is_low[key]
         return (
           <div key={`q-${key}`}>
@@ -259,12 +267,13 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
     },
     {
       name: (
-        <div className="flex">
+        <div className="flex" key="burn-rate">
           <Activity className="text-yellow-400 mr-4" />
           <h1 className="dark:text-white text-base">Burn Rate</h1>
         </div>
       ),
       ...mapValues(data.burn_rate, (val, key: OxygenMapKeys) => {
+        // console.log('Something3', key)
         const unit = data.quantity_unit[key]
         const isLow = data.is_low[key]
         return (
@@ -286,7 +295,7 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
     },
     {
       name: (
-        <div className="flex">
+        <div className="flex" key={'time-to-empty'}>
           <Clock className="text-green-500 mr-4" />
           <h1 className="dark:text-white text-base">Time To Empty</h1>
         </div>
@@ -387,7 +396,6 @@ export const processOxygenExportData = (
 export const oxygenTableColumns: ColumnType<DefaultRecordType>[] = [
   {
     title: '',
-    key: 'name',
     dataIndex: 'name',
     width: '1rem',
     align: 'left',

@@ -21,7 +21,6 @@ import {
   getOxygenCardData,
   getOxygenFlatData,
   getOxygenSummeryConfig,
-  OxygenCardData,
 } from '../../utils/facility/oxygen'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
@@ -64,8 +63,6 @@ export default function Oxygen({ districtName }: Props) {
 
   const oxygenCardData = useMemo(() => getOxygenCardData(filtered), [filtered])
   const oxygenFlatData = useMemo(() => getOxygenFlatData(filtered), [filtered])
-
-  const [searchTerm, setSearchTerm] = useState('')
 
   const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
     data: oxygenCardData,
