@@ -11,7 +11,7 @@ export const OXYGEN_INVENTORY = {
   type_d: 4,
   type_c: 6,
   type_b: 5,
-} as const
+}
 
 export const INITIAL_FACILITIES_TRIVIA = {
   '20': { total: 0, used: 0 },
@@ -99,3 +99,31 @@ export const COVID_BEDS = Object.entries(AVAILABILITY_TYPES_PROXY)
 export const NON_COVID_BEDS = Object.entries(AVAILABILITY_TYPES_PROXY)
   .filter(([_, value]) => value === 'Non-Covid')
   .map(([key, _]) => key)
+
+export enum OXYGEN_INVENTORY_ENUM {
+  oxygen_capacity = 2,
+  type_d_cylinders = 4,
+  type_c_cylinders = 6,
+  type_b_cylinders = 5,
+}
+
+export const OXYGEN_INVENTORY_MAP = {
+  oxygen_capacity: 2,
+  type_d_cylinders: 4,
+  type_c_cylinders: 6,
+  type_b_cylinders: 5,
+}
+
+export const OXYGEN_INVENTORY_NAME = {
+  liquid: 'Liquid Oxygen',
+  type_d: 'Jumbo D Type Oxygen Cylinder',
+  type_c: 'C Type Oxygen Cylinder',
+  type_b: 'B Type Oxygen Cylinder',
+}
+
+export const OXYGEN_INVENTORY_STRING_ENUM = {
+  oxygen_capacity: 'oxygen_capacity',
+  type_d_cylinders: 'type_d_cylinders',
+  type_c_cylinders: 'type_c_cylinders',
+  type_b_cylinders: 'type_b_cylinders',
+}

@@ -59,7 +59,7 @@ export const RadialCard: React.FC<RadialCardProps> = ({
       className={clsx(
         isLoading
           ? 'bg-slate-800 animate-pulse'
-          : 'bg-white dark:bg-black dark:text-gray-200 opacity-100',
+          : 'bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100',
         'shadow-sm dark:shadow-none rounded-xl flex flex-col justify-between',
         className
       )}
@@ -74,12 +74,12 @@ export const RadialCard: React.FC<RadialCardProps> = ({
           <div className="relative flex content-center justify-center m-2 w-4/5">
             <svg viewBox="0 0 36 36" className="w-full">
               <path
-                className="text-slate-200 dark:text-slate-900 stroke-current stroke-2"
+                className="text-slate-200 dark:text-slate-900 stroke-current stroke-[4px]"
                 fill="none"
                 d={CIRCLE_PATH}
               />
               <animated.path
-                className="text-primary-500 stroke-current stroke-2"
+                className="text-primary-500 stroke-current stroke-[3px]"
                 fill="none"
                 strokeDasharray={progress}
                 d={CIRCLE_PATH}

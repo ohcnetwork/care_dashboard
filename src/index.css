@@ -16,6 +16,9 @@ body {
   select {
     @apply mt-1 block pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-100 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md dark:text-black text-white font-medium;
   }
+  .card {
+    @apply border border-slate-700 bg-slate-800;
+  }
 }
 
 table {
@@ -27,4 +30,22 @@ th {
 }
 td {
   @apply p-2 text-center;
+}
+
+@screen md {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme(colors.slate.500);
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme(colors.slate.800);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: theme(colors.slate.700);
+    border-radius: 4px;
+    border: 1px solid theme(colors.slate.600);
+  }
 }
