@@ -1,0 +1,132 @@
+import { Fragment, useEffect, useState } from 'react'
+import { Combobox, Transition } from '@headlessui/react'
+import { Check, ChevronDown, X } from 'react-feather'
+import { facility_types } from '../utils/constants'
+import { UrlQuery } from '../types/urlQuery'
+import { useQueryParams } from 'raviger'
+import _ from 'lodash'
+
+type Facility = {
+  id: number
+  facility_type: string
+}
+
+interface Props {
+  selectedItems: Facility[]
+  setSelectedItems: React.Dispatch<React.SetStateAction<any>>
+}
+
+export default function FacilityMultiSelect({
+  selectedItems,
+  setSelectedItems,
+}: Props) {
+  const [query, setQuery] = useState('')
+  const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
+
+  const filteredFacilities =
+    query === ''
+      ? facility_types
+      : facility_types.filter((facility) =>
+          facility.facility_type
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        )
+
+  useEffect(() => {
+    if (selectedItems.length)
+      setURLQuery({
+        ...urlQuery,
+        facility_type: selectedItems.map((i) => i.id).join(','),
+      })
+    else setURLQuery(_.omit(urlQuery, 'facility_type'))
+  }, [selectedItems])
+
+  return (
+    <div className="">
+      <Combobox value={selectedItems} onChange={setSelectedItems} multiple>
+        <div className="relative mt-1">
+          <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+            <Combobox.Input
+              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+              placeholder={'Search facility type'}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2 text-black">
+              <ChevronDown />
+            </Combobox.Button>
+          </div>
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            afterLeave={() => setQuery('')}
+          >
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {filteredFacilities.length === 0 && query !== '' ? (
+                <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
+                  Nothing found.
+                </div>
+              ) : (
+                filteredFacilities.map((facility) => (
+                  <Combobox.Option
+                    key={facility.id}
+                    className={({ active }) =>
+                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                        active ? 'bg-teal-600 text-white' : 'text-gray-900'
+                      }`
+                    }
+                    value={facility}
+                  >
+                    {({ selected, active }) => (
+                      <>
+                        <span
+                          className={`block truncate ${
+                            selected ? 'font-medium' : 'font-normal'
+                          }`}
+                        >
+                          {facility.facility_type}
+                        </span>
+                        {selected ? (
+                          <span
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                              active ? 'text-white' : 'text-teal-600'
+                            }`}
+                          >
+                            <Check />
+                          </span>
+                        ) : null}
+                      </>
+                    )}
+                  </Combobox.Option>
+                ))
+              )}
+            </Combobox.Options>
+          </Transition>
+          <div className="mt-4 overflow-y-auto max-h-48">
+            <ul className="flex flex-wrap">
+              {selectedItems.map((i: Facility) => {
+                return (
+                  <li className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+                    <span>{i.facility_type}</span>
+                    <button
+                      className="ml-2"
+                      onClick={() => {
+                        setSelectedItems((p: Facility[]) =>
+                          p.filter((item: Facility) => item.id != i.id)
+                        )
+                      }}
+                    >
+                      <X size={15} />
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
+      </Combobox>
+    </div>
+  )
+}

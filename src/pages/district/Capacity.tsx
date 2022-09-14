@@ -12,6 +12,7 @@ import {
   AVAILABILITY_TYPES,
   AVAILABILITY_TYPES_ORDERED,
   AVAILABILITY_TYPES_TOTAL_ORDERED,
+  facility_types,
 } from '../../utils/constants'
 import {
   getDateFromQuery,
@@ -29,6 +30,9 @@ import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
+import FilterButton from '../../components/FilterButton'
+import SlideOver from '../../common/SlideOver'
+import Filters from '../../components/Filters'
 
 interface Props {
   districtName?: string
@@ -36,7 +40,20 @@ interface Props {
 
 export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const [{ date }, setQuery] = useQueryParams<UrlQuery>()
+  const [{ date, facility_type }, setQuery] = useQueryParams<UrlQuery>()
+  const [open, setOpen] = useState(false)
+  const initialFaciltyType = facility_type
+    ?.split(',')
+    .map((i) => {
+      const key = parseInt(i.trim())
+      return key >= 0 && key < facility_types.length
+        ? facility_types[key]
+        : null
+    })
+    .filter((i) => i != null) as any[]
+  const [selectedItems, setSelectedItems] = useState<any>(
+    initialFaciltyType || []
+  )
 
   const queryDate = getDateFromQuery(date)
   const query: FacilitySummaryQuery = {
@@ -75,6 +92,16 @@ export default function Capacity({ districtName }: Props) {
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
+          <div className="mt-4">
+            <FilterButton setOpen={() => setOpen(true)} />
+            <SlideOver open={open} setOpen={setOpen}>
+              <Filters
+                setOpen={setOpen}
+                selectedItems={selectedItems}
+                setSelectedItems={setSelectedItems}
+              />
+            </SlideOver>
+          </div>
           <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
             <ValuePill
               isLoading={isLoading}
