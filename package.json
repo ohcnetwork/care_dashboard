@@ -10,6 +10,7 @@
     "format": "prettier --write src/**/*.{ts,tsx}"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.1",
     "@react-google-maps/api": "^2.12.0",
     "@react-spring/web": "^9.4.5",
     "@types/google-map-react": "^2.1.7",
