@@ -74,7 +74,7 @@ export default function Capacity({ districtName }: Props) {
           ? selectedFacilities.map(
               (i: { id: number; facility_type: string }) => i.facility_type
             )
-          : FACILITY_TYPES
+          : []
       ),
     [data?.results, selectedFacilities]
   )
