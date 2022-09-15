@@ -15,6 +15,11 @@ const Filters: React.FC<FiltersProps> = ({
   selectedFacilities,
   setSelectedFacilities,
 }) => {
+  const handleClearFilter = () => {
+    setSelectedFacilities([])
+    setOpen(false)
+  }
+
   return (
     <div className="">
       <div className="flex flex-wrap justify-between">
@@ -27,7 +32,7 @@ const Filters: React.FC<FiltersProps> = ({
         </button>
         <button
           className="btn bg-red-500 hover:bg-red-700 mx-1 my-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          onClick={() => setOpen(false)}
+          onClick={handleClearFilter}
         >
           <X />
           <span className="ml-2">Clear Filter</span>
