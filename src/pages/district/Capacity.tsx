@@ -12,6 +12,7 @@ import {
   AVAILABILITY_TYPES,
   AVAILABILITY_TYPES_ORDERED,
   AVAILABILITY_TYPES_TOTAL_ORDERED,
+  FACILITY_TYPES,
   facility_types,
 } from '../../utils/constants'
 import {
@@ -66,8 +67,16 @@ export default function Capacity({ districtName }: Props) {
   const { data, isLoading } = useFacilitySummary(query)
 
   const filtered = useMemo(
-    () => processFacilityData(data?.results, []),
-    [data?.results]
+    () =>
+      processFacilityData(
+        data?.results,
+        selectedFacilities.length
+          ? selectedFacilities.map(
+              (i: { id: number; facility_type: string }) => i.facility_type
+            )
+          : FACILITY_TYPES
+      ),
+    [data?.results, selectedFacilities]
   )
   const facilitiesTrivia = useMemo(
     () => processFacilityTrivia(filtered, toDateString(queryDate)),
