@@ -6,14 +6,14 @@ import { UrlQuery } from '../types/urlQuery'
 
 interface FiltersProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  selectedItems: any
-  setSelectedItems: React.Dispatch<React.SetStateAction<any>>
+  selectedFacilities: any
+  setSelectedFacilities: React.Dispatch<React.SetStateAction<any>>
 }
 
 const Filters: React.FC<FiltersProps> = ({
   setOpen,
-  selectedItems,
-  setSelectedItems,
+  selectedFacilities,
+  setSelectedFacilities,
 }) => {
   return (
     <div className="">
@@ -42,8 +42,8 @@ const Filters: React.FC<FiltersProps> = ({
         <div className="mt-8">
           <div className="mb-4">Facility Type</div>
           <FacilityMultiSelect
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
+            selectedFacilities={selectedFacilities}
+            setSelectedFacilities={setSelectedFacilities}
           />
         </div>
         <div className="mt-8">

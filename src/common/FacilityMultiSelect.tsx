@@ -12,13 +12,13 @@ type Facility = {
 }
 
 interface Props {
-  selectedItems: Facility[]
-  setSelectedItems: React.Dispatch<React.SetStateAction<any>>
+  selectedFacilities: Facility[]
+  setSelectedFacilities: React.Dispatch<React.SetStateAction<any>>
 }
 
 export default function FacilityMultiSelect({
-  selectedItems,
-  setSelectedItems,
+  selectedFacilities,
+  setSelectedFacilities,
 }: Props) {
   const [query, setQuery] = useState('')
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
@@ -34,17 +34,21 @@ export default function FacilityMultiSelect({
         )
 
   useEffect(() => {
-    if (selectedItems.length)
+    if (selectedFacilities.length)
       setURLQuery({
         ...urlQuery,
-        facility_type: selectedItems.map((i) => i.id).join(','),
+        facility_type: selectedFacilities.map((i) => i.id).join(','),
       })
     else setURLQuery(_.omit(urlQuery, 'facility_type'))
-  }, [selectedItems])
+  }, [selectedFacilities])
 
   return (
     <div className="">
-      <Combobox value={selectedItems} onChange={setSelectedItems} multiple>
+      <Combobox
+        value={selectedFacilities}
+        onChange={setSelectedFacilities}
+        multiple
+      >
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
@@ -106,14 +110,14 @@ export default function FacilityMultiSelect({
           </Transition>
           <div className="mt-4 overflow-y-auto max-h-48">
             <ul className="flex flex-wrap">
-              {selectedItems.map((i: Facility) => {
+              {selectedFacilities.map((i: Facility) => {
                 return (
                   <li className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
                     <span>{i.facility_type}</span>
                     <button
                       className="ml-2"
                       onClick={() => {
-                        setSelectedItems((p: Facility[]) =>
+                        setSelectedFacilities((p: Facility[]) =>
                           p.filter((item: Facility) => item.id != i.id)
                         )
                       }}

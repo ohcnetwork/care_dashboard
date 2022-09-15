@@ -51,7 +51,7 @@ export default function Capacity({ districtName }: Props) {
         : null
     })
     .filter((i) => i != null) as any[]
-  const [selectedItems, setSelectedItems] = useState<any>(
+  const [selectedFacilities, setSelectedFacilities] = useState<any>(
     initialFaciltyType || []
   )
 
@@ -97,8 +97,8 @@ export default function Capacity({ districtName }: Props) {
             <SlideOver open={open} setOpen={setOpen}>
               <Filters
                 setOpen={setOpen}
-                selectedItems={selectedItems}
-                setSelectedItems={setSelectedItems}
+                selectedFacilities={selectedFacilities}
+                setSelectedFacilities={setSelectedFacilities}
               />
             </SlideOver>
           </div>
