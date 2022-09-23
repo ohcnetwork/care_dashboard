@@ -13,8 +13,8 @@ export const ValuePill: React.FC<Props> = ({ title, value, isLoading }) => {
       className={clsx(
         'shadow-xs rounded-lg translate-x-0',
         isLoading
-          ? 'bg-slate-800 animate-pulse'
-          : 'bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100'
+          ? 'bg-slate-200 dark:bg-slate-800 animate-pulse'
+          : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:text-gray-200 opacity-100'
       )}
     >
       <div

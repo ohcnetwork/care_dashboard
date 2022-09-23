@@ -89,7 +89,7 @@ const PopUp: React.FC<PopUpProps> = ({ data, open }) => {
                   <p className="text-sm text-slate-500 font-semibold">
                     {
                       AVAILABILITY_TYPES[
-                        a as unknown as keyof typeof AVAILABILITY_TYPES
+                      a as unknown as keyof typeof AVAILABILITY_TYPES
                       ]
                     }
                   </p>
@@ -264,18 +264,18 @@ export const FacilityBedMap = (props: Props) => {
           </GoogleMapReact>
           <select
             name="bed-type"
-            className="select absolute top-2 left-3 z-10 p-2 rounded-lg"
+            className="select absolute top-2 left-3 z-10 p-2 rounded-lg text-black"
             onChange={(e) => setSelectedBedType(e.target.value)}
           >
-            <option value={'All'}>All</option>
+            <option value={'All'} className="text-black">All</option>
             {filter(
               AVAILABILITY_TYPES_ORDERED,
               (key) => ![40, 50, 60, 70].includes(key)
             ).map((a) => (
-              <option key={a} value={String(a)}>
+              <option className="text-black " key={a} value={String(a)}>
                 {
                   AVAILABILITY_TYPES[
-                    a as unknown as keyof typeof AVAILABILITY_TYPES
+                  a as unknown as keyof typeof AVAILABILITY_TYPES
                   ]
                 }
               </option>
