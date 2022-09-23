@@ -55,6 +55,7 @@ export default function Capacity({ districtName }: Props) {
   const [selectedFacilities, setSelectedFacilities] = useState<any>(
     initialFaciltyType || []
   )
+  const [selectedDate, setSelectedDate] = useState<any>(null)
 
   const queryDate = getDateFromQuery(date)
   const query: FacilitySummaryQuery = {
@@ -108,6 +109,8 @@ export default function Capacity({ districtName }: Props) {
                 setOpen={setOpen}
                 selectedFacilities={selectedFacilities}
                 setSelectedFacilities={setSelectedFacilities}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
               />
             </SlideOver>
           </div>

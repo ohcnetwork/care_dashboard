@@ -1,22 +1,25 @@
-import { setQueryParamsOptions } from 'raviger'
-import * as React from 'react'
-import { Check, X } from 'react-feather'
+import React, { useState } from 'react'
+import { Calendar, Check, X } from 'react-feather'
+import SelectDate from '../common/SelectDate'
 import FacilityMultiSelect from '../common/FacilityMultiSelect'
-import { UrlQuery } from '../types/urlQuery'
-
 interface FiltersProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   selectedFacilities: any
   setSelectedFacilities: React.Dispatch<React.SetStateAction<any>>
+  selectedDate: any
+  setSelectedDate: React.Dispatch<React.SetStateAction<any>>
 }
 
 const Filters: React.FC<FiltersProps> = ({
   setOpen,
   selectedFacilities,
   setSelectedFacilities,
+  selectedDate,
+  setSelectedDate,
 }) => {
   const handleClearFilter = () => {
     setSelectedFacilities([])
+    setSelectedDate(null)
     setOpen(false)
   }
 
@@ -53,6 +56,10 @@ const Filters: React.FC<FiltersProps> = ({
         </div>
         <div className="mt-8">
           <div className="mb-4">Date</div>
+          <SelectDate
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
         </div>
       </div>
     </div>
