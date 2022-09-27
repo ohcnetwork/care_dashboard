@@ -229,7 +229,6 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
         </h1>
       ),
       ...mapValues(data.last_updated, (val, key) => {
-        // console.log('Something', key)
         return (
           <span key={`last-${key}`} className="text-slate-300 text-base">
             {val || '---'}
@@ -246,7 +245,6 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
       ),
 
       ...mapValues(data.quantity, (val, key: OxygenMapKeys) => {
-        // console.log('Something2', key)
         const isLow = data.is_low[key]
         return (
           <div key={`q-${key}`}>
@@ -273,7 +271,6 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
         </div>
       ),
       ...mapValues(data.burn_rate, (val, key: OxygenMapKeys) => {
-        // console.log('Something3', key)
         const unit = data.quantity_unit[key]
         const isLow = data.is_low[key]
         return (
