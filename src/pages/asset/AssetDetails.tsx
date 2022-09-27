@@ -14,7 +14,7 @@ export const AssetDetailsSkeleton = () => {
   return (
     <section className="my-4 w-full">
       <div className="w-full 2xl:max-w-7xl mx-auto px-4">
-        <div className="bg-slate-800 rounded-2xl animate-pulse h-72 mb-6" />
+        <div className="bg-slate-200 dark:bg-slate-800 rounded-2xl animate-pulse h-72 mb-6" />
       </div>
     </section>
   )
@@ -60,20 +60,22 @@ const AssetDetails = (props: Props) => {
   return (
     <section className="my-4">
       <div className="2xl:max-w-7xl mx-auto px-4">
-        <div className="border border-slate-700 bg-slate-800 rounded-2xl">
-          <h1 className="p-4 border-b border-slate-700 font-bold text-slate-300">
+        <div className="border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-2xl">
+          <h1 className="p-4 border-b border-slate-300 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300">
             {serial_number ? `# ${serial_number}` : 'Asset Details'}
           </h1>
           <div className="flex gap-8 justify-between p-4 flex-wrap">
             <div>
-              <h1 className="text-2xl text-slate-100 font-bold">{name}</h1>
+              <h1 className="text-2xl  text-slate-800 dark:text-slate-100 font-bold">
+                {name}
+              </h1>
               <div className="mt-2 mb-4 flex gap-2">
                 <span
                   className={clsx(
-                    'border  text-sm font-bold px-2 py-1 rounded-md bg-opacity-50',
+                    'border text-sm font-bold px-2 py-1 rounded-md bg-opacity-50',
                     isActive
-                      ? 'border-green-700 bg-green-800 text-green-300'
-                      : 'border-yellow-700 bg-yellow-800 text-yellow-300'
+                      ? 'text-green-800 bg-green-300 border-green-400 dark:border-green-700 dark:bg-green-800 dark:text-green-300'
+                      : 'text-yellow-800 border-yellow-400 bg-yellow-200 dark:border-yellow-700 dark:bg-yellow-800 dark:text-yellow-300'
                   )}
                 >
                   {isActive ? 'Active' : 'Transfer In Progress'}
@@ -83,8 +85,8 @@ const AssetDetails = (props: Props) => {
                   className={clsx(
                     'border  bg-opacity-50 text-sm font-bold px-2 py-1 rounded-md',
                     is_working
-                      ? 'border-green-700 bg-green-800 text-green-300'
-                      : 'border-red-700 bg-red-800 text-red-300'
+                      ? 'text-green-800 bg-green-300 border-green-400 dark:border-green-700 dark:bg-green-800 dark:text-green-300'
+                      : 'border-red-300 bg-red-200 text-red-700 dark:border-red-700 dark:bg-red-800 dark:text-red-300'
                   )}
                 >
                   {is_working ? 'Working' : 'Not Working'}
@@ -100,14 +102,14 @@ const AssetDetails = (props: Props) => {
               </div>
             </div>
             <div>
-              <div className="border-2 border-slate-700 p-4 rounded-xl bg-white">
+              <div className="border-2 border-slate-300 dark:border-slate-700 p-4 rounded-xl bg-white">
                 <QRCodeSVG value={pageURL} />
               </div>
             </div>
           </div>
         </div>
-        <div className="border border-slate-700 bg-slate-800 rounded-2xl mt-4">
-          <h1 className="p-4 border-b border-slate-700 font-bold text-slate-300">
+        <div className="border border-slate-300 bg-white dark:border-slate-700 dark:bg-slate-800 rounded-2xl mt-4">
+          <h1 className="p-4 border-b border-slate-300 dark:border-slate-700 font-bold text-slate-700 dark:text-slate-300">
             Warranty & Support
           </h1>
           <div className="p-4">

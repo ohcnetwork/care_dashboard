@@ -32,8 +32,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({
   return (
     <div
       className={clsx(
-        'bg-white dark:bg-slate-800',
-        'rounded-xl',
+        'bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm',
         small ? 'p-0' : 'md:p-3'
       )}
     >
@@ -42,7 +41,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({
           <p
             className={clsx(
               small ? 'mb-1 text-xs md:text-base' : 'mb-3 text-sm md:text-lg',
-              'dark:text-gray-400 text-gray-600 font-medium'
+              'dark:text-slate-400 text-slate-600 font-medium'
             )}
           >
             {title}
@@ -51,7 +50,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({
             <animated.p
               className={clsx(
                 small ? 'text-2xl' : 'text-4xl',
-                'dark:text-gray-200 text-gray-700'
+                'dark:text-slate-200 text-slate-700'
               )}
             >
               {_value.to((x) => Math.round(x))}

@@ -1,16 +1,15 @@
 import { ActiveLink, Link } from 'raviger'
 import React from 'react'
 import { Moon, Sun } from 'react-feather'
+import { useTheme } from '../utils/hooks/useTheme'
 import { navigation } from '../utils/navigation'
 
 interface Props {
-  district?: string,
-  theme: string,
-  setTheme: React.Dispatch<React.SetStateAction<"dark" | "light">>
+  district?: string
 }
 
-export const Header = ({ district, theme, setTheme }: Props) => {
-
+export const Header = ({ district }: Props) => {
+  const [theme, setTheme] = useTheme()
   return (
     <header className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -31,7 +30,7 @@ export const Header = ({ district, theme, setTheme }: Props) => {
                     key={link.name}
                     href={link.href}
                     className="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-slate-50 transition-all"
-                    activeClass="text-primary-600 dark:text-primary-400"
+                    activeClass="text-primary-500 font-medium dark:text-primary-400"
                   >
                     {link.name}
                   </ActiveLink>
@@ -41,12 +40,16 @@ export const Header = ({ district, theme, setTheme }: Props) => {
           <div className="ml-10 space-x-4">
             <button
               className="inline-block border-slate-200 dark:border-slate-800 p-2 border-2 rounded-md text-base font-medium text-slate-500 dark:text-slate-400 hover:bg-opacity-75"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() =>
+                setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+              }
             >
               {/* <Sun className="p-1 text-yellow-500" /> */}
-              {theme === "light" ?
-                <Sun className="p-1 text-yellow-500" /> :
-                <Moon className="p-1 text-blue-500" />}
+              {theme === 'light' ? (
+                <Sun className="p-1 text-yellow-500" />
+              ) : (
+                <Moon className="p-1 text-blue-500" />
+              )}
             </button>
           </div>
         </div>

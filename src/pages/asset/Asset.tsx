@@ -24,7 +24,7 @@ export const Asset = () => {
     <section className="my-4">
       <div className="2xl:max-w-7xl mx-auto px-4">
         <div>
-          <h1 className="mb-8 text-2xl font-bold text-slate-300">
+          <h1 className="mb-8 text-2xl font-bold text-slate-700 dark:text-slate-300">
             Search Asset
           </h1>
           <div className="flex gap-2">

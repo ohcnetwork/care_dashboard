@@ -20,7 +20,7 @@ export const FacilityCapacityTableCard = (props: Props) => {
     non_covid,
   } = props.data
   return (
-    <div className="p-4 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 mb-2 rounded-2xl dark:text-white overflow-x-auto">
+    <div className="p-4 dark:bg-slate-800 bg-white border border-slate-200 dark:border-slate-700 mb-2 rounded-2xl dark:text-white overflow-x-auto">
       <div className="flex gap-2 items-center justify-between flex-wrap">
         <div className="flex gap-2 flex-wrap items-center">
           <Link
@@ -35,11 +35,16 @@ export const FacilityCapacityTableCard = (props: Props) => {
         </div>
         <div className="flex gap-4">
           <h1 className="text-sm">
-            <span className="mr-2 text-slate-400">Last Updated</span>{' '}
+            <span className="mr-2 text-slate-500 dark:text-slate-400">
+              Last Updated
+            </span>{' '}
             <span className="text-base font-bold">{last_updated}</span>
           </h1>
           <h1 className="text-sm">
-            <span className="mr-2 text-slate-400"> Patient Discharged</span>
+            <span className="mr-2 text-slate-500 dark:text-slate-400">
+              {' '}
+              Patient Discharged
+            </span>
             <span className="text-base font-bold">{patient_discharged}</span>
           </h1>
         </div>
@@ -58,46 +63,48 @@ export const FacilityCapacityTableCard = (props: Props) => {
             <tr className="opacity-80">
               <th></th>
               <th colSpan={3}>Ordinary Beds</th>
-              <th colSpan={3} className="border-l dark:border-slate-600">
-                Oxygen Beds
-              </th>
-              <th colSpan={3} className="border-l dark:border-slate-600">
-                ICU
-              </th>
-              <th colSpan={3} className="border-l dark:border-slate-600">
-                Ventilators
-              </th>
+              <th colSpan={3}>Oxygen Beds</th>
+              <th colSpan={3}>ICU</th>
+              <th colSpan={3}>Ventilators</th>
             </tr>
             <tr>
               <th></th>
-              <th className="border-b border-b-slate-600 text-red-500 font-medium">
+              <th className="border-b border-slate-300 dark:border-slate-600 text-red-500 font-medium">
                 Used
               </th>
-              <th className="border-b border-b-slate-600 text-green-400">
+              <th className="border-b border-slate-300 dark:border-slate-600 text-green-600 dark:text-green-400">
                 Vacant
               </th>
-              <th>Total</th>
-              <th className="border-l dark:border-slate-600 text-red-500 font-medium">
+              <th className="border-b border-slate-300 dark:border-slate-600">
+                Total
+              </th>
+              <th className="border-l border-b border-slate-300 dark:border-slate-600 text-red-500 font-medium">
                 Used
               </th>
-              <th className="border-b border-b-slate-600 text-green-400">
+              <th className="border-b border-slate-300 dark:border-slate-600 text-green-600 dark:text-green-400">
                 Vacant
               </th>
-              <th>Total</th>
-              <th className="border-l dark:border-slate-600 text-red-500 font-medium">
+              <th className="border-b border-slate-300 dark:border-slate-600">
+                Total
+              </th>
+              <th className="border-l border-b border-slate-300 dark:border-slate-600 text-red-500 font-medium">
                 Used
               </th>
-              <th className="border-b border-b-slate-600 text-green-400">
+              <th className="border-b border-slate-300 dark:border-slate-600 text-green-600 dark:text-green-400">
                 Vacant
               </th>
-              <th>Total</th>
-              <th className="border-l dark:border-slate-600 text-red-500 font-medium">
+              <th className="border-b border-slate-300 dark:border-slate-600">
+                Total
+              </th>
+              <th className="border-l border-b  border-slate-300 dark:border-slate-600 text-red-500 font-medium">
                 Used
               </th>
-              <th className="border-b border-b-slate-600 text-green-400">
+              <th className="border-b border-slate-300 dark:border-slate-600 text-green-600 dark:text-green-400">
                 Vacant
               </th>
-              <th>Total</th>
+              <th className="border-b border-slate-300 dark:border-slate-600">
+                Total
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -108,13 +115,15 @@ export const FacilityCapacityTableCard = (props: Props) => {
                   <React.Fragment key={i}>
                     <td
                       className={clsx(
-                        i && 'border-l dark:border-slate-600',
+                        i && 'border-l border-slate-200 dark:border-slate-600',
                         'text-red-500 font-medium'
                       )}
                     >
                       {d.used}
                     </td>
-                    <td className="text-green-300 font-bold">{d.vacant}</td>
+                    <td className="text-green-500 dark:text-green-300 font-bold">
+                      {d.vacant}
+                    </td>
                     <td>{d.total}</td>
                   </React.Fragment>
                 )
@@ -127,13 +136,15 @@ export const FacilityCapacityTableCard = (props: Props) => {
                   <React.Fragment key={i}>
                     <td
                       className={clsx(
-                        i && 'border-l dark:border-slate-600',
+                        i && 'border-l border-slate-200 dark:border-slate-600',
                         'text-red-500 font-medium'
                       )}
                     >
                       {d.used}
                     </td>
-                    <td className="text-green-300 font-bold">{d.vacant}</td>
+                    <td className="text-green-500 dark:text-green-300 font-bold">
+                      {d.vacant}
+                    </td>
                     <td>{d.total}</td>
                   </React.Fragment>
                 )
@@ -146,13 +157,15 @@ export const FacilityCapacityTableCard = (props: Props) => {
                   <React.Fragment key={i}>
                     <td
                       className={clsx(
-                        i && 'border-l dark:border-slate-600',
+                        i && 'border-l border-slate-200 dark:border-slate-600',
                         'text-red-500 font-medium'
                       )}
                     >
                       {d.used}
                     </td>
-                    <td className="text-green-300 font-bold">{d.vacant}</td>
+                    <td className="text-green-500 dark:text-green-300 font-bold">
+                      {d.vacant}
+                    </td>
                     <td>{d.total}</td>
                   </React.Fragment>
                 )

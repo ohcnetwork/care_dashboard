@@ -39,10 +39,10 @@ interface Props {
 const FacilityDetailsSkeleton = () => {
   return (
     <>
-      <div className="bg-slate-800 rounded animate-pulse h-10 w-1/2 mb-6" />
-      <div className="bg-slate-800 rounded animate-pulse h-4 w-2/3 mb-3" />
-      <div className="bg-slate-800 rounded animate-pulse h-3 w-1/4 mb-3" />
-      <div className="bg-slate-800 rounded animate-pulse h-3 w-1/5 mb-3" />
+      <div className="bg-slate-200 dark:bg-slate-800 rounded animate-pulse h-10 w-1/2 mb-6" />
+      <div className="bg-slate-200 dark:bg-slate-800 rounded animate-pulse h-4 w-2/3 mb-3" />
+      <div className="bg-slate-200 dark:bg-slate-800 rounded animate-pulse h-3 w-1/4 mb-3" />
+      <div className="bg-slate-200 dark:bg-slate-800 rounded animate-pulse h-3 w-1/5 mb-3" />
     </>
   )
 }
@@ -102,7 +102,7 @@ export default function FacilityDetails(props: Props) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 lg:gap-12 xl:gap-16">
           <div
             className={clsx(
-              'bg-slate-800 row-span-1 aspect-square rounded-xl',
+              'bg-slate-200 dark:bg-slate-800 row-span-1 aspect-square rounded-xl',
               (isLoading || isPatientDataLoading) && 'animate-pulse'
             )}
           >
@@ -124,10 +124,14 @@ export default function FacilityDetails(props: Props) {
             ) : (
               <>
                 {' '}
-                <h1 className="text-white font-bold text-4xl mb-6">{name}</h1>
+                <h1 className="text-slate-900 dark:text-slate-100 font-bold text-4xl mb-6">
+                  {name}
+                </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <p className="text-slate-400">Phone Number</p>
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Phone Number
+                    </p>
                     <a
                       href={`tel:${phone_number || ''}`}
                       className="text-blue-500 font-medium text-lg"
@@ -136,27 +140,31 @@ export default function FacilityDetails(props: Props) {
                     </a>
                   </div>
                   <div>
-                    <p className="text-slate-400">Facility Type</p>
-                    <p className="text-slate-100 font-medium text-lg">
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Facility Type
+                    </p>
+                    <p className="text-slate-900 dark:text-slate-100 font-medium text-lg">
                       {facility_type}
                     </p>
                   </div>
                   <div>
-                    <p className="text-slate-400">Local body</p>
-                    <p className="text-slate-100 font-medium text-lg">
+                    <p className="text-slate-600 dark:text-slate-400">
+                      Local body
+                    </p>
+                    <p className="text-slate-900 dark:text-slate-100 font-medium text-lg">
                       {local_body_object?.name}
                     </p>
                   </div>
                   <div>
-                    <p className="text-slate-400">Ward</p>
-                    <p className="text-slate-100 font-medium text-lg">
+                    <p className="text-slate-600 dark:text-slate-400">Ward</p>
+                    <p className="text-slate-900 dark:text-slate-100 font-medium text-lg">
                       {ward_object?.name}
                     </p>
                   </div>
                 </div>
                 <div className="mt-4">
-                  <p className="text-slate-400">Address</p>
-                  <p className="text-slate-100 font-medium text-lg">
+                  <p className="text-slate-600 dark:text-slate-400">Address</p>
+                  <p className="text-slate-900 dark:text-slate-100 font-medium text-lg">
                     {address}
                   </p>
                 </div>

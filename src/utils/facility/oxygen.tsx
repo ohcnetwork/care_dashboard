@@ -224,13 +224,19 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
   return [
     {
       name: (
-        <h1 className="dark:text-white text-base" key="last-updated">
+        <h1
+          className="text-slate-900 dark:text-white text-base"
+          key="last-updated"
+        >
           Last Updated
         </h1>
       ),
       ...mapValues(data.last_updated, (val, key) => {
         return (
-          <span key={`last-${key}`} className="text-slate-300 text-base">
+          <span
+            key={`last-${key}`}
+            className="text-slate-700 dark:text-slate-300 text-base"
+          >
             {val || '---'}
           </span>
         )
@@ -240,7 +246,7 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
       name: (
         <div className="flex" key="quantity">
           <Database className="text-blue-500 mr-4" />
-          <h1 className="dark:text-white text-base">Quantity</h1>
+          <h1 className="text-slate-900 dark:text-white text-base">Quantity</h1>
         </div>
       ),
 
@@ -250,7 +256,7 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
           <div key={`q-${key}`}>
             <h1
               className={clsx(
-                'text-base text-slate-300',
+                'text-base text-slate-700 dark:text-slate-300',
                 isLow && 'text-red-500'
               )}
             >
@@ -267,7 +273,9 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
       name: (
         <div className="flex" key="burn-rate">
           <Activity className="text-yellow-400 mr-4" />
-          <h1 className="dark:text-white text-base">Burn Rate</h1>
+          <h1 className="text-slate-900 dark:text-white text-base">
+            Burn Rate
+          </h1>
         </div>
       ),
       ...mapValues(data.burn_rate, (val, key: OxygenMapKeys) => {
@@ -277,7 +285,7 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
           <div key={`burn-${key}`}>
             <h1
               className={clsx(
-                'text-base text-slate-300',
+                'text-base text-slate-700 dark:text-slate-300',
                 isLow && 'text-red-500'
               )}
             >
@@ -294,14 +302,16 @@ export const getOxygenTableRows = (data: OxygenCardData) => {
       name: (
         <div className="flex" key={'time-to-empty'}>
           <Clock className="text-green-500 mr-4" />
-          <h1 className="dark:text-white text-base">Time To Empty</h1>
+          <h1 className="text-slate-900 dark:text-white text-base">
+            Time To Empty
+          </h1>
         </div>
       ),
       ...mapValues(data.time_to_empty, (val, key: OxygenMapKeys) => {
         const isLow = data.is_low[key]
         return (
           <div key={`time-${key}`} className={clsx(val && isLow && 'pulse')}>
-            <h1 className="text-base text-slate-300">
+            <h1 className="text-base text-slate-700 dark:text-slate-300">
               {val || '---'}{' '}
               {val && <span className="text-base text-slate-500">Hr</span>}
             </h1>
