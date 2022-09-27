@@ -14,17 +14,21 @@ export const navigation: (district: string) => Navigation[] = (district) => [
     href: `/district/${parameterize(district)}/patient`,
     name: 'Patient',
   },
+  // {
+  //   href: `/district/${parameterize(district)}/tests`,
+  //   name: 'Tests',
+  // },
+  // {
+  //   href: `/district/${parameterize(district)}/triage`,
+  //   name: 'Triage',
+  // },
+  // {
+  //   href: `/district/${parameterize(district)}/lsg`,
+  //   name: 'LSG',
+  // },
   {
-    href: `/district/${parameterize(district)}/tests`,
-    name: 'Tests',
-  },
-  {
-    href: `/district/${parameterize(district)}/triage`,
-    name: 'Triage',
-  },
-  {
-    href: `/district/${parameterize(district)}/lsg`,
-    name: 'LSG',
+    href: `/assets`,
+    name: 'Assets',
   },
   {
     href: `/district/${parameterize(district)}/oxygen`,
