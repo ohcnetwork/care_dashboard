@@ -13,7 +13,7 @@ export const Home = () => {
               key={district.id}
               className="border border-slate-600 bg-slate-800 p-4 rounded-xl"
             >
-              <h1 className="text-4xl text-white font-bold">{district.name}</h1>
+              <h1 className="text-4xl text-black dark:text-white font-bold">{district.name}</h1>
               <Link
                 href={`/district/${parameterize(district.name)}/capacity`}
                 className="btn mt-8"

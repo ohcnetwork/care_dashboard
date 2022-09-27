@@ -20,7 +20,7 @@ export const FacilityCapacityTableCard = (props: Props) => {
     non_covid,
   } = props.data
   return (
-    <div className="p-4 dark:bg-slate-800 border border-slate-700 mb-2 rounded-2xl dark:text-white overflow-x-auto">
+    <div className="p-4 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 mb-2 rounded-2xl dark:text-white overflow-x-auto">
       <div className="flex gap-2 items-center justify-between flex-wrap">
         <div className="flex gap-2 flex-wrap items-center">
           <Link
