@@ -32,8 +32,6 @@ interface Props {
 const RESULT_PER_PAGE = 10
 
 const OxygenLoading = () => {
-  console.log('Hello')
-
   return (
     <div className="2xl:max-w-7xl mx-auto px-4 my-4">
       <div className="w-full h-32 bg-slate-800 animate-pulse rounded-xl mb-4" />

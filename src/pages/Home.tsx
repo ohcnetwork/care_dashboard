@@ -11,7 +11,7 @@ export const Home = () => {
           {ACTIVATED_DISTRICTS.map((district) => (
             <div
               key={district.id}
-              className="border border-slate-600 p-4 rounded-xl"
+              className="border border-slate-600 bg-slate-800 p-4 rounded-xl"
             >
               <h1 className="text-4xl text-white font-bold">{district.name}</h1>
               <Link

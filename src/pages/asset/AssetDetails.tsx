@@ -4,6 +4,7 @@ import { useAssetDetails } from '../../api/queries/useAssetDetails'
 import { LabelText } from '../../components/LabelText'
 import { navigate } from 'raviger'
 import { AxiosError } from 'axios'
+import clsx from 'clsx'
 
 interface Props {
   id?: string
@@ -67,24 +68,27 @@ const AssetDetails = (props: Props) => {
             <div>
               <h1 className="text-2xl text-slate-100 font-bold">{name}</h1>
               <div className="mt-2 mb-4 flex gap-2">
-                {!isActive ? (
-                  <span className="border border-green-700 bg-green-800 bg-opacity-50 text-green-300 text-sm font-bold px-2 py-1 rounded-md">
-                    Active
-                  </span>
-                ) : (
-                  <span className="border border-yellow-700 bg-yellow-800 bg-opacity-50 text-yellow-300 text-sm font-bold px-2 py-1 rounded-md">
-                    Transfer In Progress
-                  </span>
-                )}
-                {is_working ? (
-                  <span className="border border-green-700 bg-green-800 bg-opacity-50 text-green-300 text-sm font-bold px-2 py-1 rounded-md">
-                    Working
-                  </span>
-                ) : (
-                  <span className="border border-red-700 bg-red-800 bg-opacity-50 text-red-300 text-sm font-bold px-2 py-1 rounded-md">
-                    Not Working
-                  </span>
-                )}
+                <span
+                  className={clsx(
+                    'border  text-sm font-bold px-2 py-1 rounded-md bg-opacity-50',
+                    isActive
+                      ? 'border-green-700 bg-green-800 text-green-300'
+                      : 'border-yellow-700 bg-yellow-800 text-yellow-300'
+                  )}
+                >
+                  {isActive ? 'Active' : 'Transfer In Progress'}
+                </span>
+
+                <span
+                  className={clsx(
+                    'border  bg-opacity-50 text-sm font-bold px-2 py-1 rounded-md',
+                    is_working
+                      ? 'border-green-700 bg-green-800 text-green-300'
+                      : 'border-red-700 bg-red-800 text-red-300'
+                  )}
+                >
+                  {is_working ? 'Working' : 'Not Working'}
+                </span>
               </div>
               <LabelText label="Type" text={asset_type} />
               <div className="flex gap-4 mt-4 flex-wrap">
