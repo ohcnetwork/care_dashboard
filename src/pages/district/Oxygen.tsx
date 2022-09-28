@@ -22,6 +22,7 @@ import {
   getOxygenFlatData,
   getOxygenSummeryConfig,
 } from '../../utils/facility/oxygen'
+import { flattenObject, ObjectI } from '../../utils/helpers'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
 
@@ -87,7 +88,12 @@ export default function Oxygen({ districtName }: Props) {
             label="Facilities"
             searchValue={searchValue}
             setSearchValue={setSearchValue}
-            exportData={{ data: [], filename: '' }}
+            exportData={{
+              data: oxygenCardData.map((data) =>
+                flattenObject(data as unknown as ObjectI)
+              ),
+              filename: '',
+            }}
             className="mb-8"
           />
           {paginatedData.map((data, index) => (
