@@ -34,6 +34,8 @@ import { UrlQuery } from '../../types/urlQuery'
 import FilterButton from '../../components/FilterButton'
 import SlideOver from '../../common/SlideOver'
 import Filters from '../../components/Filters'
+import { X } from 'react-feather'
+import _ from 'lodash'
 
 interface Props {
   districtName?: string
@@ -41,7 +43,8 @@ interface Props {
 
 export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const [{ date, facility_type }, setQuery] = useQueryParams<UrlQuery>()
+  const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
+  const { date, facility_type } = urlQuery
   const [open, setOpen] = useState(false)
   const initialFaciltyType = facility_type
     ?.split(',')
@@ -113,6 +116,36 @@ export default function Capacity({ districtName }: Props) {
                 setSelectedDate={setSelectedDate}
               />
             </SlideOver>
+          </div>
+          <div className="flex text-white">
+            {selectedFacilities.length !== 0 && (
+              <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+                <span>Facility Type</span>
+                <button
+                  className="ml-2"
+                  onClick={() => {
+                    setQuery(_.omit(urlQuery, 'facility_type'))
+                    setSelectedFacilities([])
+                  }}
+                >
+                  <X size={15} />
+                </button>
+              </div>
+            )}
+            {selectedDate && (
+              <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+                <span>Date</span>
+                <button
+                  className="ml-2"
+                  onClick={() => {
+                    setQuery(_.omit(urlQuery, 'date'))
+                    setSelectedDate(null)
+                  }}
+                >
+                  <X size={15} />
+                </button>
+              </div>
+            )}
           </div>
           <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
             <ValuePill
