@@ -91,6 +91,8 @@ export default function FacilityDetails(props: Props) {
     [filtered]
   )
 
+  console.log(patientData)
+
   // const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
   //   data: tableData,
   //   keys: ['facility_name'],
@@ -218,11 +220,69 @@ export default function FacilityDetails(props: Props) {
           <h1 className="dark:text-gray-100 text-2xl font-bold mb-4">
             Expected Burn Rate
           </h1>
-          <div className="grid grid-cols-3 gap-4">
-            <InfoCard title="Oxygen Bed" value={901.4} unit="l/hr" />
-            <InfoCard title="ICU" value={526.68} />
-            <InfoCard title="Ventilator" value={87.78} />
-          </div>
+
+          {patientData?.results[0]?.data
+            ?.total_patients_bed_with_oxygen_support ||
+          patientData?.results[0]?.data
+            ?.total_patients_icu_with_oxygen_support ||
+          patientData?.results[0]?.data
+            ?.total_patients_icu_with_invasive_ventilator ||
+          patientData?.results[0]?.data
+            ?.total_patients_icu_with_non_invasive_ventilator ? (
+            <div className="grid grid-cols-3 gap-4">
+              <InfoCard
+                title="Oxygen Bed"
+                key="oxygen-bed"
+                value={
+                  patientData?.results[0]?.data
+                    ?.total_patients_bed_with_oxygen_support *
+                  7.4 *
+                  8.778
+                }
+                unit={
+                  <span className="ml-1 text-lg font-bold text-gray-300">
+                    m<sup>3</sup>/hr
+                  </span>
+                }
+              />
+              <InfoCard
+                title="ICU"
+                key="icu"
+                value={
+                  patientData?.results[0]?.data
+                    ?.total_patients_icu_with_oxygen_support *
+                  10 *
+                  8.778
+                }
+                unit={
+                  <span className="ml-1 text-lg font-bold text-gray-300">
+                    m<sup>3</sup>/hr
+                  </span>
+                }
+              />
+              <InfoCard
+                title="Ventilator"
+                key="ventilator"
+                value={
+                  (patientData?.results[0]?.data
+                    ?.total_patients_icu_with_invasive_ventilator +
+                    patientData?.results[0]?.data
+                      ?.total_patients_icu_with_non_invasive_ventilator) *
+                  10 *
+                  8.778
+                }
+                unit={
+                  <span className="ml-1 text-lg font-bold text-gray-300">
+                    m<sup>3</sup>/hr
+                  </span>
+                }
+              />
+            </div>
+          ) : (
+            <h1 className="my-8 text-center text-3xl text-slate-500 font-bold">
+              No Data Available
+            </h1>
+          )}
         </section>
         <section id="map">
           <h1 className="dark:text-gray-100 text-2xl font-bold mb-4">Map</h1>

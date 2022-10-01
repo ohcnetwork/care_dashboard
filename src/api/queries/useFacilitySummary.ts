@@ -21,7 +21,7 @@ export interface FacilitySummaryResponse {
   data: Data
 }
 
-interface Facility {
+export interface Facility {
   id: string
   name: string
   ward: number
