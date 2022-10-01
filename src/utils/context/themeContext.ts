@@ -5,11 +5,12 @@ type InitialTheme = {
   theme: 'light' | 'dark'
   setTheme: React.Dispatch<React.SetStateAction<'dark' | 'light'>>
 }
-console.log(checkTheme())
+
 const initialTheme: InitialTheme = {
   theme: checkTheme(),
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => {},
+  setTheme: () => {
+    return
+  },
 }
 
 export const ThemeContext = createContext(initialTheme)

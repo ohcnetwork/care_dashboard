@@ -37,7 +37,7 @@ export const TableExportHeader: React.FC<TableExportHeaderProps> = ({
         )}
 
         <input
-          className="input"
+          className="input py-2"
           placeholder="Search Facility"
           value={searchValue}
           onChange={(event) => setSearchValue(event.target.value)}

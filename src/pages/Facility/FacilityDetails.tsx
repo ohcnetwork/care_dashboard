@@ -8,7 +8,7 @@ import {
 import { usePatientSummary } from '../../api/queries/usePatientSummery'
 import { FacilityIcon } from '../../asset/icons/FacilityIcon'
 import { FacilityBedMap } from '../../components/FacilityBedMap'
-import { InfoCard } from '../../components/InfoCard'
+import InfoCard from '../../components/InfoCard'
 import RadialCard from '../../components/RadialCard'
 import { UsageCard } from '../../components/UsageCard'
 import { UrlQuery } from '../../types/urlQuery'

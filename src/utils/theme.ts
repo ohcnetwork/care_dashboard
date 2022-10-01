@@ -1,6 +1,5 @@
 export const checkTheme: () => 'light' | 'dark' = () => {
   const theme = localStorage.getItem('theme')
-  console.log({ theme })
   if (theme && (theme === 'dark' || theme === 'light')) {
     return theme
   }
