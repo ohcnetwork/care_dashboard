@@ -91,8 +91,6 @@ export default function FacilityDetails(props: Props) {
     [filtered]
   )
 
-  console.log(patientData)
-
   // const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
   //   data: tableData,
   //   keys: ['facility_name'],
