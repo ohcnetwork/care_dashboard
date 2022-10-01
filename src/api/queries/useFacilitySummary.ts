@@ -121,6 +121,24 @@ export interface Data {
   actual_live_patients: number
 }
 
+export type FilteredFacilityData = Data & {
+  id: string | null
+  name: string | null
+  address: string | null
+  district_id: number | null
+  location: Location | null
+  phone_number: string | null
+  inventory: Record<string, Inventory> | null
+  modified_date: string | null
+  date: string
+  inventory_modified_date: string
+  read_cover_image_url: string
+  tte_tank: number | undefined
+  tte_d_cylinders: number | undefined
+  tte_c_cylinders: number | undefined
+  tte_b_cylinders: number | undefined
+}
+
 export interface Inventory {
   unit: string
   stock: number
