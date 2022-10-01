@@ -102,7 +102,7 @@ export default function Capacity({ districtName }: Props) {
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
-          <div className="mt-4">
+          <div className="flex flex-row-reverse mt-4">
             <FilterButton setOpen={() => setOpen(true)} />
             <SlideOver open={open} setOpen={setOpen}>
               <Filters
