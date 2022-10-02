@@ -127,3 +127,18 @@ export const OXYGEN_INVENTORY_STRING_ENUM = {
   type_c_cylinders: 'type_c_cylinders',
   type_b_cylinders: 'type_b_cylinders',
 }
+
+export const FACILITY_TYPES = [
+  ...GOVT_FACILITY_TYPES,
+  'Private Hospital',
+  'First Line Treatment Centre',
+  'Second Line Treatment Center',
+  'COVID-19 Domiciliary Care Center',
+  'Corona Care Centre',
+  'Covid Management Center',
+  'Shifting Centre',
+  'TeleMedicine',
+]
+export const facilityOptions = FACILITY_TYPES.map((facility_type, idx) => {
+  return { value: idx, label: facility_type }
+})
