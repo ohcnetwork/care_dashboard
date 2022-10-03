@@ -32,8 +32,6 @@ const InfoCard: React.FC<InfoCardProps> = ({
 
   const isDeltaPositive = delta > 0
 
-  if (!value || isNaN(value)) return null
-
   return (
     <div
       className={clsx(

@@ -5,7 +5,6 @@ import { createQueryKey } from '../../utils/url'
 import { Facility } from '../common/types/facilitySummery'
 import { FacilitySummaryResponse } from './useFacilitySummary'
 
-
 const PATIENT_SUMMARY_KEY = 'patientSummeryKey'
 
 export interface PatientSummaryResponse {
