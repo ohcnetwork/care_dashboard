@@ -44,7 +44,7 @@ interface Props {
 export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
-  const { date, facility_type } = urlQuery
+  const { date, end_date, facility_type } = urlQuery
   const [open, setOpen] = useState(false)
   const initialFaciltyType = facility_type
     ?.split(',')
@@ -59,12 +59,14 @@ export default function Capacity({ districtName }: Props) {
     initialFaciltyType || []
   )
   const [selectedDate, setSelectedDate] = useState<any>(null)
+  const [selectedEndDate, setSelectedEndDate] = useState<any>(null)
 
   const queryDate = getDateFromQuery(date)
+  const queryEndDate = getDateFromQuery(end_date)
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
-    end_date: toDateString(getNDateAfter(queryDate, 1)),
+    end_date: toDateString(getNDateAfter(queryEndDate, 1)),
     limit: 1000,
   }
 
@@ -114,6 +116,8 @@ export default function Capacity({ districtName }: Props) {
                 setSelectedFacilities={setSelectedFacilities}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
+                selectedEndDate={selectedEndDate}
+                setSelectedEndDate={setSelectedEndDate}
               />
             </SlideOver>
           </div>

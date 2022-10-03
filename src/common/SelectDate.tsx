@@ -19,9 +19,14 @@ type DatepickerType = 'date' | 'month' | 'year'
 interface Props {
   selectedDate: any
   setSelectedDate: React.Dispatch<React.SetStateAction<any>>
+  query: any
 }
 
-export default function SelectDate({ selectedDate, setSelectedDate }: Props) {
+export default function SelectDate({
+  selectedDate,
+  setSelectedDate,
+  query,
+}: Props) {
   const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   const [dayCount, setDayCount] = useState<Array<number>>([])
   const [blankDays, setBlankDays] = useState<Array<number>>([])
@@ -31,12 +36,13 @@ export default function SelectDate({ selectedDate, setSelectedDate }: Props) {
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
 
   useEffect(() => {
+    console.log(selectedDate)
     if (selectedDate)
       setURLQuery({
         ...urlQuery,
-        date: format(selectedDate, 'yyyy-MM-dd'),
+        [query]: format(selectedDate, 'yyyy-MM-dd'),
       })
-    else setURLQuery(_.omit(urlQuery, 'date'))
+    else setURLQuery(_.omit(urlQuery, query))
   }, [selectedDate])
 
   const decrement = () => {
@@ -153,7 +159,7 @@ export default function SelectDate({ selectedDate, setSelectedDate }: Props) {
           </div>
           {showDatepicker && (
             <div
-              className="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
+              className="z-10 bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
               style={{ width: '17rem' }}
             >
               <div className="flex justify-between items-center mb-2">

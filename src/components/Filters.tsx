@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import { Calendar, Check, X } from 'react-feather'
 import SelectDate from '../common/SelectDate'
 import FacilityMultiSelect from '../common/FacilityMultiSelect'
+import { useQueryParams } from 'raviger'
+import { UrlQuery } from '../types/urlQuery'
+import _ from 'lodash'
 interface FiltersProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   selectedFacilities: any
   setSelectedFacilities: React.Dispatch<React.SetStateAction<any>>
   selectedDate: any
   setSelectedDate: React.Dispatch<React.SetStateAction<any>>
+  selectedEndDate: any
+  setSelectedEndDate: any
 }
 
 const Filters: React.FC<FiltersProps> = ({
@@ -16,11 +21,27 @@ const Filters: React.FC<FiltersProps> = ({
   setSelectedFacilities,
   selectedDate,
   setSelectedDate,
+  selectedEndDate,
+  setSelectedEndDate,
 }) => {
+  const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
+  const [range, setRange] = useState<boolean>(false)
+
+  const handleToggle = (val: boolean) => {
+    if (val) {
+      setRange(true)
+    } else {
+      setURLQuery(_.omit(urlQuery, 'end_date'))
+      setRange(false)
+    }
+  }
+
   const handleClearFilter = () => {
     setSelectedFacilities([])
     setSelectedDate(null)
+    setSelectedEndDate(null)
     setOpen(false)
+    setURLQuery({})
   }
 
   return (
@@ -55,11 +76,49 @@ const Filters: React.FC<FiltersProps> = ({
           />
         </div>
         <div className="mt-8">
-          <div className="mb-4">Date</div>
-          <SelectDate
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-          />
+          <div className="flex justify-between">
+            <div className="mb-4">Date</div>
+            <div className="flex flex-row-reverse">
+              <button
+                onClick={() => {
+                  handleToggle(true)
+                }}
+                className={`btn rounded-l-none mb-2 ${
+                  range && 'bg-primary-700'
+                }`}
+              >
+                Range
+              </button>
+              <button
+                onClick={() => {
+                  handleToggle(false)
+                }}
+                className={`btn rounded-r-none mb-2 ${
+                  !range && 'bg-primary-700'
+                }`}
+              >
+                Single
+              </button>
+            </div>
+          </div>
+          <div className="mb-4">
+            {range && <span className="mb-2">Start date:</span>}
+            <SelectDate
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              query={'date'}
+            />
+          </div>
+          {range && (
+            <div className="">
+              <span className="mb-2">End date:</span>
+              <SelectDate
+                selectedDate={selectedEndDate}
+                setSelectedDate={setSelectedEndDate}
+                query={'end_date'}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
