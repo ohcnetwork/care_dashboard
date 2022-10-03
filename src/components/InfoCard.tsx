@@ -8,7 +8,7 @@ interface InfoCardProps {
   value: number
   delta?: number
   small?: boolean
-  unit?: string
+  unit?: string | JSX.Element
   className?: string
 }
 
@@ -17,6 +17,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
   value = 0,
   delta = 0,
   small = false,
+  unit = '',
   className = 'bg-white dark:bg-slate-800',
 }) => {
   const { _value, _delta } = useSpring({
@@ -30,6 +31,8 @@ const InfoCard: React.FC<InfoCardProps> = ({
   })
 
   const isDeltaPositive = delta > 0
+
+  if (!value || isNaN(value)) return null
 
   return (
     <div
@@ -49,7 +52,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
           >
             {title}
           </p>
-          <div className="flex">
+          <div className="flex items-center">
             <animated.p
               className={clsx(
                 small ? 'text-2xl' : 'text-4xl',
@@ -58,6 +61,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
             >
               {_value.to((x) => Math.round(x))}
             </animated.p>
+            {unit && <span className="ml-2">{unit}</span>}
             {delta !== 0 && (
               <div
                 className={clsx(

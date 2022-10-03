@@ -18,7 +18,7 @@ const ValueCard: React.FC<ValueCardProps> = ({
     <div className="dark:text-white">
       <div>
         <p className="text-slate-600 dark:text-slate-400">{label}</p>
-        <h1 className="text-4xl my-2">{value || '---'}</h1>
+        <h1 className="text-4xl my-2">{value ?? '---'}</h1>
         <h2 className="text-slate-700 dark:text-slate-300">{unit}</h2>
       </div>
     </div>
