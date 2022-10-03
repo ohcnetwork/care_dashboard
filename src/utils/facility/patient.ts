@@ -131,50 +131,60 @@ export const processPatientCardData = (
   }, [] as PatientCardDataForCapacity[])
 }
 
-// export const processPatientExportData = (
-//   facilityData: ReturnType<typeof processPatientSummaryData>,
-//   date: Date
-// ) => {
-//   const filename = 'patient_export.csv'
+type AdditionalExportData = Record<string, string | number | null | boolean>
 
-//   const data = reduce(
-//     facilityData,
-//     (a, c) => {
-//       if (c.date !== toDateString(date)) {
-//         return a
-//       }
+type PatientExportData = {
+  'Govt/Pvt': 'Govt' | 'Pvt'
+  'Hops/CFLTC': 'CFLTC' | 'Hops'
+  'Hospital/CFLTC Address': string | null
+  'Hospital/CFLTC Name': string | null
+  Mobile: string | null
+} & AdditionalExportData
 
-//       const additionalData = reduce(
-//         Object.keys(PATIENT_TYPES),
-//         (acc, cur) => {
-//           const copy = cloneDeep(acc)
-//           const key = cur as unknown as keyof typeof PATIENT_TYPES
-//           copy[`Total Patient in ${PATIENT_TYPES[key]}`] =
-//             c[`total_patients_${key}`]
+export const processPatientExportData = (
+  facilityData: ReturnType<typeof processPatientSummaryData>,
+  date: Date
+) => {
+  const filename = 'patient_export.csv'
 
-//           return copy
-//         },
-//         {}
-//       )
+  const data = reduce(
+    facilityData,
+    (a, c) => {
+      if (c.date !== toDateString(date)) {
+        return a
+      }
 
-//       const newData = [
-//         ...a,
-//         {
-//           'Hospital/CFLTC Name': c.name || null,
-//           'Hospital/CFLTC Address': c.address || null,
-//           'Govt/Pvt': c.facility_type.startsWith('Govt') ? 'Govt' : 'Pvt',
-//           'Hops/CFLTC':
-//             c.facility_type === 'First Line Treatment Centre'
-//               ? 'CFLTC'
-//               : 'Hops' || null,
-//           Mobile: c.phone_number ? String(c.phone_number) : null,
-//           ...additionalData,
-//         },
-//       ]
-//       return newData
-//     },
-//     [] as any[]
-//   )
+      const additionalData = reduce(
+        Object.keys({ ...PATIENT_TYPES }),
+        (acc, cur) => {
+          const copy = cloneDeep(acc)
+          const key = cur as unknown as keyof typeof PATIENT_TYPES
+          copy[`Total Patient in ${PATIENT_TYPES[key]}`] =
+            c[`total_patients_${key}`]
 
-//   return { data, filename }
-// }
+          return copy
+        },
+        {} as AdditionalExportData
+      )
+
+      const newData: PatientExportData[] = [
+        ...a,
+        {
+          'Hospital/CFLTC Name': c.name || null,
+          'Hospital/CFLTC Address': c.address || null,
+          'Govt/Pvt': c.facility_type.startsWith('Govt') ? 'Govt' : 'Pvt',
+          'Hops/CFLTC':
+            c.facility_type === 'First Line Treatment Centre'
+              ? 'CFLTC'
+              : 'Hops',
+          Mobile: c.phone_number ? String(c.phone_number) : null,
+          ...additionalData,
+        },
+      ]
+      return newData
+    },
+    [] as PatientExportData[]
+  )
+
+  return { data, filename }
+}

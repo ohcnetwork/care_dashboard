@@ -20,6 +20,7 @@ import {
 import {
   PatientTypeKeys,
   processPatientCardData,
+  processPatientExportData,
   processPatientFacilitiesTriviaData,
   processPatientSummaryData,
 } from '../../utils/facility/patient'
@@ -76,7 +77,10 @@ export default function Patient({ districtName }: Props) {
     [filtered]
   )
 
-  // const exportData = processPatientExportData(filtered, _start_date)
+  const exportData = useMemo(
+    () => processPatientExportData(filtered, new Date(date || new Date())),
+    [filtered, date]
+  )
 
   const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
     data: patientCardData,
@@ -97,7 +101,7 @@ export default function Patient({ districtName }: Props) {
         />
       </div>
       <div className="grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8 ">
-        {Object.entries(PATIENT_TYPES).map(([k, title], i) => {
+        {Object.entries({ ...PATIENT_TYPES }).map(([k, title], i) => {
           const key = k as PatientTypeKeys
           const value = facilityTrivia.current[key]?.total || 0
           const delta = facilityTrivia.current[key].today || 0
@@ -109,7 +113,7 @@ export default function Patient({ districtName }: Props) {
           label="Facilities"
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-          // exportData={}
+          exportData={exportData}
           className="mb-4"
         />
         <div className="flex gap-4 flex-col">
