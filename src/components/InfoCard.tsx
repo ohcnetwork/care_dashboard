@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { ArrowDown, ArrowUp, ChevronsUp } from 'react-feather'
+import { ArrowDown, ArrowUp } from 'react-feather'
 import { animated, config, useSpring } from '@react-spring/web'
 
 interface InfoCardProps {
@@ -9,14 +9,16 @@ interface InfoCardProps {
   delta?: number
   small?: boolean
   unit?: string | JSX.Element
+  className?: string
 }
 
-export const InfoCard: React.FC<InfoCardProps> = ({
+const InfoCard: React.FC<InfoCardProps> = ({
   title = '',
   value = 0,
   delta = 0,
   small = false,
   unit = '',
+  className = 'bg-white dark:bg-slate-800',
 }) => {
   const { _value, _delta } = useSpring({
     from: { _value: 0, _delta: 0 },
@@ -30,13 +32,12 @@ export const InfoCard: React.FC<InfoCardProps> = ({
 
   const isDeltaPositive = delta > 0
 
-  if (!value || isNaN(value)) return null
-
   return (
     <div
       className={clsx(
-        'bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm',
-        small ? 'p-0' : 'md:p-3'
+        'rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm',
+        small ? 'p-1' : 'p-3',
+        className
       )}
     >
       <div className="flex flex-col">
@@ -90,3 +91,5 @@ export const InfoCard: React.FC<InfoCardProps> = ({
     </div>
   )
 }
+
+export default InfoCard
