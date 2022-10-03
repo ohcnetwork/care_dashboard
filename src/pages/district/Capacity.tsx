@@ -142,8 +142,9 @@ export default function Capacity({ districtName }: Props) {
                 <button
                   className="ml-2"
                   onClick={() => {
-                    setQuery(_.omit(urlQuery, 'date'))
+                    setQuery(_.omit(urlQuery, 'date', 'end_date'))
                     setSelectedDate(null)
+                    setSelectedEndDate(null)
                   }}
                 >
                   <X size={15} />
