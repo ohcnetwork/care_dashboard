@@ -91,6 +91,14 @@ export default function FacilityDetails(props: Props) {
     [filtered]
   )
 
+  const isBurnRateAvailable =
+    patientData?.results[0]?.data?.total_patients_bed_with_oxygen_support ||
+    patientData?.results[0]?.data?.total_patients_icu_with_oxygen_support ||
+    patientData?.results[0]?.data
+      ?.total_patients_icu_with_invasive_ventilator ||
+    patientData?.results[0]?.data
+      ?.total_patients_icu_with_non_invasive_ventilator
+
   // const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
   //   data: tableData,
   //   keys: ['facility_name'],
@@ -219,14 +227,7 @@ export default function FacilityDetails(props: Props) {
             Expected Burn Rate
           </h1>
 
-          {patientData?.results[0]?.data
-            ?.total_patients_bed_with_oxygen_support ||
-          patientData?.results[0]?.data
-            ?.total_patients_icu_with_oxygen_support ||
-          patientData?.results[0]?.data
-            ?.total_patients_icu_with_invasive_ventilator ||
-          patientData?.results[0]?.data
-            ?.total_patients_icu_with_non_invasive_ventilator ? (
+          {isBurnRateAvailable ? (
             <div className="grid grid-cols-3 gap-4">
               <InfoCard
                 title="Oxygen Bed"
