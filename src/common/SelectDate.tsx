@@ -36,7 +36,6 @@ export default function SelectDate({
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
 
   useEffect(() => {
-    console.log(selectedDate)
     if (selectedDate)
       setURLQuery({
         ...urlQuery,
@@ -144,7 +143,7 @@ export default function SelectDate({
           <input
             type="text"
             readOnly
-            className="cursor-pointer w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+            className="input text-white cursor-pointer pl-4 pr-10 py-3 shadow-sm focus:outline-none focus:shadow-outline font-medium"
             placeholder="Select date"
             value={
               selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '----/--/--'
@@ -155,27 +154,27 @@ export default function SelectDate({
             className="cursor-pointer absolute top-0 right-0 px-3 py-2"
             onClick={toggleDatepicker}
           >
-            <Calendar className="text-black" />
+            <Calendar className="text-white" />
           </div>
           {showDatepicker && (
             <div
-              className="z-10 bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
+              className="z-10 bg-white dark:bg-slate-800 mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
               style={{ width: '17rem' }}
             >
               <div className="flex justify-between items-center mb-2">
                 <div>
                   <button
                     type="button"
-                    className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                    className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-primary-700 p-1 rounded-full"
                     onClick={decrement}
                   >
-                    <ChevronLeft className="text-black" />
+                    <ChevronLeft className="text-white" />
                   </button>
                 </div>
                 {type === 'date' && (
                   <div
                     onClick={showMonthPicker}
-                    className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                    className="flex-grow p-1 text-lg font-bold text-gray-800 dark:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
                   >
                     <p className="text-center">
                       {format(datepickerHeaderDate, 'MMMM')}
@@ -184,7 +183,7 @@ export default function SelectDate({
                 )}
                 <div
                   onClick={showYearPicker}
-                  className="flex-grow p-1 text-lg font-bold text-gray-800 cursor-pointer hover:bg-gray-200 rounded-lg"
+                  className="flex-grow p-1 text-lg font-bold text-gray-800 dark:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
                 >
                   <p className="text-center">
                     {format(datepickerHeaderDate, 'yyyy')}
@@ -193,10 +192,10 @@ export default function SelectDate({
                 <div>
                   <button
                     type="button"
-                    className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                    className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-primary-700 p-1 rounded-full"
                     onClick={increment}
                   >
-                    <ChevronRight className="text-black" />
+                    <ChevronRight className="text-white" />
                   </button>
                 </div>
               </div>
@@ -205,7 +204,7 @@ export default function SelectDate({
                   <div className="flex flex-wrap mb-3 -mx-1">
                     {DAYS.map((day, i) => (
                       <div key={i} style={{ width: '14.26%' }} className="px-1">
-                        <div className="text-gray-800 font-medium text-center text-xs">
+                        <div className="text-white font-medium text-center text-xs">
                           {day}
                         </div>
                       </div>
@@ -227,10 +226,10 @@ export default function SelectDate({
                       >
                         <div
                           onClick={setDateValue(d)}
-                          className={`cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
+                          className={`cursor-pointer dark:text-white text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
                             selectedDate && isToday(d)
-                              ? 'bg-blue-500 text-white'
-                              : 'text-gray-700 hover:bg-blue-200'
+                              ? 'bg-primary-500 text-white'
+                              : 'text-gray-700 hover:bg-primary-700'
                           }`}
                         >
                           {d}
@@ -251,10 +250,10 @@ export default function SelectDate({
                         style={{ width: '25%' }}
                       >
                         <div
-                          className={`cursor-pointer p-5 font-semibold text-center text-sm rounded-lg hover:bg-gray-200 ${
+                          className={`cursor-pointer p-5 font-semibold dark:text-white text-center text-sm rounded-lg hover:bg-primary-700 ${
                             selectedDate && isSelectedMonth(i)
                               ? 'bg-blue-500 text-white'
-                              : 'text-gray-700 hover:bg-blue-200'
+                              : 'text-gray-700 hover:bg-primary-700'
                           }`}
                         >
                           {format(

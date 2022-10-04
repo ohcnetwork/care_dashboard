@@ -25,7 +25,7 @@ const Filters: React.FC<FiltersProps> = ({
   setSelectedEndDate,
 }) => {
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
-  const [range, setRange] = useState<boolean>(false)
+  const [range, setRange] = useState<boolean>(urlQuery?.end_date != null)
 
   const handleToggle = (val: boolean) => {
     if (val) {

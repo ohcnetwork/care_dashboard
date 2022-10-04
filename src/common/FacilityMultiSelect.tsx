@@ -52,7 +52,7 @@ export default function FacilityMultiSelect({
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg dark:bg-slate-800 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
-              className="input border-none py-2 pl-3 pr-10 focus:ring-0"
+              className="input py-3 pl-3 pr-10 focus:ring-0"
               placeholder={'Search facility type'}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -77,7 +77,7 @@ export default function FacilityMultiSelect({
                   <Combobox.Option
                     key={facility.id}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4  text-white ${
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4  text-white ${
                         active
                           ? 'bg-green-500'
                           : 'dark:bg-slate-800 text-gray-900'
