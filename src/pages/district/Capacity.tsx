@@ -127,16 +127,14 @@ export default function Capacity({ districtName }: Props) {
           </div>
           <div className="mt-2 flex flex-wrap text-white text-sm">
             {selectedFacilities.length !== 0 && (
-              <div className="my-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
-                <div>
-                  Facility Type :{' '}
-                  <span className="">
-                    {selectedFacilities
-                      .map((i: any) => {
-                        return i.facility_type
-                      })
-                      .join(', ')}
-                  </span>
+              <div className="flex my-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
+                <div className="mr-1">Facility&nbsp;Type&nbsp;:</div>
+                <div className="max-w-screen max-h-5 overflow-clip text-ellipsis ">
+                  {selectedFacilities
+                    .map((i: any) => {
+                      return i.facility_type
+                    })
+                    .join(', ')}
                 </div>
                 <button
                   className="ml-2 hover:bg-slate-900 rounded-full p-1 flex justify-center items-center"
