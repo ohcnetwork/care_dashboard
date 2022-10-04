@@ -58,11 +58,15 @@ export default function Capacity({ districtName }: Props) {
   const [selectedFacilities, setSelectedFacilities] = useState<any>(
     initialFaciltyType || []
   )
-  const [selectedDate, setSelectedDate] = useState<any>(null)
-  const [selectedEndDate, setSelectedEndDate] = useState<any>(null)
+  const [selectedDate, setSelectedDate] = useState<any>(
+    date ? getDateFromQuery(date) : null
+  )
+  const [selectedEndDate, setSelectedEndDate] = useState<any>(
+    end_date ? getDateFromQuery(end_date) : null
+  )
 
   const queryDate = getDateFromQuery(date)
-  const queryEndDate = getDateFromQuery(end_date)
+  const queryEndDate = getDateFromQuery(end_date ? end_date : date)
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
@@ -121,9 +125,9 @@ export default function Capacity({ districtName }: Props) {
               />
             </SlideOver>
           </div>
-          <div className="flex flex-wrap text-white text-sm">
+          <div className="mt-2 flex flex-wrap text-white text-sm">
             {selectedFacilities.length !== 0 && (
-              <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+              <div className="my-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
                 <div>
                   Facility Type :{' '}
                   <span className="">
@@ -135,7 +139,7 @@ export default function Capacity({ districtName }: Props) {
                   </span>
                 </div>
                 <button
-                  className="ml-2 hover:bg-slate-900 rounded-full w-5 flex justify-center items-center"
+                  className="ml-2 hover:bg-slate-900 rounded-full p-1 flex justify-center items-center"
                   onClick={() => {
                     setQuery(_.omit(urlQuery, 'facility_type'))
                     setSelectedFacilities([])
@@ -146,17 +150,17 @@ export default function Capacity({ districtName }: Props) {
               </div>
             )}
             {selectedDate && (
-              <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+              <div className="ml-2 my-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
                 <span>Date</span>
                 <button
-                  className="ml-2 hover:bg-slate-900 rounded-full w-5 flex justify-center items-center"
+                  className="ml-2 hover:bg-slate-900 rounded-full p-1 flex justify-center items-center"
                   onClick={() => {
                     setQuery(_.omit(urlQuery, 'date', 'end_date'))
                     setSelectedDate(null)
                     setSelectedEndDate(null)
                   }}
                 >
-                  <X size={15} />
+                  <X size={12} />
                 </button>
               </div>
             )}
