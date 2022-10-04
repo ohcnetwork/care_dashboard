@@ -121,18 +121,27 @@ export default function Capacity({ districtName }: Props) {
               />
             </SlideOver>
           </div>
-          <div className="flex text-white">
+          <div className="flex flex-wrap text-white text-sm">
             {selectedFacilities.length !== 0 && (
               <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
-                <span>Facility Type</span>
+                <div>
+                  Facility Type :{' '}
+                  <span className="">
+                    {selectedFacilities
+                      .map((i: any) => {
+                        return i.facility_type
+                      })
+                      .join(', ')}
+                  </span>
+                </div>
                 <button
-                  className="ml-2"
+                  className="ml-2 hover:bg-slate-900 rounded-full w-5 flex justify-center items-center"
                   onClick={() => {
                     setQuery(_.omit(urlQuery, 'facility_type'))
                     setSelectedFacilities([])
                   }}
                 >
-                  <X size={15} />
+                  <X size={12} />
                 </button>
               </div>
             )}
@@ -140,7 +149,7 @@ export default function Capacity({ districtName }: Props) {
               <div className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
                 <span>Date</span>
                 <button
-                  className="ml-2"
+                  className="ml-2 hover:bg-slate-900 rounded-full w-5 flex justify-center items-center"
                   onClick={() => {
                     setQuery(_.omit(urlQuery, 'date', 'end_date'))
                     setSelectedDate(null)
