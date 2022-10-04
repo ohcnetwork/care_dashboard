@@ -112,10 +112,10 @@ export default function FacilityMultiSelect({
             <ul className="flex flex-wrap">
               {selectedFacilities.map((i: Facility) => {
                 return (
-                  <li className="my-2 rounded-full w-max px-2 bg-slate-700 flex mr-2">
+                  <li className="my-1 mr-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
                     <span>{i.facility_type}</span>
                     <button
-                      className="ml-2"
+                      className="ml-2 hover:bg-slate-900 rounded-full p-1 flex justify-center items-center"
                       onClick={() => {
                         setSelectedFacilities((p: Facility[]) =>
                           p.filter((item: Facility) => item.id != i.id)
