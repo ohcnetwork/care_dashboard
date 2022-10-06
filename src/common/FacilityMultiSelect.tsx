@@ -77,10 +77,8 @@ export default function FacilityMultiSelect({
                   <Combobox.Option
                     key={facility.id}
                     className={({ active }) =>
-                      `relative cursor-pointer select-none py-2 pl-10 pr-4  text-white ${
-                        active
-                          ? 'bg-green-500'
-                          : 'dark:bg-slate-800 text-gray-900'
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4 text-white ${
+                        active ? 'bg-green-500' : 'dark:bg-slate-800'
                       }`
                     }
                     value={facility}
@@ -114,7 +112,10 @@ export default function FacilityMultiSelect({
             <ul className="flex flex-wrap">
               {selectedFacilities.map((i: Facility) => {
                 return (
-                  <li key={i.facility_type} className="my-1 mr-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
+                  <li
+                    key={i.facility_type}
+                    className="my-1 mr-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center"
+                  >
                     <span>{i.facility_type}</span>
                     <button
                       className="ml-2 hover:bg-slate-900 rounded-full p-1 flex justify-center items-center"
