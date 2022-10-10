@@ -38,7 +38,7 @@ export interface PatientSummaryData {
 }
 
 export interface PatientSummaryQuery {
-  /* DISTRICT ID */
+  /** District ID */
   district?: number
   start_date?: string
   end_date?: string

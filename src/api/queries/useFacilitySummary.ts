@@ -6,7 +6,7 @@ import { createQueryKey } from '../../utils/url'
 const FACILITY_SUMMARY_KEY = 'facilitySummeryKey'
 
 export interface FacilitySummaryQuery {
-  /* DISTRICT ID */
+  /** District ID */
   district?: number
   start_date?: string
   end_date?: string
