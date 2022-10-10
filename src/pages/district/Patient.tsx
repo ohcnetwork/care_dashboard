@@ -82,11 +82,12 @@ export default function Patient({ districtName }: Props) {
     [filtered, date]
   )
 
-  const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
-    data: patientCardData,
-    keys: ['facility_name'],
-    searchValue,
-  })
+  const { handlePageChange, page, paginatedData, totalPage, totalResults } =
+    usePaginateData({
+      data: patientCardData,
+      keys: ['facility_name'],
+      searchValue,
+    })
 
   if (isLoading) {
     return <PatientSkeleton />
@@ -127,7 +128,7 @@ export default function Patient({ districtName }: Props) {
             handlePageChange={handlePageChange}
             totalPages={totalPage}
             resultsPerPage={10}
-            resultsLength={patientCardData?.length}
+            resultsLength={totalResults}
           />
         </div>
       </div>

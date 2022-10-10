@@ -66,11 +66,13 @@ export default function Capacity({ districtName }: Props) {
     [filtered]
   )
 
-  const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
-    data: tableData,
-    keys: ['facility_name'],
-    searchValue,
-  })
+  const { handlePageChange, page, paginatedData, totalPage, totalResults } =
+    usePaginateData({
+      data: tableData,
+      keys: ['facility_name'],
+      searchValue,
+    })
+
   return (
     <>
       <section className="my-4">
@@ -144,7 +146,7 @@ export default function Capacity({ districtName }: Props) {
               handlePageChange={handlePageChange}
               totalPages={totalPage}
               resultsPerPage={10}
-              resultsLength={tableData?.length}
+              resultsLength={totalResults}
             />
           </div>
         </section>

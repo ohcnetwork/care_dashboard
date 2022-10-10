@@ -78,7 +78,7 @@ export const Pagination = (props: Props) => {
                 onClick={() => handlePageChange(curPage - 2)}
                 className="bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               >
-                {curPage + 2}
+                {curPage - 2}
               </button>
             )}
             {curPage !== 1 && (
