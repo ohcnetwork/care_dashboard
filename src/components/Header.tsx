@@ -59,8 +59,8 @@ export const Header = ({ district }: Props) => {
               <ActiveLink
                 key={link.name}
                 href={link.href}
-                className="text-base font-medium text-white hover:text-indigo-50"
-                activeClass="text-primary-500"
+                className="text-base font-medium text-slate-500 dark:text-slate-400 transition-all"
+                activeClass="text-primary-500 font-medium dark:text-primary-400"
               >
                 {link.name}
               </ActiveLink>
