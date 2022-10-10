@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import { PaginatedResponse } from '../../types/paginatedResponse'
 import { createQueryKey } from '../../utils/url'
 import { FacilitySummaryResponse } from './useFacilitySummary'
+import { getGenericQueryHook } from './utils'
 
 const TRIAGE_SUMMARY_KEY = 'triageSummaryKey'
 
@@ -36,17 +37,7 @@ export interface TriageSummaryData {
   total_patients_confirmed_positive: number
 }
 
-const hook = (query: TriageSummaryQuery, enabled = true) =>
-  useQuery(
-    createQueryKey(TRIAGE_SUMMARY_KEY, query),
-    () =>
-      axios
-        .get<PaginatedResponse<TriageSummaryResponse[]>>(
-          'https://careapi.coronasafe.in/api/v1/triage_summary',
-          { params: query }
-        )
-        .then((d) => d.data),
-    { enabled }
-  )
-
-export default hook
+export default getGenericQueryHook<TriageSummaryQuery, TriageSummaryResponse>(
+  TRIAGE_SUMMARY_KEY,
+  'api/v1/triage_summary'
+)
