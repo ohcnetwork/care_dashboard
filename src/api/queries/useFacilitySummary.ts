@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { useQuery } from 'react-query'
 import { PaginatedResponse } from '../../types/paginatedResponse'
 import { createQueryKey } from '../../utils/url'
@@ -14,11 +14,11 @@ export interface FacilitySummaryQuery {
   facility?: string
 }
 
-export interface FacilitySummaryResponse {
+export type FacilitySummaryResponse<T> = {
   facility: Facility
   created_date: string
   modified_date: string
-  data: Data
+  data: T
 }
 
 export interface Facility {
@@ -103,7 +103,7 @@ export interface Data {
   state_object: StateObject
   facility_type: string
   modified_date: string
-  cover_image_url?: null
+  read_cover_image_url?: null | string
   district_object: DistrictObject
   inventory?: Record<string, Inventory>
   capacity?: Record<string, Capacity>
@@ -175,7 +175,7 @@ export const useFacilitySummary = (
     createQueryKey(FACILITY_SUMMARY_KEY, query),
     () =>
       axios
-        .get<PaginatedResponse<FacilitySummaryResponse[]>>(
+        .get<PaginatedResponse<FacilitySummaryResponse<Data>[]>>(
           'https://careapi.coronasafe.in/api/v1/facility_summary/',
           {
             params: query,
