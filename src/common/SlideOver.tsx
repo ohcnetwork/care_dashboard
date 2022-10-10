@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useTheme } from '../utils/hooks/useTheme'
 // import { XMarkIcon } from '@heroicons/react/24/outline'
 interface Props {
   open: boolean | undefined
@@ -8,6 +9,7 @@ interface Props {
   children: React.ReactNode
 }
 export default function SlideOver({ open, setOpen, children }: Props) {
+  const [theme, _] = useTheme()
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -20,7 +22,7 @@ export default function SlideOver({ open, setOpen, children }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-slate-900 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-slate-50 dark:bg-slate-900 dark:bg-opacity-75 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -47,7 +49,7 @@ export default function SlideOver({ open, setOpen, children }: Props) {
                   >
                     <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4"></div>
                   </Transition.Child>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-slate-900 py-4 shadow-2xl">
+                  <div className="flex h-full flex-col overflow-y-scroll py-4 shadow-2xl bg-slate-50 dark:bg-slate-900">
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       {children}
                     </div>

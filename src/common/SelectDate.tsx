@@ -143,7 +143,7 @@ export default function SelectDate({
           <input
             type="text"
             readOnly
-            className="input text-white cursor-pointer pl-4 pr-10 py-3 shadow-sm focus:outline-none focus:shadow-outline font-medium"
+            className="input dark:text-white cursor-pointer pl-4 pr-10 py-3 shadow-sm focus:outline-none focus:shadow-outline font-medium"
             placeholder="Select date"
             value={
               selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '----/--/--'
@@ -154,7 +154,7 @@ export default function SelectDate({
             className="cursor-pointer absolute top-0 right-0 px-3 py-2"
             onClick={toggleDatepicker}
           >
-            <Calendar className="text-white" />
+            <Calendar className="dark:text-white" />
           </div>
           {showDatepicker && (
             <div
@@ -168,13 +168,13 @@ export default function SelectDate({
                     className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-primary-700 p-1 rounded-full"
                     onClick={decrement}
                   >
-                    <ChevronLeft className="text-white" />
+                    <ChevronLeft className="dark:text-white" />
                   </button>
                 </div>
                 {type === 'date' && (
                   <div
                     onClick={showMonthPicker}
-                    className="flex-grow p-1 text-lg font-bold text-gray-800 dark:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
+                    className="flex-grow p-1 text-lg font-bold text-gray-900 dark:text-white hover:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
                   >
                     <p className="text-center">
                       {format(datepickerHeaderDate, 'MMMM')}
@@ -183,7 +183,7 @@ export default function SelectDate({
                 )}
                 <div
                   onClick={showYearPicker}
-                  className="flex-grow p-1 text-lg font-bold text-gray-800 dark:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
+                  className="flex-grow p-1 text-lg font-bold text-gray-900 dark:text-white hover:text-white cursor-pointer hover:bg-primary-700 rounded-lg"
                 >
                   <p className="text-center">
                     {format(datepickerHeaderDate, 'yyyy')}
@@ -195,7 +195,7 @@ export default function SelectDate({
                     className="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-primary-700 p-1 rounded-full"
                     onClick={increment}
                   >
-                    <ChevronRight className="text-white" />
+                    <ChevronRight className="dark:text-white" />
                   </button>
                 </div>
               </div>
@@ -204,7 +204,7 @@ export default function SelectDate({
                   <div className="flex flex-wrap mb-3 -mx-1">
                     {DAYS.map((day, i) => (
                       <div key={i} style={{ width: '14.26%' }} className="px-1">
-                        <div className="text-white font-medium text-center text-xs">
+                        <div className="dark:text-white font-medium text-center text-xs">
                           {day}
                         </div>
                       </div>
@@ -226,7 +226,7 @@ export default function SelectDate({
                       >
                         <div
                           onClick={setDateValue(d)}
-                          className={`cursor-pointer dark:text-white text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
+                          className={`cursor-pointer dark:text-white hover:text-white text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100 ${
                             selectedDate && isToday(d)
                               ? 'bg-primary-500 text-white'
                               : 'text-gray-700 hover:bg-primary-700'
@@ -250,9 +250,9 @@ export default function SelectDate({
                         style={{ width: '25%' }}
                       >
                         <div
-                          className={`cursor-pointer p-5 font-semibold dark:text-white text-center text-sm rounded-lg hover:bg-primary-700 ${
+                          className={`cursor-pointer p-5 font-semibold dark:text-white hover:text-white text-center text-sm rounded-lg hover:bg-primary-700 ${
                             selectedDate && isSelectedMonth(i)
-                              ? 'bg-blue-500 text-white'
+                              ? 'bg-primary-700 text-white'
                               : 'text-gray-700 hover:bg-primary-700'
                           }`}
                         >

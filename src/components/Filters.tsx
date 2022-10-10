@@ -45,7 +45,7 @@ const Filters: React.FC<FiltersProps> = ({
   }
 
   return (
-    <div className="">
+    <div className="text-black dark:text-white">
       <div className="flex flex-wrap justify-between">
         <button
           className="btn bg-red-500 hover:bg-red-700 mr-1 my-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -66,7 +66,7 @@ const Filters: React.FC<FiltersProps> = ({
           <span className="ml-2">Apply</span>
         </button>
       </div>
-      <div className="mt-4 text-white">
+      <div className="mt-4 text-black dark:text-white">
         <div className="">Filter by:</div>
         <div className="mt-8">
           <div className="mb-4">Facility Type</div>
