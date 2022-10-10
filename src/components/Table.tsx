@@ -1,6 +1,5 @@
 import RCTable from 'rc-table'
 import { ColumnsType, DefaultRecordType } from 'rc-table/lib/interface'
-import '../styles/table.css'
 
 interface GenericTableProps {
   data: DefaultRecordType[]

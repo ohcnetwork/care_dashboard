@@ -1,5 +1,5 @@
-export const mapTheme = (mode: 'dark' | 'light' = 'dark') => {
-  return mode === 'dark'
+export const mapTheme = (theme: 'dark' | 'light' = 'dark') => {
+  return theme === 'dark'
     ? [
         {
           elementType: 'geometry',

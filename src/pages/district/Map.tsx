@@ -22,7 +22,6 @@ interface Props {
 
 export default function Map({ districtName }: Props) {
   const [{ date }, setQuery] = useQueryParams<UrlQuery>()
-  const [searchValue, setSearchValue] = useState('')
 
   const queryDate = getDateFromQuery(date)
 

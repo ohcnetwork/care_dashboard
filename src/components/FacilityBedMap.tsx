@@ -20,6 +20,7 @@ import clsx from 'clsx'
 import { Triangle } from 'react-feather'
 import { filter } from 'lodash-es'
 import { Progress } from './Progress'
+import { useTheme } from '../utils/hooks/useTheme'
 
 interface Props {
   district?: typeof ACTIVATED_DISTRICTS[number]
@@ -37,7 +38,7 @@ const PopUp: React.FC<PopUpProps> = ({ data, open }) => {
   return (
     <div
       className={clsx(
-        'absolute bottom-10 left-50 -translate-x-1/2 bg-white dark:bg-slate-900 shadow-2xl dark:text-white p-3 rounded-xl transition-all w-80',
+        'absolute z-10 bottom-10 left-50 -translate-x-1/2 bg-white dark:bg-slate-900 shadow-2xl dark:text-white p-3 rounded-xl transition-all w-80',
         open
           ? 'opacity-100  translate-y-0'
           : 'translate-y-4 opacity-0 pointer-events-none'
@@ -167,7 +168,12 @@ export const Marker: React.FC<MarkerProps> = (props) => {
     >
       <div onMouseEnter={() => setIsPopUpOpen(true)}>
         {isMarkerVisible ? (
-          <div className={colorClasses(data.capacity?.[selectedBedType])}>
+          <div
+            className={clsx(
+              colorClasses(data.capacity?.[selectedBedType]),
+              'z-0'
+            )}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
@@ -199,6 +205,7 @@ export const Marker: React.FC<MarkerProps> = (props) => {
 export const FacilityBedMap = (props: Props) => {
   const { facilities, className, district, isLoading } = props
   const [selectedBedType, setSelectedBedType] = useState('All')
+  const [theme, _] = useTheme()
   const [state, setState] = useState({
     assets: [],
     showAddressSuggestion: false,
@@ -243,7 +250,7 @@ export const FacilityBedMap = (props: Props) => {
             center={state.center}
             zoom={state.zoom}
             options={{
-              styles: mapTheme(),
+              styles: mapTheme(theme),
             }}
           >
             {facilities
@@ -264,15 +271,17 @@ export const FacilityBedMap = (props: Props) => {
           </GoogleMapReact>
           <select
             name="bed-type"
-            className="select absolute top-2 left-3 z-10 p-2 rounded-lg"
+            className="select absolute top-2 left-3 z-10 p-2 rounded-lg text-black"
             onChange={(e) => setSelectedBedType(e.target.value)}
           >
-            <option value={'All'}>All</option>
+            <option value={'All'} className="text-black">
+              All
+            </option>
             {filter(
               AVAILABILITY_TYPES_ORDERED,
               (key) => ![40, 50, 60, 70].includes(key)
             ).map((a) => (
-              <option key={a} value={String(a)}>
+              <option className="text-black " key={a} value={String(a)}>
                 {
                   AVAILABILITY_TYPES[
                     a as unknown as keyof typeof AVAILABILITY_TYPES
@@ -283,7 +292,7 @@ export const FacilityBedMap = (props: Props) => {
           </select>
         </>
       ) : (
-        <div className="animate-pulse w-full bg-slate-800 h-full" />
+        <div className="animate-pulse w-full bg-slate-200 dark:bg-slate-800 h-full" />
       )}
     </div>
   )

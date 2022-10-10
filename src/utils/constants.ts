@@ -142,3 +142,29 @@ export const OXYGEN_INVENTORY_STRING_ENUM = {
   type_c_cylinders: 'type_c_cylinders',
   type_b_cylinders: 'type_b_cylinders',
 }
+
+export const INITIAL_PATIENT_FACILITY_TRIVIA = {
+  count: 0,
+  icu: { total: 0, today: 0 },
+  oxygen_bed: { total: 0, today: 0 },
+  bed_with_oxygen_support: { total: 0, today: 0 },
+  icu_with_oxygen_support: { total: 0, today: 0 },
+  not_admitted: { total: 0, today: 0 },
+  home_isolation: { total: 0, today: 0 },
+  isolation: { total: 0, today: 0 },
+  home_quarantine: { total: 0, today: 0 },
+  paediatric_ward: { total: 0, today: 0 },
+  gynaecology_ward: { total: 0, today: 0 },
+  icu_with_invasive_ventilator: { total: 0, today: 0 },
+  icu_with_non_invasive_ventilator: { total: 0, today: 0 },
+}
+
+export const PATIENT_TYPES = {
+  home_quarantine: 'Home Isolation',
+  isolation: 'Isolation Room',
+  bed_with_oxygen_support: 'Bed with Oxygen Support',
+  icu: 'ICU',
+  icu_with_oxygen_support: 'ICU with Oxygen Support',
+  icu_with_non_invasive_ventilator: 'ICU with Non Invasive ventilator',
+  icu_with_invasive_ventilator: 'ICU with Invasive ventilator',
+}

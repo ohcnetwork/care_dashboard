@@ -28,7 +28,7 @@ export const OxygenFacilityCard: React.FC<OxygenFacilityCardProps> = ({
     <div className={className}>
       <div className="flex justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-4">
-          <h1 className="dark:text-white text-3xl font-medium capitalize">
+          <h1 className="text-slate-900 dark:text-white text-3xl font-medium capitalize">
             <Link
               href={`/facility/${facility_id || ''}`}
               className="text-lg font-medium capitalize"
@@ -40,17 +40,14 @@ export const OxygenFacilityCard: React.FC<OxygenFacilityCardProps> = ({
             {facility_type}
           </span>
         </div>
-        <h1 className="text-base text-slate-400 font-medium">
+        <h1 className="text-base text-slate-500 dark:text-slate-400 font-medium">
           <span className="mr-2 text-slate-500">Last Updated</span>{' '}
           {facility_last_updated}
         </h1>
       </div>
       <div className="my-2 flex items-center gap-2">
         <Phone className="text-blue-500 fill-current w-4" fill="" />
-        <a
-          href={`tel:${phone_number || ''}`}
-          className="text-black dark:text-blue-500"
-        >
+        <a href={`tel:${phone_number || ''}`} className="text-blue-500">
           {phone_number}
         </a>
       </div>
