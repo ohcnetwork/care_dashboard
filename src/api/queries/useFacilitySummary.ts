@@ -1,6 +1,6 @@
 import { getGenericSummaryQueryHook } from './utils'
 
-const FACILITY_SUMMARY_KEY = 'facilitySummeryKey'
+const FACILITY_SUMMARY_KEY = 'facilitySummaryKey'
 
 export interface FacilitySummaryQuery {
   /** District ID */

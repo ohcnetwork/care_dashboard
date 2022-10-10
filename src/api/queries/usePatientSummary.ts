@@ -1,7 +1,7 @@
 import { FacilitySummaryResponse } from './useFacilitySummary'
 import { getGenericSummaryQueryHook } from './utils'
 
-const PATIENT_SUMMARY_KEY = 'patientSummeryKey'
+const PATIENT_SUMMARY_KEY = 'patientSummaryKey'
 
 export type PatientSummaryResponse = FacilitySummaryResponse<PatientSummaryData>
 
