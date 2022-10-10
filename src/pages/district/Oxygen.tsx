@@ -1,10 +1,8 @@
-import Fuse from 'fuse.js'
 import { useQueryParams } from 'raviger'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import {
+import React, { useMemo, useState } from 'react'
+import useFacilitySummary, {
   FacilitySummaryQuery,
   FilteredFacilityData,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
 import { OxygenFacilityCard } from '../../components/OxygenFacilityCard'
 import { Pagination } from '../../components/Pagination'
@@ -24,7 +22,6 @@ import {
   getOxygenSummeryConfig,
   processOxygenExportData,
 } from '../../utils/facility/oxygen'
-import { flattenObject, ObjectI } from '../../utils/helpers'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
 

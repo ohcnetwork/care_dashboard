@@ -1,9 +1,8 @@
 import { useQueryParams } from 'raviger'
 import React, { useMemo, useState } from 'react'
-import {
+import usePatientSummary, {
   PatientSummaryQuery,
-  usePatientSummary,
-} from '../../api/queries/usePatientSummery'
+} from '../../api/queries/usePatientSummary'
 import BedsSummery from '../../components/BedsSummery'
 import InfoCard from '../../components/InfoCard'
 import { Pagination } from '../../components/Pagination'

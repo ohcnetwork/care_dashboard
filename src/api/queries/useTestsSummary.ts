@@ -1,7 +1,3 @@
-import axios from 'axios'
-import { useQuery } from 'react-query'
-import { PaginatedResponse } from '../../types/paginatedResponse'
-import { createQueryKey } from '../../utils/url'
 import { FacilitySummaryResponse } from './useFacilitySummary'
 import { getGenericQueryHook } from './utils'
 

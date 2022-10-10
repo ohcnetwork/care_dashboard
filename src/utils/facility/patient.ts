@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 import { cloneDeep, filter, includes, map, keys, reduce } from 'lodash-es'
-import { PatientSummaryResponse } from '../../api/queries/usePatientSummery'
+import { PatientSummaryResponse } from '../../api/queries/usePatientSummary'
 import { INITIAL_PATIENT_FACILITY_TRIVIA, PATIENT_TYPES } from '../constants'
 import { toDateString } from '../date'
 

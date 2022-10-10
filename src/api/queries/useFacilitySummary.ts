@@ -1,7 +1,4 @@
-import axios from 'axios'
-import { useQuery } from 'react-query'
-import { PaginatedResponse } from '../../types/paginatedResponse'
-import { createQueryKey } from '../../utils/url'
+import { getGenericQueryHook } from './utils'
 
 const FACILITY_SUMMARY_KEY = 'facilitySummeryKey'
 
@@ -14,7 +11,7 @@ export interface FacilitySummaryQuery {
   facility?: string
 }
 
-export type FacilitySummaryResponse<T> = {
+export type FacilitySummaryResponse<T = Data> = {
   facility: Facility
   created_date: string
   modified_date: string
@@ -167,22 +164,7 @@ export interface Capacity {
   current_capacity: number | string
 }
 
-export const useFacilitySummary = (
-  query: FacilitySummaryQuery,
-  enabled = true
-) =>
-  useQuery(
-    createQueryKey(FACILITY_SUMMARY_KEY, query),
-    () =>
-      axios
-        .get<PaginatedResponse<FacilitySummaryResponse<Data>[]>>(
-          'https://careapi.coronasafe.in/api/v1/facility_summary/',
-          {
-            params: query,
-          }
-        )
-        .then((d) => d.data),
-    {
-      enabled,
-    }
-  )
+export default getGenericQueryHook<
+  FacilitySummaryQuery,
+  FacilitySummaryResponse<Data>
+>(FACILITY_SUMMARY_KEY, '/api/v1/facility_summary/')
