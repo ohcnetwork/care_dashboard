@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { PaginatedResponse } from '../../types/paginatedResponse'
 import { createQueryKey } from '../../utils/url'
 
-export const getGenericQueryHook = <QueryType, ResponseType>(
+export const getGenericSummaryQueryHook = <QueryType, ResponseType>(
   key: string,
   endpoint: string
 ) => {

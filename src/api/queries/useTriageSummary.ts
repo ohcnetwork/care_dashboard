@@ -1,5 +1,5 @@
 import { FacilitySummaryResponse } from './useFacilitySummary'
-import { getGenericQueryHook } from './utils'
+import { getGenericSummaryQueryHook } from './utils'
 
 const TRIAGE_SUMMARY_KEY = 'triageSummaryKey'
 
@@ -33,7 +33,7 @@ export interface TriageSummaryData {
   total_patients_confirmed_positive: number
 }
 
-export default getGenericQueryHook<TriageSummaryQuery, TriageSummaryResponse>(
-  TRIAGE_SUMMARY_KEY,
-  'api/v1/triage_summary/'
-)
+export default getGenericSummaryQueryHook<
+  TriageSummaryQuery,
+  TriageSummaryResponse
+>(TRIAGE_SUMMARY_KEY, 'api/v1/triage_summary/')

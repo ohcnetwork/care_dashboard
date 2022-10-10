@@ -1,5 +1,5 @@
 import { FacilitySummaryResponse } from './useFacilitySummary'
-import { getGenericQueryHook } from './utils'
+import { getGenericSummaryQueryHook } from './utils'
 
 const PATIENT_SUMMARY_KEY = 'patientSummeryKey'
 
@@ -37,7 +37,7 @@ export interface PatientSummaryQuery {
   facility?: string
 }
 
-export default getGenericQueryHook<PatientSummaryQuery, PatientSummaryResponse>(
-  PATIENT_SUMMARY_KEY,
-  '/api/v1/patient_summary/'
-)
+export default getGenericSummaryQueryHook<
+  PatientSummaryQuery,
+  PatientSummaryResponse
+>(PATIENT_SUMMARY_KEY, '/api/v1/patient_summary/')

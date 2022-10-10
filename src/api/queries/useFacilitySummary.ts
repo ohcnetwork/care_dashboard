@@ -1,4 +1,4 @@
-import { getGenericQueryHook } from './utils'
+import { getGenericSummaryQueryHook } from './utils'
 
 const FACILITY_SUMMARY_KEY = 'facilitySummeryKey'
 
@@ -164,7 +164,7 @@ export interface Capacity {
   current_capacity: number | string
 }
 
-export default getGenericQueryHook<
+export default getGenericSummaryQueryHook<
   FacilitySummaryQuery,
   FacilitySummaryResponse<Data>
 >(FACILITY_SUMMARY_KEY, '/api/v1/facility_summary/')

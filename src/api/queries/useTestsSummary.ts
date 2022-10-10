@@ -1,5 +1,5 @@
 import { FacilitySummaryResponse } from './useFacilitySummary'
-import { getGenericQueryHook } from './utils'
+import { getGenericSummaryQueryHook } from './utils'
 
 const TESTS_SUMMARY_KEY = 'testsSummaryKey'
 
@@ -30,7 +30,7 @@ export interface TestsSummaryData {
   result_positive: number
 }
 
-export default getGenericQueryHook<TestsSummaryQuery, TestsSummaryResponse>(
-  TESTS_SUMMARY_KEY,
-  'api/v1/tests_summary'
-)
+export default getGenericSummaryQueryHook<
+  TestsSummaryQuery,
+  TestsSummaryResponse
+>(TESTS_SUMMARY_KEY, 'api/v1/tests_summary')
