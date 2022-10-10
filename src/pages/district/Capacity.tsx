@@ -73,6 +73,8 @@ export default function Capacity({ districtName }: Props) {
       searchValue,
     })
 
+  console.log(paginatedData)
+
   return (
     <>
       <section className="my-4">

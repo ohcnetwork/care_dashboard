@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { Link } from 'raviger'
 import React from 'react'
 import { CapacityCardDataForCapacity } from '../utils/facility/capacity'
+import ToolTip from './tooltip'
 
 interface Props {
   data: CapacityCardDataForCapacity
@@ -45,7 +46,15 @@ export const FacilityCapacityTableCard = (props: Props) => {
               {' '}
               Patient Discharged
             </span>
-            <span className="text-base font-bold">{patient_discharged}</span>
+            <span className="text-base font-bold">
+              <ToolTip
+                className="inline text-sm"
+                text="Live / Discharged"
+                position="BOTTOM"
+              >
+                {patient_discharged}
+              </ToolTip>
+            </span>
           </h1>
         </div>
       </div>
