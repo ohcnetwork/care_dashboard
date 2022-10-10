@@ -2,8 +2,7 @@ import axios from 'axios'
 import { useQuery } from 'react-query'
 import { PaginatedResponse } from '../../types/paginatedResponse'
 import { createQueryKey } from '../../utils/url'
-import { Facility } from '../common/types/facilitySummery'
-import { FacilitySummaryResponse } from './useFacilitySummary'
+import { Facility, FacilitySummaryResponse } from './useFacilitySummary'
 
 const PATIENT_SUMMARY_KEY = 'patientSummeryKey'
 

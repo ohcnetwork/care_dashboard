@@ -50,7 +50,7 @@ export interface Facility {
   expected_type_b_cylinders: number
   expected_type_c_cylinders: number
   expected_type_d_cylinders: number
-  cover_image_url?: string
+  read_cover_image_url?: null | string
 }
 
 export interface Location {
