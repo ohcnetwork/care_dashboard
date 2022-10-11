@@ -10,7 +10,6 @@ import {
   getDay,
 } from 'date-fns'
 import { ArrowLeft, ArrowRight, Calendar } from 'react-feather'
-import _ from 'lodash'
 import clsx from 'clsx'
 
 type DatePickerType = 'date' | 'month' | 'year'
@@ -18,15 +17,22 @@ type DatePickerType = 'date' | 'month' | 'year'
 interface Props {
   value: Date
   onChange: (date: Date) => void
+  position?: 'LEFT' | 'RIGHT' | 'CENTER'
+  disabled?: boolean
 }
 
 const DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 
-const DatePicker: React.FC<Props> = ({ value, onChange }) => {
+const DatePicker: React.FC<Props> = ({
+  value,
+  onChange,
+  position,
+  disabled,
+}) => {
   const [dayCount, setDayCount] = useState<Array<number>>([])
   const [blankDays, setBlankDays] = useState<Array<number>>([])
 
-  const [showDatePicker, setShowDatePicker] = useState(true)
+  const [showDatePicker, setShowDatePicker] = useState(false)
   const [datePickerHeaderDate, setDatePickerHeaderDate] = useState(new Date())
   const [type, setType] = useState<DatePickerType>('date')
 
@@ -115,27 +121,45 @@ const DatePicker: React.FC<Props> = ({ value, onChange }) => {
     getDayCount(datePickerHeaderDate)
   }, [datePickerHeaderDate])
 
+  const getPosition = () => {
+    switch (position) {
+      case 'LEFT':
+        return 'left-0'
+      case 'RIGHT':
+        return 'right-0'
+      case 'CENTER':
+        return 'left-1/2 transform -translate-x-1/2'
+      default:
+        return 'left-0'
+    }
+  }
+
   return (
-    <div>
+    <div className={disabled ? 'pointer-events-none opacity-0.8' : ''}>
       <div className="container mx-auto">
         <div className="relative">
           <input type="hidden" name="date" />
           <input
             type="text"
             readOnly
-            className="input text-slate-900 dark:text-white cursor-pointer pl-4 pr-10 py-3 shadow-sm focus:outline-none focus:shadow-outline font-medium"
+            className="input text-slate-900 dark:text-white cursor-pointer pl-2 pr-10 py-2 shadow-sm focus:outline-none focus:shadow-outline font-medium"
             placeholder="Select date"
             value={value ? format(value, 'yyyy-MM-dd') : '----/--/--'}
             onClick={toggleDatePicker}
           />
           <div
-            className="cursor-pointer absolute top-0 right-0 px-3 py-2"
+            className="cursor-pointer absolute top-1/2 right-0 p-2 -translate-y-1/2"
             onClick={toggleDatePicker}
           >
-            <Calendar className="text-slate-500 w-6 h-6" />
+            <Calendar className="text-slate-500 w-5 h-5" />
           </div>
           {showDatePicker && (
-            <div className="z-10 w-72 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg shadow p-4 absolute top-[105%] left-0">
+            <div
+              className={clsx(
+                'z-10 w-72 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg shadow p-4 absolute top-[105%]',
+                getPosition()
+              )}
+            >
               <div className="flex justify-between items-center w-full mb-4">
                 <button
                   type="button"
@@ -241,6 +265,10 @@ const DatePicker: React.FC<Props> = ({ value, onChange }) => {
       </div>
     </div>
   )
+}
+
+DatePicker.defaultProps = {
+  position: 'CENTER',
 }
 
 export default DatePicker
