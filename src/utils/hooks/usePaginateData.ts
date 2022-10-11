@@ -27,16 +27,16 @@ export const usePaginateData = <T>(args: UsePaginationDataArgs<T>) => {
   const [paginatedData, setPaginatedData] = useState(data)
 
   useEffect(() => {
-    fuseData.current = new Fuse(data, { keys, includeScore: true })
+    fuseData.current = new Fuse(data, {
+      keys,
+      threshold: 0.3,
+    })
   }, [data])
 
   useEffect(() => {
     let newData = data
     if (searchValue.length) {
-      newData = fuseData.current
-        .search({ facility_name: searchValue })
-        .filter((i) => (i?.score || 0) <= 0.5)
-        .map((i) => i.item)
+      newData = fuseData.current.search(searchValue).map((i) => i.item)
     }
 
     setTotalPage(Math.ceil(newData.length / resultsPerPage))

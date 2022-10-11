@@ -12,7 +12,7 @@ export default function ToolTip(props: {
   const [status, show] = useState(false)
 
   const style = clsx(
-    'absolute bg-black/50 backdrop-blur rounded text-white transition px-2 py-1 z-50 w-fit text-center block',
+    'absolute bg-black backdrop-blur rounded text-white transition px-2 py-1 z-50 w-fit text-center block',
     position === 'TOP' && 'bottom-[calc(100%+5px)] left-[calc(50%-75px)]',
     position === 'BOTTOM' && 'top-[calc(100%+5px)] left-[calc(50%-75px)]',
     position === 'LEFT' && 'right-[calc(100%+5px)] top-[calc(50%-75px)]',

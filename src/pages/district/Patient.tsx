@@ -122,6 +122,11 @@ export default function Patient({ districtName }: Props) {
             return <BedsSummery key={i} data={data} />
           })}
         </div>
+        {paginatedData.length === 0 && (
+          <div className="text-center font-bold text-lg text-gray-500">
+            No facilities found
+          </div>
+        )}
         <div className="my-4 py-4">
           <Pagination
             curPage={page}

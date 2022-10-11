@@ -104,7 +104,11 @@ export default function Oxygen({ districtName }: Props) {
               key={index}
             />
           ))}
-
+          {paginatedData.length === 0 && (
+            <div className="text-center font-bold text-lg text-gray-500">
+              No facilities found
+            </div>
+          )}
           <div className="mt-4">
             <Pagination
               resultsPerPage={RESULT_PER_PAGE}
