@@ -31,9 +31,6 @@ import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
-import FilterButton from '../../components/FilterButton'
-import SlideOver from '../../common/SlideOver'
-import Filters from '../../components/Filters'
 import { X } from 'react-feather'
 import _ from 'lodash'
 
@@ -125,20 +122,6 @@ export default function Capacity({ districtName }: Props) {
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
-          <div className="flex flex-row-reverse mt-4">
-            <FilterButton setOpen={() => setOpen(true)} />
-            <SlideOver open={open} setOpen={setOpen}>
-              <Filters
-                setOpen={setOpen}
-                selectedFacilities={selectedFacilities}
-                setSelectedFacilities={setSelectedFacilities}
-                selectedDate={selectedDate}
-                setSelectedDate={setSelectedDate}
-                selectedEndDate={selectedEndDate}
-                setSelectedEndDate={setSelectedEndDate}
-              />
-            </SlideOver>
-          </div>
           <div className="mt-2 flex flex-wrap dark:text-white text-sm">
             {selectedFacilities.map((i: any) => {
               return (

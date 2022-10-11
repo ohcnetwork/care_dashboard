@@ -1,128 +1,164 @@
-import React, { useState } from 'react'
-import { Calendar, Check, X } from 'react-feather'
-import SelectDate from '../common/SelectDate'
-import FacilityMultiSelect from '../common/FacilityMultiSelect'
+import clsx from 'clsx'
+import { omit } from 'lodash-es'
 import { useQueryParams } from 'raviger'
+import React, { useEffect, useState } from 'react'
+import { X } from 'react-feather'
 import { UrlQuery } from '../types/urlQuery'
-import _ from 'lodash'
-interface FiltersProps {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  selectedFacilities: any
-  setSelectedFacilities: React.Dispatch<React.SetStateAction<any>>
-  selectedDate: any
-  setSelectedDate: React.Dispatch<React.SetStateAction<any>>
-  selectedEndDate: any
-  setSelectedEndDate: any
+import { facilityOptions } from '../utils/constants'
+import { stringToDate, toDateString } from '../utils/date'
+import DatePicker from './DatePicker'
+import MultiSelect from './MultiSelect'
+import SlideOver from './SlideOver'
+
+interface Props {
+  tep?: string
 }
 
-const Filters: React.FC<FiltersProps> = ({
-  setOpen,
-  selectedFacilities,
-  setSelectedFacilities,
-  selectedDate,
-  setSelectedDate,
-  selectedEndDate,
-  setSelectedEndDate,
-}) => {
+export const Filters: React.FC<Props> = () => {
+  const [isOpen, setIsOpen] = useState(true)
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
-  const [range, setRange] = useState<boolean>(urlQuery?.end_date != null)
 
-  const handleToggle = (val: boolean) => {
-    if (val) {
-      setRange(true)
-    } else {
-      setURLQuery(_.omit(urlQuery, 'end_date'))
-      setRange(false)
-    }
-  }
+  const [tempUrlQuery, setTempURLQuery] = useState<UrlQuery>(urlQuery)
 
-  const handleClearFilter = () => {
-    setSelectedFacilities([])
-    setSelectedDate(null)
-    setSelectedEndDate(null)
-    setOpen(false)
-    setURLQuery({})
-  }
+  const [dateFilterType, setDateFilterType] = useState<'SINGLE' | 'RANGE'>(
+    'SINGLE'
+  )
+
+  useEffect(() => {
+    if (selectedOptions.length)
+      setTempURLQuery({
+        ...tempUrlQuery,
+        facility_type: selectedOptions.join(','),
+      })
+    else setTempURLQuery(omit(urlQuery, 'facility_type'))
+  }, [selectedOptions])
 
   return (
-    <div className="text-black dark:text-white">
-      <div className="flex flex-wrap justify-between">
-        <button
-          className="btn bg-red-500 hover:bg-red-700 mr-1 my-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          onClick={() => setOpen(false)}
-        >
-          <X />
-          <span className="ml-2">Cancel</span>
-        </button>
-        <button
-          className="btn bg-red-500 hover:bg-red-700 mx-1 my-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          onClick={handleClearFilter}
-        >
-          <X />
-          <span className="ml-2">Clear Filter</span>
-        </button>
-        <button className="btn ml-1 my-1" onClick={() => setOpen(false)}>
-          <Check />
-          <span className="ml-2">Apply</span>
-        </button>
-      </div>
-      <div className="mt-4 text-black dark:text-white">
-        <div className="">Filter by:</div>
-        <div className="mt-8">
-          <div className="mb-4">Facility Type</div>
-          <FacilityMultiSelect
-            selectedFacilities={selectedFacilities}
-            setSelectedFacilities={setSelectedFacilities}
+    <section>
+      <button className="btn" onClick={() => setIsOpen(true)}>
+        Filters
+      </button>
+      <SlideOver open={isOpen} setOpen={setIsOpen}>
+        <div className="flex gap-4 justify-between items-center text-slate-900 dark:text-white ">
+          <h1 className="text-2xl font-bold">Filters</h1>
+          <button onClick={() => setIsOpen(false)}>
+            <X />
+          </button>
+        </div>
+        <div className="py-3">
+          <MultiSelect
+            selectedOptions={selectedOptions}
+            setSelectedOptions={(options) => setSelectedOptions(options)}
+            options={facilityOptions}
           />
         </div>
-        <div className="mt-8">
-          <div className="flex justify-between">
-            <div className="mb-4">Date</div>
-            <div className="flex flex-row-reverse">
+        <div className="text-slate-900 dark:text-slate-100 my-4">
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <h1 className="text-lg">Filter By Date</h1>
+            <div className="flex items-center justify-between gap-1 rounded-lg bg-slate-800 p-1 border border-slate-700">
               <button
-                onClick={() => {
-                  handleToggle(true)
-                }}
-                className={`btn rounded-l-none mb-2 ${
-                  range && 'bg-primary-700'
-                }`}
-              >
-                Range
-              </button>
-              <button
-                onClick={() => {
-                  handleToggle(false)
-                }}
-                className={`btn rounded-r-none mb-2 ${
-                  !range && 'bg-primary-700'
-                }`}
+                className={clsx(
+                  'px-2 rounded hover:bg-slate-700',
+                  dateFilterType === 'SINGLE' && 'bg-primary-700'
+                )}
+                onClick={() => setDateFilterType('SINGLE')}
               >
                 Single
               </button>
+              <button
+                className={clsx(
+                  'px-2 rounded hover:bg-slate-700',
+                  dateFilterType === 'RANGE' && 'bg-primary-700'
+                )}
+                onClick={() => setDateFilterType('RANGE')}
+              >
+                Range
+              </button>
             </div>
           </div>
-          <div className="mb-4">
-            {range && <span className="mb-2">Start date:</span>}
-            <SelectDate
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-              query={'date'}
+          {dateFilterType === 'SINGLE' ? (
+            <DatePicker
+              value={stringToDate(tempUrlQuery.date)}
+              onChange={(date) =>
+                setTempURLQuery(
+                  omit(
+                    {
+                      ...tempUrlQuery,
+                      date: toDateString(date),
+                    },
+                    'start_date',
+                    'end_date'
+                  )
+                )
+              }
+              position="LEFT"
             />
-          </div>
-          {range && (
-            <div className="">
-              <span className="mb-2">End date:</span>
-              <SelectDate
-                selectedDate={selectedEndDate}
-                setSelectedDate={setSelectedEndDate}
-                query={'end_date'}
+          ) : (
+            <div className="flex gap-2">
+              <DatePicker
+                value={stringToDate(tempUrlQuery.start_date)}
+                onChange={(date) =>
+                  setTempURLQuery(
+                    omit(
+                      {
+                        ...tempUrlQuery,
+                        start_date: toDateString(date),
+                      },
+                      'date'
+                    )
+                  )
+                }
+                position="LEFT"
+              />
+              <DatePicker
+                value={stringToDate(tempUrlQuery.end_date)}
+                onChange={(date) =>
+                  setTempURLQuery(
+                    omit(
+                      {
+                        ...tempUrlQuery,
+                        end_date: toDateString(date),
+                      },
+                      'date'
+                    )
+                  )
+                }
+                position="RIGHT"
+                disabled={!tempUrlQuery.start_date}
               />
             </div>
           )}
         </div>
-      </div>
-    </div>
+        <div className="flex gap-2 mt-8">
+          <button
+            className="btn bg-slate-800 hover:bg-slate-700"
+            onClick={() => {
+              setURLQuery(
+                omit(
+                  urlQuery,
+                  'date',
+                  'start_date',
+                  'end_date',
+                  'facility_type'
+                )
+              )
+              setIsOpen(false)
+            }}
+          >
+            Reset
+          </button>
+          <button
+            className="btn"
+            onClick={() => {
+              setURLQuery(tempUrlQuery)
+              setIsOpen(false)
+            }}
+          >
+            Apply
+          </button>
+        </div>
+      </SlideOver>
+    </section>
   )
 }
-
-export default Filters

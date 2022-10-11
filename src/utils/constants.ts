@@ -77,21 +77,6 @@ export const GOVT_FACILITY_TYPES = [
   'Govt Medical College Hospitals',
 ]
 
-export const FACILITY_TYPES = [
-  ...GOVT_FACILITY_TYPES,
-  'Private Hospital',
-  'First Line Treatment Centre',
-  'Second Line Treatment Center',
-  'COVID-19 Domiciliary Care Center',
-  'Corona Care Centre',
-  'Covid Management Center',
-  'Shifting Centre',
-  'TeleMedicine',
-]
-export const facility_types = FACILITY_TYPES.map((facility_type, idx) => {
-  return { id: idx, facility_type: facility_type }
-})
-
 export const AVAILABILITY_TYPES_PROXY = {
   '20': 'Non-Covid',
   '10': 'Non-Covid',
@@ -168,3 +153,21 @@ export const PATIENT_TYPES = {
   icu_with_non_invasive_ventilator: 'ICU with Non Invasive ventilator',
   icu_with_invasive_ventilator: 'ICU with Invasive ventilator',
 }
+export const FACILITY_TYPES = [
+  ...GOVT_FACILITY_TYPES,
+  'Private Hospital',
+  'First Line Treatment Centre',
+  'Second Line Treatment Center',
+  'COVID-19 Domiciliary Care Center',
+  'Corona Care Centre',
+  'Covid Management Center',
+  'Shifting Centre',
+  'TeleMedicine',
+]
+export const facilityOptions = FACILITY_TYPES.map((facility_type, idx) => {
+  return { value: idx, label: facility_type }
+})
+
+export const facility_types = FACILITY_TYPES.map((facility_type, idx) => {
+  return { id: idx, facility_type: facility_type }
+})

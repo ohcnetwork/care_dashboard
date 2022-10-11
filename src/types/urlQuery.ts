@@ -1,5 +1,6 @@
 export interface UrlQuery {
   date?: string
-  end_date?:string
-  facility_type ?: string
+  facility_type?: string
+  start_date?: string
+  end_date?: string
 }
