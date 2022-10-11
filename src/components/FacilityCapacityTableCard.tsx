@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { Link } from 'raviger'
 import React from 'react'
 import { CapacityCardDataForCapacity } from '../utils/facility/capacity'
-import ToolTip from './tooltip'
+import ToolTip from './ToolTip'
 
 interface Props {
   data: CapacityCardDataForCapacity
