@@ -65,11 +65,12 @@ export default function Oxygen({ districtName }: Props) {
   const oxygenCardData = useMemo(() => getOxygenCardData(filtered), [filtered])
   const oxygenFlatData = useMemo(() => getOxygenFlatData(filtered), [filtered])
 
-  const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
-    data: oxygenCardData,
-    keys: ['facility_name'],
-    searchValue,
-  })
+  const { handlePageChange, page, paginatedData, totalPage, totalResults } =
+    usePaginateData({
+      data: oxygenCardData,
+      keys: ['facility_name'],
+      searchValue,
+    })
 
   return isLoading ? (
     <OxygenLoading />
@@ -103,14 +104,18 @@ export default function Oxygen({ districtName }: Props) {
               key={index}
             />
           ))}
-
+          {paginatedData.length === 0 && (
+            <div className="text-center font-bold text-lg text-gray-500">
+              No facilities found
+            </div>
+          )}
           <div className="mt-4">
             <Pagination
               resultsPerPage={RESULT_PER_PAGE}
               totalPages={totalPage}
               curPage={page}
               handlePageChange={handlePageChange}
-              resultsLength={oxygenCardData?.length}
+              resultsLength={totalResults}
             />
           </div>
         </div>
