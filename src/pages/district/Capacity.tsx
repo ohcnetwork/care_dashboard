@@ -231,7 +231,7 @@ export default function Capacity({ districtName }: Props) {
               handlePageChange={handlePageChange}
               totalPages={totalPage}
               resultsPerPage={10}
-              resultsLength={totalResults}
+              resultsLength={tableData?.length}
             />
           </div>
         </section>

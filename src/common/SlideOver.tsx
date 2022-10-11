@@ -2,7 +2,6 @@
 import { Dispatch, Fragment, SetStateAction } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useTheme } from '../utils/hooks/useTheme'
-// import { XMarkIcon } from '@heroicons/react/24/outline'
 interface Props {
   open: boolean | undefined
   setOpen: Dispatch<SetStateAction<boolean>>
