@@ -35,7 +35,7 @@ export const Filters: React.FC<Props> = () => {
   }, [selectedOptions])
 
   return (
-    <section>
+    <section className="flex flex-row-reverse mt-4 mr-4">
       <button className="btn" onClick={() => setIsOpen(true)}>
         Filters
       </button>
@@ -56,11 +56,11 @@ export const Filters: React.FC<Props> = () => {
         <div className="text-slate-900 dark:text-slate-100 my-4">
           <div className="flex items-center justify-between gap-2 mb-4">
             <h1 className="text-lg">Filter By Date</h1>
-            <div className="flex items-center justify-between gap-1 rounded-lg bg-slate-800 p-1 border border-slate-700">
+            <div className="dark:text-white flex items-center justify-between gap-1 rounded-lg p-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
               <button
                 className={clsx(
-                  'px-2 rounded hover:bg-slate-700',
-                  dateFilterType === 'SINGLE' && 'bg-primary-700'
+                  'px-2 rounded hover:bg-slate-200 hover:text-black dark:hover:text-white dark:hover:bg-slate-700',
+                  dateFilterType === 'SINGLE' && 'bg-primary-700 text-white'
                 )}
                 onClick={() => setDateFilterType('SINGLE')}
               >
@@ -68,8 +68,8 @@ export const Filters: React.FC<Props> = () => {
               </button>
               <button
                 className={clsx(
-                  'px-2 rounded hover:bg-slate-700',
-                  dateFilterType === 'RANGE' && 'bg-primary-700'
+                  'px-2 rounded hover:bg-slate-200 hover:text-black dark:hover:text-white dark:hover:bg-slate-700',
+                  dateFilterType === 'RANGE' && 'bg-primary-700 text-white'
                 )}
                 onClick={() => setDateFilterType('RANGE')}
               >
