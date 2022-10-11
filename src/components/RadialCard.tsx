@@ -132,7 +132,7 @@ export const RadialCard: React.FC<RadialCardProps> = ({
                 </div>
               </div>
             </div>
-            <div className="flex text-center mt-4">
+            <div className="flex flex-col md:flex-row gap-4 text-center mt-4 justify-center items-center">
               <div className="w-1/2">
                 <p className="dark:text-slate-400 text-slate-500 font-medium text-lg xl:text-xl">
                   Used
