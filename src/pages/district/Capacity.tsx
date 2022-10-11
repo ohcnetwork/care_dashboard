@@ -220,13 +220,18 @@ export default function Capacity({ districtName }: Props) {
               {paginatedData.map((data, i) => (
                 <FacilityCapacityTableCard data={data} key={i} />
               ))}
+              {paginatedData.length === 0 && (
+                <div className="text-center font-bold text-lg text-gray-500">
+                  No facilities found
+                </div>
+              )}
             </div>
             <Pagination
               curPage={page}
               handlePageChange={handlePageChange}
               totalPages={totalPage}
               resultsPerPage={10}
-              resultsLength={tableData?.length}
+              resultsLength={totalResults}
             />
           </div>
         </section>
