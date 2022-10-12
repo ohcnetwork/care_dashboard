@@ -117,7 +117,7 @@ export default function FacilityDetails(props: Props) {
               <img
                 src={read_cover_image_url}
                 alt={`${name || ''} cover image`}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full rounded-lg"
               />
             ) : (
               <div className="flex items-center justify-center h-full">
