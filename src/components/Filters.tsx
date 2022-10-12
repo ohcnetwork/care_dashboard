@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const Filters: React.FC<Props> = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
 
