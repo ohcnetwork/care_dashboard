@@ -1,9 +1,8 @@
 import { filter } from 'lodash-es'
 import { useQueryParams } from 'raviger'
 import { useState, useMemo } from 'react'
-import {
+import useFacilitySummary, {
   FacilitySummaryQuery,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
 import { FacilityBedMap } from '../../components/FacilityBedMap'
 import { UrlQuery } from '../../types/urlQuery'

@@ -1,12 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
-import { useQuery } from 'react-query'
-import { PaginatedResponse } from '../../types/paginatedResponse'
-import { createQueryKey } from '../../utils/url'
+import { getGenericSummaryQueryHook } from './utils'
 
-const FACILITY_SUMMARY_KEY = 'facilitySummeryKey'
+const FACILITY_SUMMARY_KEY = 'facilitySummaryKey'
 
 export interface FacilitySummaryQuery {
-  /* DISTRICT ID */
+  /** District ID */
   district?: number
   start_date?: string
   end_date?: string
@@ -14,11 +11,11 @@ export interface FacilitySummaryQuery {
   facility?: string
 }
 
-export interface FacilitySummaryResponse {
+export type FacilitySummaryResponse<T = Data> = {
   facility: Facility
   created_date: string
   modified_date: string
-  data: Data
+  data: T
 }
 
 export interface Facility {
@@ -50,7 +47,7 @@ export interface Facility {
   expected_type_b_cylinders: number
   expected_type_c_cylinders: number
   expected_type_d_cylinders: number
-  cover_image_url?: string
+  read_cover_image_url?: null | string
 }
 
 export interface Location {
@@ -103,7 +100,7 @@ export interface Data {
   state_object: StateObject
   facility_type: string
   modified_date: string
-  cover_image_url?: null
+  read_cover_image_url?: null | string
   district_object: DistrictObject
   inventory?: Record<string, Inventory>
   capacity?: Record<string, Capacity>
@@ -167,22 +164,7 @@ export interface Capacity {
   current_capacity: number | string
 }
 
-export const useFacilitySummary = (
-  query: FacilitySummaryQuery,
-  enabled = true
-) =>
-  useQuery(
-    createQueryKey(FACILITY_SUMMARY_KEY, query),
-    () =>
-      axios
-        .get<PaginatedResponse<FacilitySummaryResponse[]>>(
-          'https://careapi.coronasafe.in/api/v1/facility_summary/',
-          {
-            params: query,
-          }
-        )
-        .then((d) => d.data),
-    {
-      enabled,
-    }
-  )
+export default getGenericSummaryQueryHook<
+  FacilitySummaryQuery,
+  FacilitySummaryResponse<Data>
+>(FACILITY_SUMMARY_KEY, '/api/v1/facility_summary/')
