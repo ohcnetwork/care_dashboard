@@ -1,10 +1,8 @@
-import Fuse from 'fuse.js'
 import { useQueryParams } from 'raviger'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import {
+import React, { useMemo, useState } from 'react'
+import useFacilitySummary, {
   FacilitySummaryQuery,
   FilteredFacilityData,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
 import { OxygenFacilityCard } from '../../components/OxygenFacilityCard'
 import { Pagination } from '../../components/Pagination'
@@ -21,10 +19,9 @@ import { processFacilityData } from '../../utils/facility/capacity'
 import {
   getOxygenCardData,
   getOxygenFlatData,
-  getOxygenSummeryConfig,
+  getOxygenSummaryConfig,
   processOxygenExportData,
 } from '../../utils/facility/oxygen'
-import { flattenObject, ObjectI } from '../../utils/helpers'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName } from '../../utils/url'
 
@@ -78,7 +75,7 @@ export default function Oxygen({ districtName }: Props) {
     <>
       <section className="my-4 2xl:max-w-7xl mx-auto px-4">
         <div>
-          {getOxygenSummeryConfig(oxygenFlatData).map((config, i) => (
+          {getOxygenSummaryConfig(oxygenFlatData).map((config, i) => (
             <div className="card px-2 my-4 rounded-2xl" key={i}>
               <UsageCard data={config} />
             </div>

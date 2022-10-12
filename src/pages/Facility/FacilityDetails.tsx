@@ -1,11 +1,10 @@
 import clsx from 'clsx'
 import { useQueryParams } from 'raviger'
 import { useMemo } from 'react'
-import {
+import useFacilitySummary, {
   FacilitySummaryQuery,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
-import { usePatientSummary } from '../../api/queries/usePatientSummery'
+import usePatientSummary from '../../api/queries/usePatientSummary'
 import { FacilityIcon } from '../../asset/icons/FacilityIcon'
 import { FacilityBedMap } from '../../components/FacilityBedMap'
 import InfoCard from '../../components/InfoCard'
@@ -68,7 +67,7 @@ export default function FacilityDetails(props: Props) {
     facility_type,
     phone_number,
     ward_object,
-    cover_image_url,
+    read_cover_image_url,
     local_body_object,
     district_object,
   } = data?.results?.[0]?.facility || {}
@@ -114,11 +113,11 @@ export default function FacilityDetails(props: Props) {
               (isLoading || isPatientDataLoading) && 'animate-pulse'
             )}
           >
-            {cover_image_url ? (
+            {read_cover_image_url ? (
               <img
-                src={cover_image_url}
+                src={read_cover_image_url}
                 alt={`${name || ''} cover image`}
-                className="object-cover w-full h-full"
+                className="object-cover w-full h-full rounded-lg"
               />
             ) : (
               <div className="flex items-center justify-center h-full">

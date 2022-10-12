@@ -1,10 +1,9 @@
 import { useQueryParams } from 'raviger'
 import React, { useMemo, useState } from 'react'
-import {
+import usePatientSummary, {
   PatientSummaryQuery,
-  usePatientSummary,
-} from '../../api/queries/usePatientSummery'
-import BedsSummery from '../../components/BedsSummery'
+} from '../../api/queries/usePatientSummary'
+import BedsSummary from '../../components/BedsSummary'
 import InfoCard from '../../components/InfoCard'
 import { Pagination } from '../../components/Pagination'
 import { TableExportHeader } from '../../components/TableExportHeader'
@@ -119,7 +118,7 @@ export default function Patient({ districtName }: Props) {
         />
         <div className="flex gap-4 flex-col">
           {paginatedData.map((data, i) => {
-            return <BedsSummery key={i} data={data} />
+            return <BedsSummary key={i} data={data} />
           })}
         </div>
         {paginatedData.length === 0 && (

@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import {
+import useFacilitySummary, {
   FacilitySummaryQuery,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
 import { FacilityCapacityTableCard } from '../../components/FacilityCapacityTableCard'
 import { Pagination } from '../../components/Pagination'

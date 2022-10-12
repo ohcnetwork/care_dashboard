@@ -3,11 +3,11 @@ import React from 'react'
 import { PatientCardDataForCapacity } from '../utils/facility/patient'
 import InfoCard from './InfoCard'
 
-interface BedsSummeryProps {
+interface BedsSummaryProps {
   data: PatientCardDataForCapacity
 }
 
-const BedsSummery: React.FC<BedsSummeryProps> = ({ data }) => {
+const BedsSummary: React.FC<BedsSummaryProps> = ({ data }) => {
   return (
     <div className="p-4 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl dark:text-white text-slate-900">
       <div className="flex gap-2 items-center justify-between flex-wrap">
@@ -119,4 +119,4 @@ const BedsSummery: React.FC<BedsSummeryProps> = ({ data }) => {
   )
 }
 
-export default BedsSummery
+export default BedsSummary
