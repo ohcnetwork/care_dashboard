@@ -32,7 +32,7 @@ import { getDistrictByName } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
 import { X } from 'react-feather'
-import _ from 'lodash'
+import { omit } from 'lodash'
 
 interface Props {
   districtName?: string
@@ -42,7 +42,6 @@ export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
   const { date, end_date, facility_type } = urlQuery
-  const [open, setOpen] = useState(false)
   const initialFaciltyType = facility_type
     ?.split(',')
     .map((i) => {
@@ -57,9 +56,6 @@ export default function Capacity({ districtName }: Props) {
   )
   const [selectedDate, setSelectedDate] = useState<any>(
     date ? getDateFromQuery(date) : null
-  )
-  const [selectedEndDate, setSelectedEndDate] = useState<any>(
-    end_date ? getDateFromQuery(end_date) : null
   )
 
   const queryDate = getDateFromQuery(date)
@@ -107,23 +103,41 @@ export default function Capacity({ districtName }: Props) {
 
   const handleRemoveFacility = (id: number) => {
     setSelectedFacilities((p: any) => p.filter((item: any) => item.id != id))
+    if (selectedFacilities.filter((item: any) => item.id != id).length)
+      setQuery({
+        ...urlQuery,
+        facility_type: selectedFacilities
+          .filter((item: any) => item.id != id)
+          .map((item: any) => {
+            return item.id
+          })
+          .join(','),
+      })
+    else setQuery(omit(urlQuery, 'facility_type'))
   }
 
   useEffect(() => {
-    if (selectedFacilities.length)
-      setQuery({
-        ...urlQuery,
-        facility_type: selectedFacilities.map((i: any) => i.id).join(','),
-      })
-    else setQuery(_.omit(urlQuery, 'facility_type'))
-  }, [selectedFacilities])
+    if (facility_type)
+      setSelectedFacilities(
+        facility_type
+          ?.split(',')
+          .map((i) => {
+            const key = parseInt(i.trim())
+            return key >= 0 && key < facility_types.length
+              ? facility_types[key]
+              : null
+          })
+          .filter((i) => i != null) as any[]
+      )
+    if (date) setSelectedDate(date)
+  }, [facility_type, date])
 
   return (
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
           <div className="mt-2 flex flex-wrap dark:text-white text-sm">
-            {selectedFacilities.map((i: any) => {
+            {selectedFacilities?.map((i: any) => {
               return (
                 <li
                   key={i.facility_type}
@@ -147,9 +161,8 @@ export default function Capacity({ districtName }: Props) {
                 <button
                   className="ml-2 hover:bg-slate-200 dark:hover:bg-slate-900 rounded-full p-1 flex justify-center items-center dark:text-gray-200"
                   onClick={() => {
-                    setQuery(_.omit(urlQuery, 'date', 'end_date'))
+                    setQuery(omit(urlQuery, 'date', 'end_date'))
                     setSelectedDate(null)
-                    setSelectedEndDate(null)
                   }}
                 >
                   <X size={12} />
