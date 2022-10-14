@@ -95,10 +95,10 @@ const additionalData = ({
 }
 
 export const processFacilityData = (
-  facilitiesSummery?: FacilitySummaryResponse[],
+  facilitiesSummary?: FacilitySummaryResponse[],
   filterFacilities?: string[]
 ) => {
-  const cleanFacilityData = filter(facilitiesSummery, (f) => !!f.facility)
+  const cleanFacilityData = filter(facilitiesSummary, (f) => !!f.facility)
   const facilityData = map(cleanFacilityData, (d) => {
     const { created_date, data, facility, modified_date } = d
 

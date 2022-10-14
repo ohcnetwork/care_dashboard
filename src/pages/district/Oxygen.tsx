@@ -1,11 +1,11 @@
-import Fuse from 'fuse.js'
+import clsx from 'clsx'
 import { useQueryParams } from 'raviger'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import {
+import React, { useMemo, useState } from 'react'
+import useFacilitySummary, {
   FacilitySummaryQuery,
   FilteredFacilityData,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
+import { Filters } from '../../components/Filters'
 import { OxygenFacilityCard } from '../../components/OxygenFacilityCard'
 import { Pagination } from '../../components/Pagination'
 import { TableExportHeader } from '../../components/TableExportHeader'
@@ -21,12 +21,11 @@ import { processFacilityData } from '../../utils/facility/capacity'
 import {
   getOxygenCardData,
   getOxygenFlatData,
-  getOxygenSummeryConfig,
+  getOxygenSummaryConfig,
   processOxygenExportData,
 } from '../../utils/facility/oxygen'
-import { flattenObject, ObjectI } from '../../utils/helpers'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
-import { getDistrictByName } from '../../utils/url'
+import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
 
 interface Props {
   districtName?: string
@@ -37,6 +36,7 @@ const RESULT_PER_PAGE = 10
 const OxygenLoading = () => {
   return (
     <div className="2xl:max-w-7xl mx-auto px-4 my-4">
+      <div className="h-[38px] rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32 mb-4"></div>
       <div className="w-full h-32 bg-slate-200 dark:bg-slate-800 animate-pulse rounded-xl mb-4" />
       <div className="w-full h-32 bg-slate-200 dark:bg-slate-800 animate-pulse rounded-xl mb-4" />
       <div className="w-full h-32 bg-slate-200 dark:bg-slate-800 animate-pulse rounded-xl" />
@@ -45,21 +45,28 @@ const OxygenLoading = () => {
 }
 export default function Oxygen({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const [{ date }, setQuery] = useQueryParams<UrlQuery>()
-  const queryDate = getDateFromQuery(date)
+  const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
+  const { date, start_date, end_date, facility_type } = urlQuery
+
+  const queryDate =
+    start_date && end_date
+      ? getDateFromQuery(start_date)
+      : getDateFromQuery(date)
+  const queryEndDate =
+    start_date && end_date ? getDateFromQuery(end_date) : getDateFromQuery(date)
 
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
-    end_date: toDateString(getNDateAfter(queryDate, 1)),
+    end_date: toDateString(getNDateAfter(queryEndDate, 1)),
     limit: 1000,
   }
 
   const { data, isLoading } = useFacilitySummary(query)
-
   const filtered = useMemo(
-    () => processFacilityData(data?.results, []),
-    [data?.results]
+    () =>
+      processFacilityData(data?.results, getFacilitiesFromQuery(facility_type)),
+    [data?.results, facility_type]
   )
 
   const oxygenCardData = useMemo(() => getOxygenCardData(filtered), [filtered])
@@ -77,8 +84,14 @@ export default function Oxygen({ districtName }: Props) {
   ) : (
     <>
       <section className="my-4 2xl:max-w-7xl mx-auto px-4">
+        <div className={clsx('flex gap-2 justify-between items-center')}>
+          <h1 className="text-xl text-slate-900 dark:text-white font-medium">
+            Oxygen
+          </h1>
+          <Filters />
+        </div>
         <div>
-          {getOxygenSummeryConfig(oxygenFlatData).map((config, i) => (
+          {getOxygenSummaryConfig(oxygenFlatData).map((config, i) => (
             <div className="card px-2 my-4 rounded-2xl" key={i}>
               <UsageCard data={config} />
             </div>

@@ -180,7 +180,7 @@ export const getOxygenFlatData = (
   const p2 = map(p1, (c) => values(c.inventory))
   return flatMap(p2)
 }
-export const getOxygenSummeryConfig = (data: Inventory[]) => {
+export const getOxygenSummaryConfig = (data: Inventory[]) => {
   return Object.values(OXYGEN_INVENTORY_NAME).map((name) => {
     const entries = filter(data, (f) => f.item_name === name)
     const stock = sumBy(entries, (f) => f.stock)

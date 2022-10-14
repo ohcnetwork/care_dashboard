@@ -1,4 +1,4 @@
-import { Facility } from './facilitySummery'
+import { Facility } from '../../queries/useFacilitySummary'
 
 export interface SummaryResponse<T> {
   facility: Facility

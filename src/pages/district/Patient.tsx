@@ -1,10 +1,12 @@
+import clsx from 'clsx'
 import { useQueryParams } from 'raviger'
 import React, { useMemo, useState } from 'react'
-import {
+import { FacilitySummaryQuery } from '../../api/queries/useFacilitySummary'
+import usePatientSummary, {
   PatientSummaryQuery,
-  usePatientSummary,
-} from '../../api/queries/usePatientSummery'
-import BedsSummery from '../../components/BedsSummery'
+} from '../../api/queries/usePatientSummary'
+import BedsSummary from '../../components/BedsSummary'
+import { Filters } from '../../components/Filters'
 import InfoCard from '../../components/InfoCard'
 import { Pagination } from '../../components/Pagination'
 import { TableExportHeader } from '../../components/TableExportHeader'
@@ -25,7 +27,7 @@ import {
   processPatientSummaryData,
 } from '../../utils/facility/patient'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
-import { getDistrictByName } from '../../utils/url'
+import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
 
 interface Props {
   districtName?: string
@@ -52,20 +54,32 @@ const PatientSkeleton = () => {
 }
 
 export default function Patient({ districtName }: Props) {
-  const [{ date }, setQuery] = useQueryParams<UrlQuery>()
-  const queryDate = getDateFromQuery(date)
   const [searchValue, setSearchValue] = useState('')
-  const query: PatientSummaryQuery = {
+  const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
+  const { date, start_date, end_date, facility_type } = urlQuery
+
+  const queryDate =
+    start_date && end_date
+      ? getDateFromQuery(start_date)
+      : getDateFromQuery(date)
+  const queryEndDate =
+    start_date && end_date ? getDateFromQuery(end_date) : getDateFromQuery(date)
+
+  const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
-    end_date: toDateString(getNDateAfter(queryDate, 1)),
+    end_date: toDateString(getNDateAfter(queryEndDate, 1)),
     limit: 1000,
   }
 
   const { data, isLoading } = usePatientSummary(query)
 
   const filtered = useMemo(
-    () => processPatientSummaryData(data?.results, []),
+    () =>
+      processPatientSummaryData(
+        data?.results,
+        getFacilitiesFromQuery(facility_type)
+      ),
     [data?.results]
   )
   const facilityTrivia = useMemo(
@@ -95,6 +109,22 @@ export default function Patient({ districtName }: Props) {
 
   return (
     <section className="my-4 2xl:max-w-7xl mx-auto px-4">
+      <div className="relative">
+        {isLoading ? (
+          <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
+        ) : null}
+        <div
+          className={clsx(
+            'flex gap-2 justify-between items-center',
+            isLoading && 'opacity-0 pointer-events-none'
+          )}
+        >
+          <h1 className="text-xl text-slate-900 dark:text-white font-medium">
+            Patient
+          </h1>
+          <Filters />
+        </div>
+      </div>
       <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
         <ValuePill
           title="Facility Count"
@@ -119,7 +149,7 @@ export default function Patient({ districtName }: Props) {
         />
         <div className="flex gap-4 flex-col">
           {paginatedData.map((data, i) => {
-            return <BedsSummery key={i} data={data} />
+            return <BedsSummary key={i} data={data} />
           })}
         </div>
         {paginatedData.length === 0 && (

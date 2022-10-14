@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 import { cloneDeep, filter, includes, map, keys, reduce } from 'lodash-es'
-import { PatientSummaryResponse } from '../../api/queries/usePatientSummery'
+import { PatientSummaryResponse } from '../../api/queries/usePatientSummary'
 import { INITIAL_PATIENT_FACILITY_TRIVIA, PATIENT_TYPES } from '../constants'
 import { toDateString } from '../date'
 
@@ -13,10 +13,10 @@ export type PatientFacilitiesTrivia = ReturnType<
 >
 
 export const processPatientSummaryData = (
-  facilitiesSummery?: PatientSummaryResponse[],
+  facilitiesSummary?: PatientSummaryResponse[],
   filterFacilities?: string[]
 ) => {
-  const cleanFacilityData = filter(facilitiesSummery, (f) => !!f.facility)
+  const cleanFacilityData = filter(facilitiesSummary, (f) => !!f.facility)
   const facilityData = map(cleanFacilityData, (d) => {
     const { created_date, data, facility, modified_date } = d
 

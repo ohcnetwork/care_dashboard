@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useTheme } from './utils/hooks/useTheme'
 import { ThemeProvider } from './utils/context/themeContext'
 import { checkTheme } from './utils/theme'
+import { Filters } from './components/Filters'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,14 +19,11 @@ const queryClient = new QueryClient({
 
 function App() {
   const appRoutes = useRoutes(routes, { matchTrailingSlash: false })
-  const [theme, _] = useTheme()
 
   return (
-    <div className={theme}>
-      <div className="bg-slate-50 dark:bg-slate-900 min-h-screen">
-        <Header district={ACTIVATED_DISTRICTS[0].name} />
-        <main>{appRoutes}</main>
-      </div>
+    <div className="bg-slate-50 dark:bg-slate-900 min-h-screen">
+      <Header district={ACTIVATED_DISTRICTS[0].name} />
+      <main>{appRoutes}</main>
     </div>
   )
 }
@@ -36,7 +34,9 @@ export default () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={{ setTheme, theme }}>
-        <App />
+        <div className={theme}>
+          <App />
+        </div>
       </ThemeProvider>
     </QueryClientProvider>
   )

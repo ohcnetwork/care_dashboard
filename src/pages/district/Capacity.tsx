@@ -1,7 +1,6 @@
-import React, { useMemo, useState } from 'react'
-import {
+import React, { useEffect, useMemo, useState } from 'react'
+import useFacilitySummary, {
   FacilitySummaryQuery,
-  useFacilitySummary,
 } from '../../api/queries/useFacilitySummary'
 import { FacilityCapacityTableCard } from '../../components/FacilityCapacityTableCard'
 import { Pagination } from '../../components/Pagination'
@@ -12,6 +11,7 @@ import {
   AVAILABILITY_TYPES,
   AVAILABILITY_TYPES_ORDERED,
   AVAILABILITY_TYPES_TOTAL_ORDERED,
+  facilityOptions,
 } from '../../utils/constants'
 import {
   getDateFromQuery,
@@ -26,9 +26,13 @@ import {
   processFacilityTrivia,
 } from '../../utils/facility/capacity'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
-import { getDistrictByName } from '../../utils/url'
+import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
+import { Filter, X } from 'react-feather'
+import { omit } from 'lodash'
+import { Filters } from '../../components/Filters'
+import clsx from 'clsx'
 
 interface Props {
   districtName?: string
@@ -36,22 +40,30 @@ interface Props {
 
 export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
-  const [{ date }, setQuery] = useQueryParams<UrlQuery>()
+  const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
+  const { date, start_date, end_date, facility_type } = urlQuery
 
-  const queryDate = getDateFromQuery(date)
+  const queryDate =
+    start_date && end_date
+      ? getDateFromQuery(start_date)
+      : getDateFromQuery(date)
+  const queryEndDate =
+    start_date && end_date ? getDateFromQuery(end_date) : getDateFromQuery(date)
+
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
-    end_date: toDateString(getNDateAfter(queryDate, 1)),
+    end_date: toDateString(getNDateAfter(queryEndDate, 1)),
     limit: 1000,
   }
 
   const { data, isLoading } = useFacilitySummary(query)
-
   const filtered = useMemo(
-    () => processFacilityData(data?.results, []),
-    [data?.results]
+    () =>
+      processFacilityData(data?.results, getFacilitiesFromQuery(facility_type)),
+    [data?.results, facility_type]
   )
+  // Todo: Support date range
   const facilitiesTrivia = useMemo(
     () => processFacilityTrivia(filtered, toDateString(queryDate)),
     [filtered, queryDate]
@@ -66,17 +78,33 @@ export default function Capacity({ districtName }: Props) {
     [filtered]
   )
 
-  const { handlePageChange, page, paginatedData, totalPage, totalResults } =
-    usePaginateData({
-      data: tableData,
-      keys: ['facility_name'],
-      searchValue,
-    })
+  const { handlePageChange, page, paginatedData, totalPage } = usePaginateData({
+    data: tableData,
+    keys: ['facility_name'],
+    searchValue,
+  })
 
   return (
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
+          <div className="relative">
+            {isLoading ? (
+              <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
+            ) : null}
+            <div
+              className={clsx(
+                'flex gap-2 justify-between items-center',
+                isLoading && 'opacity-0 pointer-events-none'
+              )}
+            >
+              <h1 className="text-xl text-slate-900 dark:text-white font-medium">
+                Capacity
+              </h1>
+              <Filters />
+            </div>
+          </div>
+
           <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
             <ValuePill
               isLoading={isLoading}
@@ -151,7 +179,7 @@ export default function Capacity({ districtName }: Props) {
               handlePageChange={handlePageChange}
               totalPages={totalPage}
               resultsPerPage={10}
-              resultsLength={totalResults}
+              resultsLength={tableData?.length}
             />
           </div>
         </section>
