@@ -6,23 +6,25 @@ import { X } from 'react-feather'
 import { UrlQuery } from '../types/urlQuery'
 import { facilityOptions } from '../utils/constants'
 import { stringToDate, toDateString } from '../utils/date'
+import { getFacilityIds } from '../utils/url'
 import DatePicker from './DatePicker'
 import MultiSelect from './MultiSelect'
 import SlideOver from './SlideOver'
 
-interface Props {
-  tep?: string
-}
-
-export const Filters: React.FC<Props> = () => {
+export const Filters = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
   const [urlQuery, setURLQuery] = useQueryParams<UrlQuery>()
+
+  const { date, end_date, facility_type, start_date } = urlQuery
+
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    getFacilityIds(facility_type)
+  )
 
   const [tempUrlQuery, setTempURLQuery] = useState<UrlQuery>(urlQuery)
 
   const [dateFilterType, setDateFilterType] = useState<'SINGLE' | 'RANGE'>(
-    'SINGLE'
+    start_date && end_date ? 'RANGE' : 'SINGLE'
   )
 
   useEffect(() => {
@@ -34,10 +36,20 @@ export const Filters: React.FC<Props> = () => {
     else setTempURLQuery(omit(urlQuery, 'facility_type'))
   }, [selectedOptions])
 
+  useEffect(() => {
+    setSelectedOptions(getFacilityIds(urlQuery.facility_type))
+    setTempURLQuery(urlQuery)
+  }, [isOpen])
+
+  const isFilterApplied = date || end_date || start_date || facility_type
+
   return (
-    <section className="flex flex-row-reverse mt-4 mr-4">
-      <button className="btn" onClick={() => setIsOpen(true)}>
+    <section className="flex flex-row-reverse">
+      <button className="relative btn" onClick={() => setIsOpen(true)}>
         Filters
+        {isFilterApplied && (
+          <span className="absolute left-full top-0 h-3 w-3 rounded-full bg-red-500 -translate-x-1/2 -translate-y-1/2" />
+        )}
       </button>
       <SlideOver open={isOpen} setOpen={setIsOpen}>
         <div className="flex gap-4 justify-between items-center text-slate-900 dark:text-white ">
@@ -132,7 +144,7 @@ export const Filters: React.FC<Props> = () => {
         </div>
         <div className="flex gap-2 mt-8">
           <button
-            className="btn bg-slate-800 hover:bg-slate-700"
+            className="btn text-slate-900 dark:text-white bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 hover:bg-slate-400"
             onClick={() => {
               setURLQuery(
                 omit(

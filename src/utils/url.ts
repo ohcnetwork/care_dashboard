@@ -1,4 +1,4 @@
-import { ACTIVATED_DISTRICTS } from './constants'
+import { ACTIVATED_DISTRICTS, facilityOptionsMap } from './constants'
 
 export const parameterize = (word: string | undefined) => {
   if (!word) return ''
@@ -24,3 +24,17 @@ export const getDistrictByName = (districtName: string | undefined) => {
 /* FUNCTION TO CREATE UNIQUE KEY FOR react-query */
 
 export const createQueryKey = <T>(baseKey: string, query: T) => [baseKey, query]
+
+export const getFacilityIds = (query?: string) =>
+  query
+    ?.split(',')
+    .map((f) => f.trim())
+    .filter((f) => Number.isInteger(+f)) || []
+
+export const getFacilitiesFromQuery = (query?: string) => {
+  const requiredFacilities = getFacilityIds(query).map(
+    (id) => facilityOptionsMap[id]
+  )
+
+  return requiredFacilities
+}

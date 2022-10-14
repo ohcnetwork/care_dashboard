@@ -23,10 +23,7 @@ function App() {
   return (
     <div className="bg-slate-50 dark:bg-slate-900 min-h-screen">
       <Header district={ACTIVATED_DISTRICTS[0].name} />
-      <main>
-        <Filters />
-        {appRoutes}
-      </main>
+      <main>{appRoutes}</main>
     </div>
   )
 }

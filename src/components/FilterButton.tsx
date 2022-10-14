@@ -1,5 +1,4 @@
 import React from 'react'
-import Example from '../common/SlideOver'
 import * as Icon from 'react-feather'
 interface FilterProps {
   setOpen: () => void

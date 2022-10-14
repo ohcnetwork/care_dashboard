@@ -11,8 +11,7 @@ import {
   AVAILABILITY_TYPES,
   AVAILABILITY_TYPES_ORDERED,
   AVAILABILITY_TYPES_TOTAL_ORDERED,
-  FACILITY_TYPES,
-  facility_types,
+  facilityOptions,
 } from '../../utils/constants'
 import {
   getDateFromQuery,
@@ -27,11 +26,13 @@ import {
   processFacilityTrivia,
 } from '../../utils/facility/capacity'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
-import { getDistrictByName } from '../../utils/url'
+import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
-import { X } from 'react-feather'
+import { Filter, X } from 'react-feather'
 import { omit } from 'lodash'
+import { Filters } from '../../components/Filters'
+import clsx from 'clsx'
 
 interface Props {
   districtName?: string
@@ -40,25 +41,15 @@ interface Props {
 export default function Capacity({ districtName }: Props) {
   const [searchValue, setSearchValue] = useState('')
   const [urlQuery, setQuery] = useQueryParams<UrlQuery>()
-  const { date, end_date, facility_type } = urlQuery
-  const initialFaciltyType = facility_type
-    ?.split(',')
-    .map((i) => {
-      const key = parseInt(i.trim())
-      return key >= 0 && key < facility_types.length
-        ? facility_types[key]
-        : null
-    })
-    .filter((i) => i != null) as any[]
-  const [selectedFacilities, setSelectedFacilities] = useState<any>(
-    initialFaciltyType || []
-  )
-  const [selectedDate, setSelectedDate] = useState<any>(
-    date ? getDateFromQuery(date) : null
-  )
+  const { date, start_date, end_date, facility_type } = urlQuery
 
-  const queryDate = getDateFromQuery(date)
-  const queryEndDate = getDateFromQuery(end_date ? end_date : date)
+  const queryDate =
+    start_date && end_date
+      ? getDateFromQuery(start_date)
+      : getDateFromQuery(date)
+  const queryEndDate =
+    start_date && end_date ? getDateFromQuery(end_date) : getDateFromQuery(date)
+
   const query: FacilitySummaryQuery = {
     district: getDistrictByName(districtName)?.id,
     start_date: toDateString(getNDateBefore(queryDate, 1)),
@@ -67,19 +58,12 @@ export default function Capacity({ districtName }: Props) {
   }
 
   const { data, isLoading } = useFacilitySummary(query)
-
   const filtered = useMemo(
     () =>
-      processFacilityData(
-        data?.results,
-        selectedFacilities.length
-          ? selectedFacilities.map(
-              (i: { id: number; facility_type: string }) => i.facility_type
-            )
-          : []
-      ),
-    [data?.results, selectedFacilities]
+      processFacilityData(data?.results, getFacilitiesFromQuery(facility_type)),
+    [data?.results, facility_type]
   )
+  // Todo: Support date range
   const facilitiesTrivia = useMemo(
     () => processFacilityTrivia(filtered, toDateString(queryDate)),
     [filtered, queryDate]
@@ -100,75 +84,27 @@ export default function Capacity({ districtName }: Props) {
     searchValue,
   })
 
-  const handleRemoveFacility = (id: number) => {
-    setSelectedFacilities((p: any) => p.filter((item: any) => item.id != id))
-    if (selectedFacilities.filter((item: any) => item.id != id).length)
-      setQuery({
-        ...urlQuery,
-        facility_type: selectedFacilities
-          .filter((item: any) => item.id != id)
-          .map((item: any) => {
-            return item.id
-          })
-          .join(','),
-      })
-    else setQuery(omit(urlQuery, 'facility_type'))
-  }
-
-  useEffect(() => {
-    if (facility_type)
-      setSelectedFacilities(
-        facility_type
-          ?.split(',')
-          .map((i) => {
-            const key = parseInt(i.trim())
-            return key >= 0 && key < facility_types.length
-              ? facility_types[key]
-              : null
-          })
-          .filter((i) => i != null) as any[]
-      )
-    if (date) setSelectedDate(date)
-  }, [facility_type, date])
-
   return (
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
-          <div className="mt-2 flex flex-wrap dark:text-white text-sm">
-            {selectedFacilities?.map((i: any) => {
-              return (
-                <li
-                  key={i.facility_type}
-                  className="my-1 mr-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center"
-                >
-                  <span>{i.facility_type}</span>
-                  <button
-                    className="ml-2 hover:bg-slate-200 dark:hover:bg-slate-900 rounded-full p-1 flex justify-center items-center dark:text-gray-200"
-                    onClick={() => {
-                      handleRemoveFacility(i.id)
-                    }}
-                  >
-                    <X size={12} />
-                  </button>
-                </li>
-              )
-            })}
-            {selectedDate && (
-              <div className="my-1 mr-1 shadow-xs rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:text-gray-200 opacity-100 flex px-2 items-center">
-                <span>Date</span>
-                <button
-                  className="ml-2 hover:bg-slate-200 dark:hover:bg-slate-900 rounded-full p-1 flex justify-center items-center dark:text-gray-200"
-                  onClick={() => {
-                    setQuery(omit(urlQuery, 'date', 'end_date'))
-                    setSelectedDate(null)
-                  }}
-                >
-                  <X size={12} />
-                </button>
-              </div>
-            )}
+          <div className="relative">
+            {isLoading ? (
+              <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
+            ) : null}
+            <div
+              className={clsx(
+                'flex gap-2 justify-between items-center',
+                isLoading && 'opacity-0 pointer-events-none'
+              )}
+            >
+              <h1 className="text-xl text-slate-900 dark:text-white font-medium">
+                Capacity
+              </h1>
+              <Filters />
+            </div>
           </div>
+
           <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
             <ValuePill
               isLoading={isLoading}

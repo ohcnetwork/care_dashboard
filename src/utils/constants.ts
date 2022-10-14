@@ -164,10 +164,13 @@ export const FACILITY_TYPES = [
   'Shifting Centre',
   'TeleMedicine',
 ]
-export const facilityOptions = FACILITY_TYPES.map((facility_type, idx) => {
-  return { value: idx, label: facility_type }
+export const facilityOptions = FACILITY_TYPES.map((facilityType, idx) => {
+  return { value: idx, label: facilityType }
 })
 
-export const facility_types = FACILITY_TYPES.map((facility_type, idx) => {
-  return { id: idx, facility_type: facility_type }
-})
+export const facilityOptionsMap: Record<string, string> = FACILITY_TYPES.reduce(
+  (acc, curr, idx) => {
+    return { ...acc, [idx]: curr }
+  },
+  {}
+)
