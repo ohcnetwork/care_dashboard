@@ -232,7 +232,7 @@ export const FacilityBedMap = (props: Props) => {
     <div
       className={clsx(
         'rounded-xl overflow-hidden relative',
-        'h-[90vh] w-full',
+        'h-[85vh] w-full',
         className
       )}
     >
