@@ -134,7 +134,7 @@ const DatePicker: React.FC<Props> = ({
     <div className={disabled ? 'pointer-events-none opacity-0.8' : ''}>
       <div className="container mx-auto">
         <Popover className="relative">
-          <Popover.Button>
+          <Popover.Button className="w-full">
             <input type="hidden" name="date" />
             <input
               type="text"
