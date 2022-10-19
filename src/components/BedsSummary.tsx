@@ -71,7 +71,7 @@ const BedsSummary: React.FC<BedsSummaryProps> = ({ data }) => {
         </div>
         <div>
           <h1 className="text-lg dark:text-slate-200 mb-4">ICU</h1>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
             <InfoCard
               className="bg-slate-50 dark:bg-slate-900"
               title="ICU"
