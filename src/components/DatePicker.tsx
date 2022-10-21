@@ -35,6 +35,7 @@ const DatePicker: React.FC<Props> = ({
 
   const [datePickerHeaderDate, setDatePickerHeaderDate] = useState(new Date())
   const [type, setType] = useState<DatePickerType>('date')
+  const [year, setYear] = useState(new Date())
 
   const decrement = () => {
     switch (type) {
@@ -45,7 +46,8 @@ const DatePicker: React.FC<Props> = ({
         setDatePickerHeaderDate((prev) => subYears(prev, 1))
         break
       case 'year':
-        setDatePickerHeaderDate((prev) => subMonths(prev, 1))
+        setDatePickerHeaderDate((prev) => subYears(prev, 1))
+        setYear((prev) => subYears(prev, 10))
         break
     }
   }
@@ -59,7 +61,8 @@ const DatePicker: React.FC<Props> = ({
         setDatePickerHeaderDate((prev) => addYears(prev, 1))
         break
       case 'year':
-        setDatePickerHeaderDate((prev) => subMonths(prev, 1))
+        setDatePickerHeaderDate((prev) => addYears(prev, 1))
+        setYear((prev) => addYears(prev, 10))
         break
     }
   }
@@ -98,6 +101,9 @@ const DatePicker: React.FC<Props> = ({
   const isSelectedMonth = (month: number) =>
     month === datePickerHeaderDate.getMonth()
 
+  const isSelectedYear = (year: number) =>
+    year === datePickerHeaderDate.getFullYear()
+
   const setMonthValue = (month: number) => () => {
     setDatePickerHeaderDate(
       new Date(
@@ -109,9 +115,20 @@ const DatePicker: React.FC<Props> = ({
     setType('date')
   }
 
+  const setYearValue = (year: number) => () => {
+    setDatePickerHeaderDate(
+      new Date(
+        year,
+        datePickerHeaderDate.getMonth(),
+        datePickerHeaderDate.getDate()
+      )
+    )
+    setType('date')
+  }
+
   const showMonthPicker = () => setType('month')
 
-  const showYearPicker = () => setType('date')
+  const showYearPicker = () => setType('year')
 
   useEffect(() => {
     getDayCount(datePickerHeaderDate)
@@ -194,6 +211,10 @@ const DatePicker: React.FC<Props> = ({
                 <button
                   type="button"
                   className="transition ease-in-out duration-100 h-full p-2 rounded inline-flex items-center justify-center aspect-square cursor-pointer dark:hover:bg-slate-700 hover:bg-slate-200"
+                  disabled={
+                    type === 'year' &&
+                    new Date().getFullYear() === year.getFullYear()
+                  }
                   onClick={increment}
                 >
                   <ArrowRight className="text-slate-900 dark:text-slate-100 w-4 h-4" />
@@ -260,6 +281,29 @@ const DatePicker: React.FC<Props> = ({
                         )}
                       </div>
                     ))}
+                </div>
+              )}
+              {type === 'year' && (
+                <div className="flex flex-wrap">
+                  {Array(12)
+                    .fill(null)
+                    .map((_, i) => {
+                      const y = year.getFullYear() - 11 + i
+                      return (
+                        <div
+                          key={i}
+                          className={clsx(
+                            'cursor-pointer text-white w-1/4 font-semibold py-4 px-2 text-center text-sm rounded-lg hover:bg-slate-200',
+                            value && isSelectedYear(y)
+                              ? 'bg-primary-500'
+                              : 'hover:bg-primary-600'
+                          )}
+                          onClick={setYearValue(y)}
+                        >
+                          {y}
+                        </div>
+                      )
+                    })}
                 </div>
               )}
             </Popover.Panel>
