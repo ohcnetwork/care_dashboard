@@ -293,7 +293,7 @@ const DatePicker: React.FC<Props> = ({
                         <div
                           key={i}
                           className={clsx(
-                            'cursor-pointer text-white w-1/4 font-semibold py-4 px-2 text-center text-sm rounded-lg hover:bg-slate-200',
+                            'cursor-pointer dark:text-white text-slate-700 w-1/4 font-semibold py-4 px-2 text-center text-sm rounded-lg hover:bg-slate-200',
                             value && isSelectedYear(y)
                               ? 'bg-primary-500'
                               : 'hover:bg-primary-600'
