@@ -21,7 +21,7 @@ export const FacilityCapacityTableCard = (props: Props) => {
     non_covid,
   } = props.data
   return (
-    <div className="p-4 dark:bg-slate-800 bg-white border border-slate-200 dark:border-slate-700 mb-2 rounded-2xl dark:text-white overflow-x-auto">
+    <div className="p-4 dark:bg-slate-800 bg-white border border-slate-200 dark:border-slate-700 mb-2 rounded-2xl dark:text-white">
       <div className="flex gap-2 items-center justify-between flex-wrap">
         <div className="flex gap-2 flex-wrap items-center">
           <Link
@@ -66,7 +66,7 @@ export const FacilityCapacityTableCard = (props: Props) => {
           {phone_number}
         </a>
       </div>
-      <div className="mt-2">
+      <div className="mt-2 overflow-x-auto">
         <table>
           <thead>
             <tr className="opacity-80">
