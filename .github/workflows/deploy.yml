@@ -8,7 +8,7 @@ on:
     branches:
       - production
 env:
-  IMAGE_NAME: care_dashboard
+  IMAGE_NAME: care-dashboard
 
 jobs:
   test:
