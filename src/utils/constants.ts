@@ -1,7 +1,12 @@
 export const GMAP_KEY = 'AIzaSyDsBAc3y7deI5ZO3NtK5GuzKwtUzQNJNUk'
 
 export const ACTIVATED_DISTRICTS = [
-  { id: 7, name: 'Ernakulam', lat: 10.148_547_6, lng: 76.500_752_4, zoom: 10 },
+  { id: 400, name: 'Imphal East', lat: 24.781_270_6, lng: 93.967_785_3, zoom: 10 },
+  { id: 411, name: 'Thoubal', lat: 24.544_830_0, lng: 93.970_229_4, zoom: 10 },
+  { id: 399, name: 'Churachandpur', lat: 24.298_914_9, lng: 93.261_984_0, zoom: 10 },
+  { id: 409, name: 'Tamenglong', lat: 24.962_158_5, lng: 93.501_322_8, zoom: 10 },
+  { id: 398, name: 'Chandel', lat: 24.193_995_7, lng: 94.142_712_2, zoom: 10 },
+  { id: 412, name: 'Ukhrul', lat: 24.930_836_6, lng: 94.483_099_5, zoom: 10 },
 ]
 
 export const DEFAULT_ACTIVE_DISTRICT = ACTIVATED_DISTRICTS[0]
