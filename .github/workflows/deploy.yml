@@ -47,7 +47,7 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  build-production:
+  build-production-manipur:
     #    needs: test
     name: Build & Push Production to container registries
     if: github.ref == 'refs/heads/production' && github.event_name == 'push'
@@ -55,6 +55,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Update env
+        run: |
+          echo "VITE_API_URL=$VITE_API_URL" > .env
+          echo "VITE_NAV_LOGO=$VITE_NAV_LOGO" >> .env
+        env:
+          VITE_API_URL: "https://care.mn.gov.in"
+          VITE_NAV_LOGO: "https://cdn.coronasafe.network/light-logo.svg"
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
@@ -103,7 +110,7 @@ jobs:
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   deploy-production-manipur:
-    needs: build-production
+    needs: build-production-manipur
     name: Deploy to GKE Manipur
     runs-on: ubuntu-latest
     environment:
