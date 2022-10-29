@@ -60,7 +60,7 @@ jobs:
           echo "VITE_API_URL=$VITE_API_URL" > .env
           echo "VITE_NAV_LOGO=$VITE_NAV_LOGO" >> .env
         env:
-          VITE_API_URL: "https://care.mn.gov.in"
+          VITE_API_URL: "https://careapi.mn.gov.in"
           VITE_NAV_LOGO: "https://cdn.coronasafe.network/light-logo.svg"
       - name: Docker meta
         id: meta
