@@ -176,7 +176,7 @@ export const useFacilitySummary = (
     () =>
       axios
         .get<PaginatedResponse<FacilitySummaryResponse[]>>(
-          'https://careapi.coronasafe.in/api/v1/facility_summary/',
+          `${import.meta.env.VITE_API_URL}/api/v1/facility_summary/`,
           {
             params: query,
           }
