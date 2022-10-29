@@ -19,7 +19,7 @@ export const useAssetDetails = (
     () =>
       axios
         .get<AssetDetails>(
-          `https://careapi.coronasafe.in/api/v1/public/asset/${id || ''}`,
+          `${import.meta.env.VITE_API_URL}/api/v1/public/asset/${id || ''}`,
           {
             params: query,
           }

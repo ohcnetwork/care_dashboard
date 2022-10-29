@@ -13,7 +13,7 @@ export const getGenericSummaryQueryHook = <QueryType, ResponseType>(
       () =>
         axios
           .get<PaginatedResponse<ResponseType[]>>(
-            `https://careapi.coronasafe.in${endpoint}`,
+            `${import.meta.env.VITE_API_URL}${endpoint}`,
             { params: query }
           )
           .then((d) => d.data),
