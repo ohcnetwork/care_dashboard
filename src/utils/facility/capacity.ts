@@ -327,18 +327,15 @@ export const processFacilityCapacityTableData = (
   facilities: ReturnType<typeof processFacilityData>,
   filterDate?: string
 ) => {
-  return reduce(
+  const fac = reduce(
     facilities,
     (acc, curr) => {
       const covidData = getCapacityBedData(COVID_BEDS, curr)
       const nonCovidData = getCapacityBedData(NON_COVID_BEDS, curr)
 
       const finalTotalData = getFinalTotalData(covidData, nonCovidData)
-      const noCapacity = every(finalTotalData, (item) => item.total === 0)
-      if (
-        curr.date !== (filterDate || toDateString(new Date())) ||
-        noCapacity
-      ) {
+      // const noCapacity = every(finalTotalData, (item) => item.total === 0)
+      if (curr.date !== (filterDate || toDateString(new Date()))) {
         return acc
       }
       return [
@@ -361,6 +358,10 @@ export const processFacilityCapacityTableData = (
     },
     [] as CapacityCardDataForCapacity[]
   )
+
+  console.log(facilities, filterDate, fac)
+
+  return fac
 }
 
 export type ProcessFacilityDataReturn = ReturnType<typeof processFacilityData>
