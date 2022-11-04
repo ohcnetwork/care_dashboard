@@ -1,13 +1,9 @@
-export const GMAP_KEY = 'AIzaSyDsBAc3y7deI5ZO3NtK5GuzKwtUzQNJNUk'
+import districts from '../../districts.json'
 
-export const ACTIVATED_DISTRICTS = [
-  { id: 16, name: 'Imphal East', lat: 24.781_270_6, lng: 93.967_785_3, zoom: 10 },
-  { id: 20, name: 'Thoubal', lat: 24.544_830_0, lng: 93.970_229_4, zoom: 10 },
-  { id: 21, name: 'Churachandpur', lat: 24.298_914_9, lng: 93.261_984_0, zoom: 10 },
-  { id: 22, name: 'Tamenglong', lat: 24.962_158_5, lng: 93.501_322_8, zoom: 10 },
-  { id: 23, name: 'Chandel', lat: 24.193_995_7, lng: 94.142_712_2, zoom: 10 },
-  { id: 24, name: 'Ukhrul', lat: 24.930_836_6, lng: 94.483_099_5, zoom: 10 },
-]
+export const GMAP_KEY =
+  import.meta.env.VITE_GMAP_KEY || 'AIzaSyDsBAc3y7deI5ZO3NtK5GuzKwtUzQNJNUk'
+
+export const ACTIVATED_DISTRICTS = districts
 
 export const DEFAULT_ACTIVE_DISTRICT = ACTIVATED_DISTRICTS[0]
 
