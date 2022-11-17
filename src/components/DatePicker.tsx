@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import {
   format,
   subMonths,
@@ -11,6 +11,7 @@ import {
 } from 'date-fns'
 import { ArrowLeft, ArrowRight, Calendar } from 'react-feather'
 import clsx from 'clsx'
+import { Popover, Transition } from '@headlessui/react'
 
 type DatePickerType = 'date' | 'month' | 'year'
 
@@ -32,9 +33,9 @@ const DatePicker: React.FC<Props> = ({
   const [dayCount, setDayCount] = useState<Array<number>>([])
   const [blankDays, setBlankDays] = useState<Array<number>>([])
 
-  const [showDatePicker, setShowDatePicker] = useState(false)
   const [datePickerHeaderDate, setDatePickerHeaderDate] = useState(new Date())
   const [type, setType] = useState<DatePickerType>('date')
+  const [year, setYear] = useState(new Date())
 
   const decrement = () => {
     switch (type) {
@@ -45,7 +46,8 @@ const DatePicker: React.FC<Props> = ({
         setDatePickerHeaderDate((prev) => subYears(prev, 1))
         break
       case 'year':
-        setDatePickerHeaderDate((prev) => subMonths(prev, 1))
+        setDatePickerHeaderDate((prev) => subYears(prev, 1))
+        setYear((prev) => subYears(prev, 10))
         break
     }
   }
@@ -59,7 +61,8 @@ const DatePicker: React.FC<Props> = ({
         setDatePickerHeaderDate((prev) => addYears(prev, 1))
         break
       case 'year':
-        setDatePickerHeaderDate((prev) => subMonths(prev, 1))
+        setDatePickerHeaderDate((prev) => addYears(prev, 1))
+        setYear((prev) => addYears(prev, 10))
         break
     }
   }
@@ -75,8 +78,6 @@ const DatePicker: React.FC<Props> = ({
         date
       )
     )
-
-    setShowDatePicker(false)
   }
 
   const getDayCount = (date: Date) => {
@@ -100,6 +101,9 @@ const DatePicker: React.FC<Props> = ({
   const isSelectedMonth = (month: number) =>
     month === datePickerHeaderDate.getMonth()
 
+  const isSelectedYear = (year: number) =>
+    year === datePickerHeaderDate.getFullYear()
+
   const setMonthValue = (month: number) => () => {
     setDatePickerHeaderDate(
       new Date(
@@ -111,11 +115,20 @@ const DatePicker: React.FC<Props> = ({
     setType('date')
   }
 
-  const toggleDatePicker = () => setShowDatePicker((prev) => !prev)
+  const setYearValue = (year: number) => () => {
+    setDatePickerHeaderDate(
+      new Date(
+        year,
+        datePickerHeaderDate.getMonth(),
+        datePickerHeaderDate.getDate()
+      )
+    )
+    setType('date')
+  }
 
   const showMonthPicker = () => setType('month')
 
-  const showYearPicker = () => setType('date')
+  const showYearPicker = () => setType('year')
 
   useEffect(() => {
     getDayCount(datePickerHeaderDate)
@@ -137,24 +150,31 @@ const DatePicker: React.FC<Props> = ({
   return (
     <div className={disabled ? 'pointer-events-none opacity-0.8' : ''}>
       <div className="container mx-auto">
-        <div className="relative">
-          <input type="hidden" name="date" />
-          <input
-            type="text"
-            readOnly
-            className="input text-slate-900 dark:text-white cursor-pointer pl-2 pr-10 py-2 shadow-sm focus:outline-none focus:shadow-outline font-medium"
-            placeholder="Select date"
-            value={value ? format(value, 'yyyy-MM-dd') : '----/--/--'}
-            onClick={toggleDatePicker}
-          />
-          <div
-            className="cursor-pointer absolute top-1/2 right-0 p-2 -translate-y-1/2"
-            onClick={toggleDatePicker}
+        <Popover className="relative">
+          <Popover.Button className="w-full">
+            <input type="hidden" name="date" />
+            <input
+              type="text"
+              readOnly
+              className="input text-slate-900 dark:text-white cursor-pointer pl-2 pr-10 py-2 shadow-sm focus:outline-none focus:shadow-outline font-medium"
+              placeholder="Select date"
+              value={value ? format(value, 'yyyy-MM-dd') : '----/--/--'}
+            />
+            <div className="cursor-pointer absolute top-1/2 right-0 p-2 -translate-y-1/2">
+              <Calendar className="text-slate-500 w-5 h-5" />
+            </div>
+          </Popover.Button>
+
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
           >
-            <Calendar className="text-slate-500 w-5 h-5" />
-          </div>
-          {showDatePicker && (
-            <div
+            <Popover.Panel
               className={clsx(
                 'z-10 w-72 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg shadow p-4 absolute top-[105%]',
                 getPosition()
@@ -191,6 +211,10 @@ const DatePicker: React.FC<Props> = ({
                 <button
                   type="button"
                   className="transition ease-in-out duration-100 h-full p-2 rounded inline-flex items-center justify-center aspect-square cursor-pointer dark:hover:bg-slate-700 hover:bg-slate-200"
+                  disabled={
+                    type === 'year' &&
+                    new Date().getFullYear() === year.getFullYear()
+                  }
                   onClick={increment}
                 >
                   <ArrowRight className="text-slate-900 dark:text-slate-100 w-4 h-4" />
@@ -199,7 +223,7 @@ const DatePicker: React.FC<Props> = ({
               {type === 'date' && (
                 <>
                   <div className="flex flex-wrap">
-                    {DAYS.map((day, i) => (
+                    {DAYS.map((day) => (
                       <div key={day} className="aspect-square w-[14.26%]">
                         <div className="text-slate-600 dark:text-slate-400 font-medium text-center text-sm">
                           {day}
@@ -259,9 +283,32 @@ const DatePicker: React.FC<Props> = ({
                     ))}
                 </div>
               )}
-            </div>
-          )}
-        </div>
+              {type === 'year' && (
+                <div className="flex flex-wrap">
+                  {Array(12)
+                    .fill(null)
+                    .map((_, i) => {
+                      const y = year.getFullYear() - 11 + i
+                      return (
+                        <div
+                          key={i}
+                          className={clsx(
+                            'cursor-pointer dark:text-white text-slate-700 w-1/4 font-semibold py-4 px-2 text-center text-sm rounded-lg hover:bg-slate-200',
+                            value && isSelectedYear(y)
+                              ? 'bg-primary-500'
+                              : 'hover:bg-primary-600'
+                          )}
+                          onClick={setYearValue(y)}
+                        >
+                          {y}
+                        </div>
+                      )
+                    })}
+                </div>
+              )}
+            </Popover.Panel>
+          </Transition>
+        </Popover>
       </div>
     </div>
   )
