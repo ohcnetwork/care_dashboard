@@ -1,7 +1,7 @@
 [
-  { "id": 16, "name": "Mysuru", "lat": 12.3141021, "lng": 76.6505102, "zoom": 10 },
-  { "id": 20, "name": "Kodagu", "lat": 12.4214655, "lng": 75.7414573, "zoom": 10 },
-  { "id": 21, "name": "Chamarajanagara", "lat": 11.9261449, "lng": 76.9432155, "zoom": 10 },
-  { "id": 22, "name": "Mandya", "lat": 12.5223161, "lng": 76.8946331, "zoom": 10 }
+  { "id": 34, "name": "Mysuru", "lat": 12.3141021, "lng": 76.6505102, "zoom": 10 },
+  { "id": 26, "name": "Kodagu", "lat": 12.4214655, "lng": 75.7414573, "zoom": 10 },
+  { "id": 43, "name": "Chamarajanagara", "lat": 11.9261449, "lng": 76.9432155, "zoom": 10 },
+  { "id": 27, "name": "Mandya", "lat": 12.5223161, "lng": 76.8946331, "zoom": 10 }
 ]
 
