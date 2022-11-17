@@ -1,0 +1,8 @@
+[
+  { "id": 16, "name": "Imphal East", "lat": 24.7812706, "lng": 93.9677853, "zoom": 10 },
+  { "id": 20, "name": "Thoubal", "lat": 24.5448300, "lng": 93.9702294, "zoom": 10 },
+  { "id": 21, "name": "Churachandpur", "lat": 24.2989149, "lng": 93.2619840, "zoom": 10 },
+  { "id": 22, "name": "Tamenglong", "lat": 24.9621585, "lng": 93.5013228, "zoom": 10 },
+  { "id": 23, "name": "Chandel", "lat": 24.1939957, "lng": 94.1427122, "zoom": 10 },
+  { "id": 24, "name": "Ukhrul", "lat": 24.9308366, "lng": 94.4830995, "zoom": 10 }
+]
