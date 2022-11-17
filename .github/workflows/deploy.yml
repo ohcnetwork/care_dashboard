@@ -123,7 +123,7 @@ jobs:
         run: |
           echo "VITE_API_URL=$VITE_API_URL" > .env
           echo "VITE_NAV_LOGO=$VITE_NAV_LOGO" >> .env
-          cp -f districts/manipur.json districts.json
+          cp -f districts/karnataka.json districts.json
         env:
           VITE_API_URL: "https://careapi.karnataka.care"
           VITE_NAV_LOGO: "https://cdn.coronasafe.network/light-logo.svg"
