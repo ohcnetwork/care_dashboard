@@ -1,7 +1,212 @@
 [
-  { "id": 34, "name": "Mysuru", "lat": 12.3141021, "lng": 76.6505102, "zoom": 10 },
-  { "id": 26, "name": "Kodagu", "lat": 12.4214655, "lng": 75.7414573, "zoom": 10 },
-  { "id": 43, "name": "Chamarajanagara", "lat": 11.9261449, "lng": 76.9432155, "zoom": 10 },
-  { "id": 27, "name": "Mandya", "lat": 12.5223161, "lng": 76.8946331, "zoom": 10 }
+  {
+    "id": 35,
+    "name": "Bagalkote",
+    "state": 2,
+    "lat": 16.2,
+    "lng": 75.75
+  },
+  {
+    "id": 16,
+    "name": "Ballari",
+    "state": 2,
+    "lat": 15.15,
+    "lng": 76.91666667
+  },
+  {
+    "id": 15,
+    "name": "Belagavi",
+    "state": 2,
+    "lat": 15.86666667,
+    "lng": 74.56666667
+  },
+  {
+    "id": 24,
+    "name": "Bengaluru Rural",
+    "state": 2,
+    "lat": 12.96666667,
+    "lng": 77.63333333
+  },
+  {
+    "id": 36,
+    "name": "Bengaluru Urban",
+    "state": 2,
+    "lat": 12.96666667,
+    "lng": 77.63333333
+  },
+  {
+    "id": 23,
+    "name": "Bidar",
+    "state": 2,
+    "lat": 17.91666667,
+    "lng": 77.65
+  },
+  {
+    "id": 43,
+    "name": "Chamarajanagara",
+    "state": 2,
+    "lat": 11.93333333,
+    "lng": 77
+  },
+  {
+    "id": 19,
+    "name": "Chikkaballapura",
+    "state": 2,
+    "lat": 13.43333333,
+    "lng": 77.76666667
+  },
+  {
+    "id": 31,
+    "name": "Chikkamagaluru",
+    "state": 2,
+    "lat": 13.3,
+    "lng": 75.81666667
+  },
+  {
+    "id": 22,
+    "name": "Chitradurga",
+    "state": 2,
+    "lat": 14.23333333,
+    "lng": 76.43333333
+  },
+  {
+    "id": 18,
+    "name": "Dakshina Kannada",
+    "state": 2,
+    "lat": 13.83333333,
+    "lng": 76.41666667
+  },
+  {
+    "id": 44,
+    "name": "Davangere",
+    "state": 2,
+    "lat": 14.51666667,
+    "lng": 75.96666667
+  },
+  {
+    "id": 28,
+    "name": "Dharwad",
+    "state": 2,
+    "lat": 15.45,
+    "lng": 75.08333333
+  },
+  {
+    "id": 29,
+    "name": "Gadag",
+    "state": 2,
+    "lat": 15.41666667,
+    "lng": 75.7
+  },
+  {
+    "id": 32,
+    "name": "Hassan",
+    "state": 2,
+    "lat": 13.01666667,
+    "lng": 76.16666667
+  },
+  {
+    "id": 17,
+    "name": "Haveri",
+    "state": 2,
+    "lat": 14.76666667,
+    "lng": 75.2
+  },
+  {
+    "id": 39,
+    "name": "Kalaburagi",
+    "state": 2,
+    "lat": 17.88333333,
+    "lng": 76.98333333
+  },
+  {
+    "id": 26,
+    "name": "Kodagu",
+    "state": 2,
+    "lat": 13.15,
+    "lng": 78.18333333
+  },
+  {
+    "id": 40,
+    "name": "Kolar",
+    "state": 2,
+    "lat": 13.15,
+    "lng": 78.18333333
+  },
+  {
+    "id": 38,
+    "name": "Koppal",
+    "state": 2,
+    "lat": 15.33333333,
+    "lng": 76.21666667
+  },
+  {
+    "id": 27,
+    "name": "Mandya",
+    "state": 2,
+    "lat": 15.03333333,
+    "lng": 76.6
+  },
+  {
+    "id": 34,
+    "name": "Mysuru",
+    "state": 2,
+    "lat": 12.3,
+    "lng": 76.7
+  },
+  {
+    "id": 21,
+    "name": "Raichur",
+    "state": 2,
+    "lat": 14.96666667,
+    "lng": 75.31666667
+  },
+  {
+    "id": 42,
+    "name": "Ramanagara",
+    "state": 2,
+    "lat": 12.9,
+    "lng": 78.03333333
+  },
+  {
+    "id": 37,
+    "name": "Shivamogga",
+    "state": 2,
+    "lat": 13.93333333,
+    "lng": 75.63333333
+  },
+  {
+    "id": 33,
+    "name": "Tumakuru",
+    "state": 2,
+    "lat": 13.33333333,
+    "lng": 77.13333333
+  },
+  {
+    "id": 20,
+    "name": "Udupi",
+    "state": 2,
+    "lat": 13.33333333,
+    "lng": 74.75
+  },
+  {
+    "id": 30,
+    "name": "Uttara Kannada",
+    "state": 2,
+    "lat": 17.01666667,
+    "lng": 78.18333333
+  },
+  {
+    "id": 25,
+    "name": "Vijayapura",
+    "state": 2,
+    "lat": 16.83333333,
+    "lng": 75.78333333
+  },
+  {
+    "id": 41,
+    "name": "Yadgir",
+    "state": 2,
+    "lat": 17,
+    "lng": 76.95
+  }
 ]
-
