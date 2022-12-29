@@ -36,8 +36,8 @@ export default function TitleBar({
           )}
         >
           <div className="flex">
-            <h1 className="text-xl text-slate-900 dark:text-white font-medium">
-              Capacity
+            <h1 className="text-xl text-slate-900 dark:text-white font-medium capitalize">
+              {endpoint}
             </h1>
 
             <DropDown
