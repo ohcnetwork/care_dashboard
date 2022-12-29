@@ -3,7 +3,23 @@ import districts from '../../districts.json'
 export const GMAP_KEY =
   import.meta.env.VITE_GMAP_KEY || 'AIzaSyDsBAc3y7deI5ZO3NtK5GuzKwtUzQNJNUk'
 
-export const ACTIVATED_DISTRICTS = districts
+interface IDistrict {
+  id: number | undefined
+  name: string
+  label?: string
+  lat?: number
+  lng?: number
+  zoom?: number
+}
+
+export const ACTIVATED_DISTRICTS: IDistrict[] = [
+  {
+    id: undefined,
+    name: 'all',
+    label: 'All Districts',
+  },
+  ...districts,
+]
 
 export const DEFAULT_ACTIVE_DISTRICT = ACTIVATED_DISTRICTS[0]
 
