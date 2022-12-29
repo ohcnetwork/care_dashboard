@@ -1,12 +1,8 @@
-import clsx from 'clsx'
 import { useQueryParams } from 'raviger'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { FacilitySummaryQuery } from '../../api/queries/useFacilitySummary'
-import usePatientSummary, {
-  PatientSummaryQuery,
-} from '../../api/queries/usePatientSummary'
+import usePatientSummary from '../../api/queries/usePatientSummary'
 import BedsSummary from '../../components/BedsSummary'
-import { Filters } from '../../components/Filters'
 import InfoCard from '../../components/InfoCard'
 import { Pagination } from '../../components/Pagination'
 import { TableExportHeader } from '../../components/TableExportHeader'
@@ -28,6 +24,7 @@ import {
 } from '../../utils/facility/patient'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
+import TitleBar from '../../components/TitleBar'
 
 interface Props {
   districtName?: string
@@ -109,28 +106,18 @@ export default function Patient({ districtName }: Props) {
 
   return (
     <section className="my-4 2xl:max-w-7xl mx-auto px-4">
-      <div className="relative">
-        {isLoading ? (
-          <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
-        ) : null}
-        <div
-          className={clsx(
-            'flex gap-2 justify-between items-center',
-            isLoading && 'opacity-0 pointer-events-none'
-          )}
-        >
-          <h1 className="text-xl text-slate-900 dark:text-white font-medium">
-            Patient
-          </h1>
-          <Filters />
-        </div>
-      </div>
-      <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
-        <ValuePill
-          title="Facility Count"
-          value={facilityTrivia.current.count}
-        />
-      </div>
+      <TitleBar
+        isLoading={isLoading}
+        district={districtName}
+        endpoint="patient"
+        pills={[
+          {
+            title: 'Facility Count',
+            value: facilityTrivia.current.count,
+          },
+        ]}
+      />
+
       <div className="grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8 ">
         {Object.entries({ ...PATIENT_TYPES }).map(([k, title], i) => {
           const key = k as PatientTypeKeys
