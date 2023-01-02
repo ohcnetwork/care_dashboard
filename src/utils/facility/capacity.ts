@@ -359,7 +359,6 @@ export const processFacilityCapacityTableData = (
     [] as CapacityCardDataForCapacity[]
   )
 
-  console.log(facilities, filterDate, fac)
 
   return fac
 }
