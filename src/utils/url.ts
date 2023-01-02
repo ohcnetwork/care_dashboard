@@ -16,8 +16,13 @@ export const capitalize = (text: string) => {
 }
 
 export const getDistrictByName = (districtName: string | undefined) => {
-  return ACTIVATED_DISTRICTS.find(
-    ({ name }) => parameterize(name) === parameterize(districtName)
+  return (
+    ACTIVATED_DISTRICTS.find(
+      ({ name }) => parameterize(name) === parameterize(districtName)
+    ) || {
+      id: -1,
+      name: 'None',
+    }
   )
 }
 

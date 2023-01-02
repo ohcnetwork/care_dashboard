@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { routes } from './router'
 import { useRoutes } from 'raviger'
 import { Header } from './components/Header'
-import { ACTIVATED_DISTRICTS } from './utils/constants'
+import { DEFAULT_ACTIVE_DISTRICT } from './utils/constants'
 import { useState } from 'react'
 import { useTheme } from './utils/hooks/useTheme'
 import { ThemeProvider } from './utils/context/themeContext'
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="bg-slate-50 dark:bg-slate-900 min-h-screen">
-      <Header district={ACTIVATED_DISTRICTS[0].name} />
+      <Header district={DEFAULT_ACTIVE_DISTRICT.name} />
       <main>{appRoutes}</main>
     </div>
   )
