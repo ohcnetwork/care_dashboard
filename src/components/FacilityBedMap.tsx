@@ -218,14 +218,14 @@ export const FacilityBedMap = (props: Props) => {
 
   useEffect(() => {
     district &&
-      setState({
+      setState((prev) => ({
         ...state,
         center: {
-          lat: district.lat,
-          lng: district.lng,
+          lat: district.lat || prev.center.lat,
+          lng: district.lng || prev.center.lng,
         },
-        zoom: district.zoom,
-      })
+        zoom: district.zoom || 5,
+      }))
   }, [district])
 
   return (

@@ -1,11 +1,9 @@
-import clsx from 'clsx'
 import { useQueryParams } from 'raviger'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import useFacilitySummary, {
   FacilitySummaryQuery,
   FilteredFacilityData,
 } from '../../api/queries/useFacilitySummary'
-import { Filters } from '../../components/Filters'
 import { OxygenFacilityCard } from '../../components/OxygenFacilityCard'
 import { Pagination } from '../../components/Pagination'
 import { TableExportHeader } from '../../components/TableExportHeader'
@@ -26,6 +24,7 @@ import {
 } from '../../utils/facility/oxygen'
 import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
+import TitleBar from '../../components/TitleBar'
 
 interface Props {
   districtName?: string
@@ -84,12 +83,12 @@ export default function Oxygen({ districtName }: Props) {
   ) : (
     <>
       <section className="my-4 2xl:max-w-7xl mx-auto px-4">
-        <div className={clsx('flex gap-2 justify-between items-center')}>
-          <h1 className="text-xl text-slate-900 dark:text-white font-medium">
-            Oxygen
-          </h1>
-          <Filters />
-        </div>
+        <TitleBar
+          isLoading={isLoading}
+          district={districtName}
+          endpoint="oxygen"
+        />
+
         <div>
           {getOxygenSummaryConfig(oxygenFlatData).map((config, i) => (
             <div className="card px-2 my-4 rounded-2xl" key={i}>
