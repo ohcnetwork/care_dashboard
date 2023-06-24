@@ -1,0 +1,282 @@
+[
+  {
+    "id": 80,
+    "name": "Bajali",
+    "state": 3,
+    "lat": 26.543942,
+    "lng": 91.18701399999999,
+    "zoom": 10
+  },
+  {
+    "id": 70,
+    "name": "Baksa",
+    "state": 3,
+    "lat": 26.6935448,
+    "lng": 91.5983959,
+    "zoom": 10
+  },
+  {
+    "id": 51,
+    "name": "Barpeta",
+    "state": 3,
+    "lat": 26.3304209,
+    "lng": 91.0040547,
+    "zoom": 10
+  },
+  {
+    "id": 75,
+    "name": "Biswanath",
+    "state": 3,
+    "lat": 26.8517875,
+    "lng": 93.33889169999999,
+    "zoom": 10
+  },
+  {
+    "id": 78,
+    "name": "Bongaigaon",
+    "state": 3,
+    "lat": 26.5030072,
+    "lng": 90.5535724,
+    "zoom": 10
+  },
+  {
+    "id": 49,
+    "name": "Cachar",
+    "state": 3,
+    "lat": 24.7821253,
+    "lng": 92.8577105,
+    "zoom": 10
+  },
+  {
+    "id": 69,
+    "name": "Charaideo",
+    "state": 3,
+    "lat": 27.0372817,
+    "lng": 95.01824599999999,
+    "zoom": 10
+  },
+  {
+    "id": 73,
+    "name": "Chirang",
+    "state": 3,
+    "lat": 26.5386619,
+    "lng": 90.6939122,
+    "zoom": 10
+  },
+  {
+    "id": 74,
+    "name": "Darrang",
+    "state": 3,
+    "lat": 26.4511588,
+    "lng": 92.1057549,
+    "zoom": 10
+  },
+  {
+    "id": 62,
+    "name": "Dhemaji",
+    "state": 3,
+    "lat": 27.4811106,
+    "lng": 94.55728470000001,
+    "zoom": 10
+  },
+  {
+    "id": 68,
+    "name": "Dhubri",
+    "state": 3,
+    "lat": 26.0206982,
+    "lng": 89.9743463,
+    "zoom": 10
+  },
+  {
+    "id": 66,
+    "name": "Dibrugarh",
+    "state": 3,
+    "lat": 27.4705449,
+    "lng": 94.91246249999999,
+    "zoom": 10
+  },
+  {
+    "id": 64,
+    "name": "Dima Hasao",
+    "state": 3,
+    "lat": 25.3478004,
+    "lng": 93.0175712,
+    "zoom": 10
+  },
+  {
+    "id": 77,
+    "name": "Goalpara",
+    "state": 3,
+    "lat": 26.1641342,
+    "lng": 90.62515409999999,
+    "zoom": 10
+  },
+  {
+    "id": 60,
+    "name": "Golaghat",
+    "state": 3,
+    "lat": 26.5238515,
+    "lng": 93.96233699999999,
+    "zoom": 10
+  },
+  {
+    "id": 76,
+    "name": "Hailakandi",
+    "state": 3,
+    "lat": 24.680855,
+    "lng": 92.56480950000001,
+    "zoom": 10
+  },
+  {
+    "id": 71,
+    "name": "Hojai",
+    "state": 3,
+    "lat": 26.0016601,
+    "lng": 92.847737,
+    "zoom": 10
+  },
+  {
+    "id": 53,
+    "name": "Jorhat",
+    "state": 3,
+    "lat": 26.7509207,
+    "lng": 94.2036696,
+    "zoom": 10
+  },
+  {
+    "id": 63,
+    "name": "Kamrup",
+    "state": 3,
+    "lat": 25.9410942,
+    "lng": 91.28910359999999,
+    "zoom": 10
+  },
+  {
+    "id": 59,
+    "name": "Kamrup Metro",
+    "state": 3,
+    "lat": 26.1700805,
+    "lng": 91.949021,
+    "zoom": 10
+  },
+  {
+    "id": 47,
+    "name": "Karbi Anglong",
+    "state": 3,
+    "lat": 26.186085,
+    "lng": 93.5812692,
+    "zoom": 10
+  },
+  {
+    "id": 50,
+    "name": "Karimganj",
+    "state": 3,
+    "lat": 24.8649128,
+    "lng": 92.3591531,
+    "zoom": 10
+  },
+  {
+    "id": 61,
+    "name": "Kokrajhar",
+    "state": 3,
+    "lat": 26.4014362,
+    "lng": 90.266699,
+    "zoom": 10
+  },
+  {
+    "id": 48,
+    "name": "Lakhimpur",
+    "state": 3,
+    "lat": 27.2063587,
+    "lng": 94.15137639999999,
+    "zoom": 10
+  },
+  {
+    "id": 54,
+    "name": "Majuli",
+    "state": 3,
+    "lat": 26.9465638,
+    "lng": 94.16577029999999,
+    "zoom": 10
+  },
+  {
+    "id": 72,
+    "name": "Marigaon",
+    "state": 3,
+    "lat": 26.2528853,
+    "lng": 92.33695499999999,
+    "zoom": 10
+  },
+  {
+    "id": 57,
+    "name": "Nagaon",
+    "state": 3,
+    "lat": 26.348009,
+    "lng": 92.6838111,
+    "zoom": 10
+  },
+  {
+    "id": 55,
+    "name": "Nalbari",
+    "state": 3,
+    "lat": 26.4446185,
+    "lng": 91.4410527,
+    "zoom": 10
+  },
+  {
+    "id": 52,
+    "name": "Sivasagar",
+    "state": 3,
+    "lat": 26.9826098,
+    "lng": 94.6424521,
+    "zoom": 10
+  },
+  {
+    "id": 58,
+    "name": "Sonitpur",
+    "state": 3,
+    "lat": 26.6769864,
+    "lng": 92.6983868,
+    "zoom": 10
+  },
+  {
+    "id": 81,
+    "name": "South Salmara Mancachar",
+    "state": 3,
+    "lat": 25.8048092,
+    "lng": 89.8879304,
+    "zoom": 10
+  },
+  {
+    "id": 79,
+    "name": "Tamulpur",
+    "state": 3,
+    "lat": 26.643691,
+    "lng": 91.57657549999999,
+    "zoom": 10
+  },
+  {
+    "id": 56,
+    "name": "Tinsukia",
+    "state": 3,
+    "lat": 27.4885539,
+    "lng": 95.355758,
+    "zoom": 10
+  },
+  {
+    "id": 67,
+    "name": "Udalguri",
+    "state": 3,
+    "lat": 26.7460177,
+    "lng": 92.0959429,
+    "zoom": 10
+  },
+  {
+    "id": 65,
+    "name": "West Karbi Anglong",
+    "state": 3,
+    "lat": 25.9273292,
+    "lng": 92.38136209999999,
+    "zoom": 10
+  }
+]
