@@ -1,0 +1,90 @@
+[
+  {
+    "id": 20,
+    "name": "Dimapur",
+    "state": 2,
+    "lat": 25.905077,
+    "lng": 93.729419,
+    "zoom": 10
+  },
+  {
+    "id": 19,
+    "name": "Kiphire",
+    "state": 2,
+    "lat": 25.882501,
+    "lng": 94.779465,
+    "zoom": 10
+  },
+  {
+    "id": 25,
+    "name": "Kohima",
+    "state": 2,
+    "lat": 25.669966,
+    "lng": 94.092249,
+    "zoom": 10
+  },
+  {
+    "id": 23,
+    "name": "Longleng",
+    "state": 2,
+    "lat": 26.492933,
+    "lng": 94.802054,
+    "zoom": 10
+  },
+  {
+    "id": 22,
+    "name": "Mokokchung",
+    "state": 2,
+    "lat": 26.318882,
+    "lng": 94.450707,
+    "zoom": 10
+  },
+  {
+    "id": 16,
+    "name": "Mon",
+    "state": 2,
+    "lat": 26.723873,
+    "lng": 95.026503,
+    "zoom": 10
+  },
+  {
+    "id": 24,
+    "name": "Peren",
+    "state": 2,
+    "lat": 25.51947,
+    "lng": 93.714742,
+    "zoom": 10
+  },
+  {
+    "id": 18,
+    "name": "Phek",
+    "state": 2,
+    "lat": 25.572053,
+    "lng": 93.854767,
+    "zoom": 10
+  },
+  {
+    "id": 21,
+    "name": "Tuensang",
+    "state": 2,
+    "lat": 26.244416,
+    "lng": 94.764303,
+    "zoom": 10
+  },
+  {
+    "id": 17,
+    "name": "Wokha",
+    "state": 2,
+    "lat": 26.092412,
+    "lng": 94.261265,
+    "zoom": 10
+  },
+  {
+    "id": 15,
+    "name": "Zunheboto",
+    "state": 2,
+    "lat": 26.003016,
+    "lng": 94.506247,
+    "zoom": 10
+  }
+]

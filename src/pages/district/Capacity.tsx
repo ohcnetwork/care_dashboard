@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import useFacilitySummary, {
   FacilitySummaryQuery,
 } from '../../api/queries/useFacilitySummary'
@@ -6,12 +6,10 @@ import { FacilityCapacityTableCard } from '../../components/FacilityCapacityTabl
 import { Pagination } from '../../components/Pagination'
 import RadialCard from '../../components/RadialCard'
 import { TableExportHeader } from '../../components/TableExportHeader'
-import { ValuePill } from '../../components/ValuePill'
 import {
   AVAILABILITY_TYPES,
   AVAILABILITY_TYPES_ORDERED,
   AVAILABILITY_TYPES_TOTAL_ORDERED,
-  facilityOptions,
 } from '../../utils/constants'
 import {
   getDateFromQuery,
@@ -29,10 +27,7 @@ import { usePaginateData } from '../../utils/hooks/usePaginateData'
 import { getDistrictByName, getFacilitiesFromQuery } from '../../utils/url'
 import { useQueryParams } from 'raviger'
 import { UrlQuery } from '../../types/urlQuery'
-import { Filter, X } from 'react-feather'
-import { omit } from 'lodash'
-import { Filters } from '../../components/Filters'
-import clsx from 'clsx'
+import TitleBar from '../../components/TitleBar'
 
 interface Props {
   districtName?: string
@@ -88,45 +83,29 @@ export default function Capacity({ districtName }: Props) {
     <>
       <section className="my-4">
         <div className="2xl:max-w-7xl mx-auto px-4">
-          <div className="relative">
-            {isLoading ? (
-              <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
-            ) : null}
-            <div
-              className={clsx(
-                'flex gap-2 justify-between items-center',
-                isLoading && 'opacity-0 pointer-events-none'
-              )}
-            >
-              <h1 className="text-xl text-slate-900 dark:text-white font-medium">
-                Capacity
-              </h1>
-              <Filters />
-            </div>
-          </div>
+          <TitleBar
+            isLoading={isLoading}
+            district={districtName}
+            pills={[
+              {
+                title: 'Facility Count',
+                value: facilitiesTrivia.current.count,
+              },
+              {
+                title: 'Oxygen Capacity',
+                value: facilitiesTrivia.current.oxygen,
+              },
+              {
+                title: 'Live Patients',
+                value: facilitiesTrivia.current.actualLivePatients,
+              },
+              {
+                title: 'Discharged Patients',
+                value: facilitiesTrivia.current.actualDischargedPatients,
+              },
+            ]}
+          />
 
-          <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
-            <ValuePill
-              isLoading={isLoading}
-              title="Facility Count"
-              value={facilitiesTrivia.current.count}
-            />
-            <ValuePill
-              isLoading={isLoading}
-              title="Oxygen Capacity"
-              value={facilitiesTrivia.current.oxygen}
-            />
-            <ValuePill
-              isLoading={isLoading}
-              title="Live Patients"
-              value={facilitiesTrivia.current.actualLivePatients}
-            />
-            <ValuePill
-              isLoading={isLoading}
-              title="Discharged Patients"
-              value={facilitiesTrivia.current.actualDischargedPatients}
-            />
-          </div>
           <div className="mx-auto grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 my-5">
             {AVAILABILITY_TYPES_TOTAL_ORDERED.map((k) => {
               return (

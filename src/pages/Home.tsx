@@ -14,7 +14,7 @@ export const Home = () => {
               className="border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 rounded-xl"
             >
               <h1 className="text-4xl text-slate-900 dark:text-white font-bold">
-                {district.name}
+                {district.label ?? district.name}
               </h1>
               <Link
                 href={`/district/${parameterize(district.name)}/capacity`}

@@ -1,12 +1,11 @@
-import clsx from 'clsx'
 import { filter } from 'lodash-es'
 import { useQueryParams } from 'raviger'
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import useFacilitySummary, {
   FacilitySummaryQuery,
 } from '../../api/queries/useFacilitySummary'
 import { FacilityBedMap } from '../../components/FacilityBedMap'
-import { Filters } from '../../components/Filters'
+import TitleBar from '../../components/TitleBar'
 import { UrlQuery } from '../../types/urlQuery'
 import {
   getDateFromQuery,
@@ -53,22 +52,12 @@ export default function Map({ districtName }: Props) {
   return (
     <section className="my-4">
       <div className="2xl:max-w-7xl mx-auto px-4">
-        <div className="relative mb-4">
-          {isLoading ? (
-            <div className="absolute top-0 left-0 h-full rounded-xl animate-pulse bg-slate-200 dark:bg-slate-800 w-32"></div>
-          ) : null}
-          <div
-            className={clsx(
-              'flex gap-2 justify-between items-center',
-              isLoading && 'opacity-0 pointer-events-none'
-            )}
-          >
-            <h1 className="text-xl text-slate-900 dark:text-white font-medium">
-              Map
-            </h1>
-            <Filters />
-          </div>
-        </div>
+        <TitleBar
+          isLoading={isLoading}
+          district={districtName}
+          endpoint={'map'}
+        />
+
         <FacilityBedMap
           isLoading={isLoading}
           facilities={todayFiltered}
