@@ -56,7 +56,7 @@ export default function TitleBar({
         </div>
       </div>
 
-      <div className="grid gap-1 grid-rows-none mb-8 sm:grid-flow-col-dense sm:grid-rows-1 sm:place-content-end my-5">
+      <div className="vpill">
         {pills?.map(({ title, value }) => (
           <ValuePill
             key={title}
