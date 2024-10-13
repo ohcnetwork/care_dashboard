@@ -11,7 +11,7 @@ export const ValuePill: React.FC<Props> = ({ title, value, isLoading }) => {
   return (
     <div
       className={clsx(
-        'shadow-xs rounded-lg translate-x-0',
+        'shadow-xs ne rounded-lg translate-x-0',
         isLoading
           ? 'bg-slate-200 dark:bg-slate-800 animate-pulse'
           : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 dark:text-gray-200 opacity-100'
@@ -19,7 +19,7 @@ export const ValuePill: React.FC<Props> = ({ title, value, isLoading }) => {
     >
       <div
         className={clsx(
-          'flex items-center justify-between rounded-lg transition-all',
+          'flex mr-[5px] nn items-center justify-between rounded-lg transition-all',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
       >
