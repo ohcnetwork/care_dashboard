@@ -19,7 +19,7 @@ export const ValuePill: React.FC<Props> = ({ title, value, isLoading }) => {
     >
       <div
         className={clsx(
-          'flex nn items-center justify-between rounded-lg transition-all',
+          'flex mr-[5px] nn items-center justify-between rounded-lg transition-all',
           isLoading ? 'opacity-0' : 'opacity-100'
         )}
       >

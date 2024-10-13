@@ -56,7 +56,7 @@ export default function TitleBar({
         </div>
       </div>
 
-      <div className="vpill">
+      <div className="vpill ml-auto flex flex-row justify-around w-[900px] ">
         {pills?.map(({ title, value }) => (
           <ValuePill
             key={title}
